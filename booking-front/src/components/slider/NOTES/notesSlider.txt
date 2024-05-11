@@ -1,0 +1,18 @@
+npm create vite
+react-image-gallery-demo
+tsc
+https://www.youtube.com/watch?v=IQY3RJAMm8g
+
+npm install
+npm run dev
+
+bgc202020 colrwhite
+react-image-gallery npm
+piscum.photos1018/1000/600
+thumbnail:1018/250/150
+1018 puede ser dinamico, hay que variar entre 1 y ??
+@import "-react-image-gallery/styles/css/image-gallery.css"
+
+showPlayButton:boolean
+showBullets, autoplay, slideInterval, slideDuration, thumbnailPosition, 
+

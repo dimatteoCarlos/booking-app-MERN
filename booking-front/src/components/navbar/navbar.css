@@ -1,0 +1,110 @@
+.navbar {
+  height: 3.0125rem;
+  background-color: var(--primary-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: bottom;
+}
+
+.navbar-container {
+  width: 100vw;
+  max-width: var(--max-width);
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0.5rem;
+
+  color: white;
+}
+.logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  width: 5rem;
+  height: 100%;
+  cursor: pointer;
+  margin-top: 0.rem;
+}
+
+.nav-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.nav-items button:nth-child(-n + 4) {
+  color: white;
+  cursor: pointer;
+  background-color: transparent;
+  min-width: 3rem;
+  width: 3rem;
+  min-height: 3rem;
+  height: 3rem;
+
+  text-align: center;
+
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.flag img {
+  border-radius: 100%;
+  width: 1.6rem;
+  height: 1.6rem;
+  vertical-align: middle;
+}
+
+.nav-items button.support {
+  padding-top: 0.5rem;
+  padding-left: 0.3rem;
+}
+
+.nav-items button.property {
+  min-width: 9rem;
+  padding: 0.5rem;
+  height: auto;
+}
+
+.nav-items button:nth-child(-n + 4):hover {
+  background-color: #1a4fa0;
+}
+
+.nav-button {
+  cursor: pointer;
+  color: var(--button-label-color);
+
+  background-color: #fff;
+  text-transform: capitalize;
+  border-radius: 0.25rem;
+
+  padding: 0.5rem 0.625rem;
+  width: 5rem;
+  text-align: center;
+
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: none;
+
+  margin-left: 1rem;
+}
+
+.nav-button:hover {
+  background-color: #f0f3f8;
+  transition: all 0.2s linear;
+  font-weight: 600;
+}
+
+.nav-button:active {
+  background-color: #f0f3f8;
+  font-weight: 600;
+  outline: 0.25px solid var(--text-color);
+}

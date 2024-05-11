@@ -1,0 +1,125 @@
+/*detailLayout.css/**/
+
+.layout-container {
+  max-width: var(--max-width, 1024px);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.hotel-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.875rem;
+  position: relative;
+}
+
+.hotel-header .booking-btn {
+  position: absolute;
+  top: 0.875rem;
+  right: 0.875rem;
+  width: max-content;
+  height: auto;
+}
+
+.hotel-header .title {
+  font-size: 1.5rem;
+  color: black;
+  text-transform: capitalize;
+}
+.hotel-header .address {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  align-items: center;
+}
+.icon-loc {
+  color: #0071c2;
+}
+.distance {
+  color: #0071c2;
+  font-weight: 500;
+  font-size: 1rem;
+}
+.hotel-header .priceHightligth {
+  color: #008009;
+  font-weight: 500;
+  font-size: 1rem;
+}
+/*-----*/
+
+.hotel-images {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 0.25rem;
+
+  margin: 1rem;
+}
+
+.hotel-images img {
+  max-width: 33%;
+  height: auto;
+  cursor: pointer;
+  object-fit: cover;
+
+}
+/**********/
+.hotel-details-info {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  padding: 0.875rem;
+}
+.hotel-desc {
+  flex: 3;
+}
+.hotel-desc .rec {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.hotel-desc .desc {
+  font-size: 0.8rem;
+}
+/*******/
+.hotel-price {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.25rem;
+  background-color: #ebf3ff;
+
+  padding: 0 1rem;
+}
+
+.hotel-price .comment {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.hotel-price .location {
+  font-size: 0.875rem;
+  width: 100%;
+}
+.hotel-price .price-days .price {
+  font-size: 1.5rem;
+}
+.hotel-price .price-days .stay-duration {
+  margin-left: 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 100;
+  color: gray;
+}
+
+.hotel-price .booking-btn {
+  /* width: max-content; */
+  height: max-content;
+  margin: auto;
+}
+/*******/

@@ -1,0 +1,52 @@
+/*header.css*/
+
+.header {
+  background-color: var(--primary-color);
+  color: var(--text-color, white);
+
+  display: flex;
+  justify-content: center;
+
+  position: relative;
+}
+
+.header-container {
+  width: 100%;
+  max-width: var(--max-width, 1024px);
+  margin-bottom: 6rem;
+  margin-top: 1rem;
+}
+
+.header-container.list-mode {
+  margin-bottom: 0;
+}
+
+.header-list {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  justify-content: start;
+  margin-bottom: 3.125rem;
+  margin-top: 1rem;
+}
+
+.header-title {
+  background-color: transparent;
+}
+
+.header-search {
+  position: absolute;
+  height: 1.875rem;
+  bottom: -1rem;
+  width: 100%;
+  max-width: var(--max-width, 750px);
+  border-radius: 0.25rem;
+
+
+}
+
+.header-search {
+  color: lightgray;
+}
+
+

@@ -1,0 +1,40 @@
+/* presentation.css */
+
+.list-container {
+  max-width: var(--max-width);
+  width: 100%;
+  display: flex;
+
+  gap: 1.25rem;
+  justify-content: space-between;
+}
+
+.listProperty-item {
+  flex: 1;
+  cursor: pointer;
+}
+
+.image-item {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.875rem;
+  overflow: hidden;
+  height: 9.375rem;
+}
+
+
+h1.category {
+  font-size: 1.125rem;
+  line-height: 1.875rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
+h2.quantity {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+}

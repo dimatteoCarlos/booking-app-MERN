@@ -1,0 +1,132 @@
+/*resultsItem.css*/
+
+.list-results {
+  flex: 3;
+  border-radius: 0.5rem;
+  gap: 0.5rem;
+}
+
+.result-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(225, 223, 223);
+  height: max-content;
+  padding: 0.875rem;
+  border-radius: 0.5rem;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.result-item .image-item {
+  width: 12.5rem;
+  height: auto;
+  cursor: pointer;
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+
+.desc {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  gap: 0.25rem;
+}
+.title {
+  font-size: 1.25rem;
+  color: #0071c2;
+}
+.distance {
+  height: 100%;
+}
+.taxiOp {
+  font-size: 0.875rem;
+  background-color: #008009;
+  width: max-content;
+  color: white;
+  padding: 0.1875rem;
+  border-radius: 0.3125rem;
+}
+.subtitle {
+  font-size: 0.78rem;
+  font-weight: bolder;
+}
+.features {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.cancelOp {
+  font-size: 0.875rem;
+  color: #008009;
+  font-weight: 700;
+}
+.cancelOpSubtitle {
+  font-size: 0.875rem;
+  color: #008009;
+  font-weight: 500;
+}
+.details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.rating {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.ratingDesc {
+  font-weight: 700;
+  margin-top: 0.27rem;
+}
+.btnRate {
+  color: white;
+  background-color: #003580;
+  padding: 0.3125rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+.texts {
+  text-align: right;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+  /* border: 1px solid blue; */
+  width: 100%;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.taxesOp {
+  font-size: 0.65rem;
+  color: gray;
+}
+
+.details .texts .btn {
+  border-radius: 0.3125rem;
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  padding: 0.625rem 0.3125rem;
+  font-size: 0.75rem;
+  border: none;
+  outline: none;
+  text-align: center;
+}
+
+.details .texts .btn:hover {
+  background-color: #003b95;
+}
+
+.details .texts .btn:active {
+  scale: 97%;
+}

@@ -1,0 +1,24 @@
+/*bookingBtn.css*/
+
+.booking-btn {
+  height: 100%;
+  width: 100%;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: bold;
+  /* background-color: #1b7ce7; */
+  background-color: #0071c2;
+
+  border: none;
+  outline: none;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+  padding: 0.875rem 1.25rem;
+}
+
+.booking-btn:hover {
+  background-color: #003580;
+}
+.booking-btn:active {
+  scale: 0.97;
+}

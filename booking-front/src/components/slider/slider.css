@@ -1,0 +1,83 @@
+/*slider.css*/
+
+.slider {
+  position: sticky;
+
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  font-size: 4rem;
+  font-weight: 700;
+  color: lightgray;
+  background-color: rgba(0, 0, 0, 0.7);
+    max-width: 1024px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+.slide {
+
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  align-items: start;
+  color: black;
+
+  /* background-color: yellow; */
+}
+
+.image {
+  margin-top: 1rem;
+  width: 95%;
+  height: auto;
+  z-index: 15;
+  object-fit: cover;
+}
+
+.close-btn {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.close-btn:active {
+  transform: rotate(35deg);
+}
+
+.arrow-btn {
+  position: absolute;
+  top: 25%;
+  transform: translateY(50%);
+
+  right: 1.5rem;
+
+  font-size: 3rem;
+
+  color: rgb(239, 217, 217, 0.9);
+
+  border-radius: 0.5rem 0 0 0.5rem;
+  padding: 3rem 1rem;
+
+  cursor: pointer;
+  margin: 0;
+
+  z-index: 20;
+}
+
+.arrow-btn.left {
+  left: 1.5rem;
+  border-radius: 0 0.5rem 0.25rem 0;
+}
+
+.arrow-btn:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.25);
+}

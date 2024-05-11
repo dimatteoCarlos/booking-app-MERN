@@ -1,0 +1,168 @@
+/**listOfHotels.css/*/
+
+.list-container {
+  display: flex;
+  background-color: #fff;
+  width: 100%;
+  margin: auto;
+}
+
+.list-wrapper {
+  max-width: var(--max-width, 1024px);
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+  justify-content: center;
+  align-items: start;
+  height: max-content;
+  margin-top: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/*list-search2*/
+
+.list-container .list-search2 {
+  border-radius: 0.5rem;
+  flex: 1;
+}
+.list-search2 .title {
+  margin-bottom: 1rem;
+}
+
+.list-search2 {
+  flex: 1;
+  border-radius: 0.75rem;
+  border: none;
+  background-color: #ffaf2a;
+  background-color: #febb02;
+
+  padding: 0.875rem;
+  padding-bottom: 0;
+  position: sticky;
+  height: max-content;
+
+  color: #111;
+}
+
+.list-search2 .title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #333;
+}
+.list-search2 .list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  justify-content: start;
+  margin-bottom: 0.875rem;
+}
+
+.list-search2 .list-item > label {
+  font-size: 0.85rem;
+}
+
+.list-search2 .list-item > input {
+  height: 1.875rem;
+  border: none;
+  outline: none;
+  border-radius: 0.125rem;
+  padding: 0.3125rem;
+  font-size: 0.875rem;
+  text-transform: capitalize;
+}
+
+.list-search2 .list-item .date-search {
+  height: 1.875rem;
+  padding: 0.25rem 0 0.25rem 0.3125rem;
+
+  background-color: white;
+
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+
+  border: none;
+  outline: none;
+}
+
+.list-search2 .list-item .date-search:active {
+  border: 3px solid #0071c2;
+  border-radius: 0.75rem;
+}
+
+.date-search {
+  position: relative;
+}
+
+.date-search .date-range {
+  position: absolute;
+  top: 5rem;
+}
+
+/*----options---*/
+.list-search2 .options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.list-item.options {
+  border: 1px none orange;
+}
+
+.list-options {
+  padding: 0 1rem;
+}
+.option-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 0.875rem;
+  color: #555;
+  font-size: 0.75rem;
+  align-items: center;
+
+  flex-wrap: nowrap;
+  gap: 1rem;
+}
+
+.option-item > input {
+  height: 1rem;
+  border: none;
+  outline: none;
+  border-radius: 0.125rem;
+  padding: 0.3125rem;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+.option-item > input {
+  width: 3.125rem;
+}
+
+.list-search-btn {
+  width: 100%;
+  background-color: #0071c2;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+
+  padding: 0.875rem;
+  font-size: 1rem;
+
+  text-align: center;
+  align-items: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.list-search-btn:hover {
+  background-color: #00487a;
+}
+
+.list-search-btn:active {
+  scale: 0.97;
+}
+
+/**********/

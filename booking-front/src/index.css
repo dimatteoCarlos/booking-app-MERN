@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap');
+
+*,
+*,
+:before *,
+:after {
+  box-sizing: border-box;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+:root,
+html {
+  --primary-color: #003b95;
+  --bg-color: #003580;
+  --text-color: white;
+  --button-label-color: #006ce4;
+  --max-width: 1024px;
+}
+
+body {
+  font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+}

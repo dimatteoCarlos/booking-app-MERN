@@ -1,0 +1,22 @@
+/*signInBtn.css*/
+
+.signIn-btn {
+  margin-top: 2rem;
+  background-color: rgba(10, 89, 206, 0.5);
+  color: white;
+  font-weight: 500;
+  border: none;
+  padding: 0.875rem;
+  cursor: pointer;
+  text-transform: capitalize;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.signIn-btn:hover {
+  background-color: #003b95;
+  outline: 1px solid white;
+}
+.signIn-btn:active {
+  transform: scale(0.98);
+}

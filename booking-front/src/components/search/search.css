@@ -1,0 +1,255 @@
+/*search.css*/
+
+/******************/
+.search-container {
+  background-color: white;
+  border-radius: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffb700;
+  border: 3px solid #ffb700;
+}
+
+.search-item {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  border: 1px solid #ffb700;
+
+  height: 3rem;
+  align-items: center;
+  border-radius: 0.2rem;
+  font-size: 0.87rem;
+  background-color: #fff;
+}
+
+.search-item:hover:not(.btn) {
+  border: 1px solid #f56700;
+}
+
+.search-item {
+  flex: 1;
+}
+
+.search-item:not(.btn) {
+  border-right: 1px solid #ffb700;
+}
+
+.search-item:last-of-type {
+  flex: 0;
+}
+
+.search-icon {
+  padding-left: 0.5rem;
+  font-size: 1.25rem;
+  color: #474747;
+}
+.search-text {
+  color: rgb(48, 45, 45);
+
+  font-size: 0.874rem;
+  vertical-align: middle;
+}
+
+input::placeholder {
+  color: #1a1a1a;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+.search-item.date-search {
+  position: relative;
+  font-size: 0.74rem;
+}
+
+.click-zone {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.search-panel {
+  position: absolute;
+  top: 0rem;
+  border-radius: 1rem;
+  border: 1px solid lightgray;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.search-panel .search-rendered {
+  position: absolute;
+  top: -1.5rem;
+}
+
+/**************/
+.date-range * {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+/*******************/
+button.search-btn {
+  background-color: #006ce4;
+  color: white;
+  border-radius: 0.25rem;
+  text-transform: capitalize;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+}
+
+button.search-btn:hover {
+  background-color: #003b95;
+}
+
+button.search-btn:active {
+  background-color: #003b95;
+  scale: 0.98;
+}
+.search-item.btn {
+  background-color: #ffb700;
+}
+
+/*---options panel*/
+/*the same as date search-panel*/
+.options-search {
+  position: relative;
+}
+
+.options-rendered {
+  position: absolute;
+  left: 1.25rem;
+  top: 3.5rem;
+  width: 250px;
+}
+/*over ride panel*/
+.options-rendered {
+  border: 1px solid lightgray;
+  background-color: #fff;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);
+  z-index: 3;
+  display: flex;
+  padding: 1rem;
+  border-radius: 1rem;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.options-item {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.options-label {
+  margin: 0;
+  margin-left: 0.75rem;
+
+  color: #595959;
+
+  text-transform: capitalize;
+  font-weight: 600;
+  line-height: 1.5rem;
+  font-size: 1rem;
+}
+
+.options-counter {
+  border: 2px solid #c3c3c3;
+  display: flex;
+  text-align: center;
+  gap: 0.75rem;
+  border-radius: 0.25rem;
+}
+.counter-number {
+  height: 1.875rem;
+  width: 1.875rem;
+  color: black;
+  border-radius: 0.25rem;
+  transform: translateY(5px);
+}
+.counter-button {
+  height: 1.875rem;
+  width: 1.875rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: white;
+  font-weight: 100;
+}
+
+.counter-button:hover {
+  background-color: #f0f6fd;
+}
+
+.sub {
+  color: red;
+}
+.sum {
+  color: blue;
+}
+
+.counter-button:disabled {
+  cursor: not-allowed;
+  color: lightgray;
+}
+
+button.done-btn {
+  color: #1b7ce7;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: white;
+  line-height: 1.875rem;
+  margin-left: 0.75rem;
+  margin-right: 0rem;
+  border-radius: 0.3rem;
+  border: 2px solid #60a3ee;
+  cursor: pointer;
+}
+
+button.done-btn:hover {
+  background-color: #f0f6fd;
+}
+
+button.done-btn:active {
+  scale: 0.95;
+}
+
+/*input checks*/
+.input-checks {
+  color: #1a1a1a;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  position: absolute;
+  left: 1.5rem;
+  gap: 0rem;
+
+  max-width: 450px;
+}
+.input-checks input[type='checkbox'] {
+  height: 1.25rem;
+  width: 1.25rem;
+  margin-right: 0.85rem;
+}
+
+.input-checks label {
+  margin-right: 2rem;
+  font-size: 0.65rem;
+}
+
+/********************/

@@ -1,0 +1,46 @@
+/* presentation.css */
+
+.presentation-container {
+  max-width: var(--max-width);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.875rem;
+  justify-content: center;
+  padding: 0.25rem;
+}
+
+.presentation-container .item-product {
+  color: #ffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.presentation-container .item-product img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.875rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+  line-height: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+h2 {
+  font-size: 1rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.presentation-container .item-product .item-titles {
+  position: absolute;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  bottom: 1rem;
+
+  left: 1.25rem;
+}
