@@ -54,7 +54,7 @@ export const countHotelsByCity = async (req, res, next) => {
       })
     );
 
-    console.log(list);
+    // console.log(list);
 
     groupHotelsByCity(req, res, next);
 
@@ -96,6 +96,7 @@ export async function groupHotelsByCity(req, res, next) {
 
 //how to do this groupping in mongodb
 //get key info
+
 export const groupHotelsByKey = async (req, res, next, keyGroup = 'city') => {
   const result = { list: [] };
   let key = keyGroup;
@@ -120,14 +121,17 @@ export const groupHotelsByKey = async (req, res, next, keyGroup = 'city') => {
       result[hotel[key]]['counter'] += 1;
     }
     console.log('result', result);
-
+    //use this is you want to see the results on the browser or as a response of a request
     // res.status(200).json(result);
   } catch (error) {
     console.log(error);
     next(error);
   }
 };
-
+//----------------------------
+//SEARCH BY query
+//query.../countnByType?types=hotel, apartment,room
+//Use this to count specific types given by user
 export const countHotelsByType = async (req, res, next) => {
   const searchedTypes = req.query.types.split(',');
   console.log(searchedTypes);
@@ -147,7 +151,9 @@ export const countHotelsByType = async (req, res, next) => {
     );
 
     console.log(list);
-    //just to check some keys the db data
+
+    //Use this to check all the different types in the database, this helps to check the keys used as type in the db data
+
     groupHotelsByKey(req, res, next, keyGroup);
 
     res.status(200).json(list);
@@ -156,16 +162,19 @@ export const countHotelsByType = async (req, res, next) => {
     next(error);
   }
 };
+//-------------------------
+//COUNT PROPERTIES BY TYPE
+//Use this to count the properties by the types already defined in the database
 
 export const countByType = async (req, res, next) => {
   const givenTypes = [
     'hotel',
-    'apartment',
     'resort',
-    'village',
     'villa',
     'cabin',
+    'apartment',
     'room',
+    'village',
   ];
   console.log(req.params);
   try {
@@ -189,7 +198,7 @@ export const countByType = async (req, res, next) => {
   }
 };
 //-------------------------------
-//READ ALL
+//READ ALL. GET ALL
 export const getHotels = async (req, res, next) => {
   try {
     const data = await HotelModel.find();

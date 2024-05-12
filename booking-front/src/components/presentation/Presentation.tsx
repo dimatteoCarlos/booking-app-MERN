@@ -13,12 +13,8 @@ type CityType = { city: string; count: number };
 // };
 
 const Presentation = () => {
+  //endpoint to count properties by cities specified by the user
   let url =
-    'http://localhost:8800/api/hotels/query/countByType?types=hotel,apartment,cabin,room,VILLAGE,Hotel,CABIN,village';
-
-  url = 'http://localhost:8800/api/hotels/count/countByType';
-
-  url =
     'http://localhost:8800/api/hotels/query/countByCity?cities=dublin,berlin,madrid,paraguachon,new%20york';
 
   //-----------
