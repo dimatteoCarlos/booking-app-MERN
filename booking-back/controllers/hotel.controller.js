@@ -39,7 +39,8 @@ export const countHotelsByCity = async (req, res, next) => {
   //query.../countnByCity?cities=berlin, madrid,london
   const searchedCities = req.query.cities.split(',');
 
-  console.log(req.query.cities, 'searchedCities', searchedCities);
+  // console.log(req.query.cities, 'searchedCities', searchedCities);
+
   try {
     const list = await Promise.all(
       searchedCities.map(async (searchedCity) => {
@@ -52,24 +53,23 @@ export const countHotelsByCity = async (req, res, next) => {
         return countObj;
       })
     );
-    //01:31:03
+
     console.log(list);
 
     groupHotelsByCity(req, res, next);
 
-    // res.status(200).json(list);
+    res.status(200).json(list);
   } catch (error) {
     console.log(error);
     next(error);
   }
 };
 
-export const groupHotelsByCity = async (req, res, next) => {
+export async function groupHotelsByCity(req, res, next) {
   //query.../countnByCity?cities=all
   const result = { list: [] };
-  let key = 'city',
-    counter = 0,
-    grouper = 'city';
+  let key = 'city';
+
   try {
     const hotels = await HotelModel.find();
 
@@ -92,16 +92,97 @@ export const groupHotelsByCity = async (req, res, next) => {
     console.log(error);
     next(error);
   }
+}
+
+//how to do this groupping in mongodb
+//get key info
+export const groupHotelsByKey = async (req, res, next, keyGroup = 'city') => {
+  const result = { list: [] };
+  let key = keyGroup;
+  console.log('🚀 ~ groupHotelsByKey ~ key:', key);
+
+  try {
+    const qtyDoc = await HotelModel.countDocuments();
+
+    const hotels = await HotelModel.find().limit(qtyDoc > 500 ? 500 : qtyDoc);
+    console.log('total number of documents:', qtyDoc);
+
+    for (let index in hotels) {
+      const hotel = hotels[index];
+
+      if (result.list.indexOf(hotel[key]) === -1) {
+        result.list.push(hotel[key]);
+        result[hotel[key]] = {};
+        result[hotel[key]]['counter'] = 0;
+      }
+      // console.log(hotel[key], hotel[key].toLowerCase());
+
+      result[hotel[key]]['counter'] += 1;
+    }
+    console.log('result', result);
+
+    // res.status(200).json(result);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 };
 
 export const countHotelsByType = async (req, res, next) => {
-  //query:  /countByType?types=cabin, hotel, apartment, room
-  const searchedType = req.query.types.split(',');
+  const searchedTypes = req.query.types.split(',');
+  console.log(searchedTypes);
+  const keyGroup = 'type';
+
   try {
-    const hotelsByType = await HotelModel.find({
-      type: searchedType,
-    });
-    console.log(hotelsByType);
+    const list = await Promise.all(
+      searchedTypes.map(async (searchedType) => {
+        const counterObj = {
+          type: searchedType,
+          count: await HotelModel.countDocuments({
+            type: { $regex: new RegExp(searchedType, 'i') },
+          }),
+        };
+        return counterObj;
+      })
+    );
+
+    console.log(list);
+    //just to check some keys the db data
+    groupHotelsByKey(req, res, next, keyGroup);
+
+    res.status(200).json(list);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+export const countByType = async (req, res, next) => {
+  const givenTypes = [
+    'hotel',
+    'apartment',
+    'resort',
+    'village',
+    'villa',
+    'cabin',
+    'room',
+  ];
+  console.log(req.params);
+  try {
+    const list = await Promise.all(
+      givenTypes.map(async (givenType) => {
+        const countObj = {
+          type: givenType,
+          count: await HotelModel.countDocuments({
+            type: { $regex: new RegExp(givenType, 'i') },
+          }),
+        };
+        return countObj;
+      })
+    );
+    console.log(list);
+
+    res.status(200).json(list);
   } catch (error) {
     console.log(error);
     next(error);

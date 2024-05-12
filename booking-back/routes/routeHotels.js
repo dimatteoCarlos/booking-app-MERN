@@ -9,6 +9,7 @@ import {
   deleteHotel,
   countHotelsByCity,
   countHotelsByType,
+  countByType,
 } from '../controllers/hotel.controller.js';
 
 import { verifyToken, verifyUser, verifyAdmin } from '../utils/verifyToken.js';
@@ -27,6 +28,8 @@ router.get('/:id', getHotel);
 //READ GET by query
 router.get('/query/countByCity', countHotelsByCity);
 router.get('/query/countByType', countHotelsByType);
+
+router.get('/count/countByType', countByType);
 
 //READ ALL
 router.get('/', getHotels);
