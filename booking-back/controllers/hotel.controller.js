@@ -32,7 +32,7 @@ export const getHotel = async (req, res, next) => {
 };
 
 //-------------------------------
-//SEARCH BY query
+//COUNT BY CITY query
 //define the query by City: /countByCity?cities=berlin, madrid, london
 
 export const countHotelsByCity = async (req, res, next) => {
@@ -129,7 +129,7 @@ export const groupHotelsByKey = async (req, res, next, keyGroup = 'city') => {
   }
 };
 //----------------------------
-//SEARCH BY query
+//COUNT BY TYPE query
 //query.../countnByType?types=hotel, apartment,room
 //Use this to count specific types given by user
 export const countHotelsByType = async (req, res, next) => {
@@ -198,10 +198,34 @@ export const countByType = async (req, res, next) => {
   }
 };
 //-------------------------------
-//READ ALL. GET ALL
+//READ ALL. GET ALL ACCOMODATIONS
 export const getHotels = async (req, res, next) => {
   try {
     const data = await HotelModel.find();
+    console.log(data);
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+
+    next(error);
+  }
+};
+
+//READ BY QUERY. GET ALL ACCOMODATIONS BY QUERY
+export const getHotelsByQuery = async (req, res, next) => {
+  //endpoint query: localhost:8800/api/hotels/query?featured=true&min=10&max=800
+  console.log(req.query);
+
+  const { min, max, limit, ...restOfQuery } = req.query;
+
+  console.log(min, max, restOfQuery);
+
+  try {
+    const data = await HotelModel.find({
+      ...restOfQuery,
+      economicPrice: { $gte: min || 1, $lte: max || 800 },
+    }).limit(req.query.limit);
+    // const data = await HotelModel.find(req.query).limit(req.query.limit);
     console.log(data);
     res.status(200).json(data);
   } catch (error) {

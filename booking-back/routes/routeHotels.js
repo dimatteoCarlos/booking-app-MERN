@@ -10,6 +10,7 @@ import {
   countHotelsByCity,
   countHotelsByType,
   countByType,
+  getHotelsByQuery,
 } from '../controllers/hotel.controller.js';
 
 import { verifyToken, verifyUser, verifyAdmin } from '../utils/verifyToken.js';
@@ -23,7 +24,7 @@ const router = express.Router();
 router.post('/', verifyAdmin, createHotel);
 
 //READ GET by id
-router.get('/:id', getHotel);
+router.get('/find/:id', getHotel);
 
 //READ GET by query
 router.get('/query/countByCity', countHotelsByCity);
@@ -33,6 +34,9 @@ router.get('/count/countByType', countByType);
 
 //READ ALL
 router.get('/', getHotels);
+
+//READ BY QUERY
+router.get('/query', getHotelsByQuery);
 
 //UPDATE
 router.put('/:id', verifyAdmin, updateHotel);

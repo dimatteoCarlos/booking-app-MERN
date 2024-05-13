@@ -1,4 +1,5 @@
 //ListProperties.tsx
+//Parent:Home.tsx
 import './listProperties.css';
 import { propertiesList } from './dataListProperties.ts';
 import useFetch from '../hooks/useFetch';
@@ -8,15 +9,15 @@ export type TypePropertyType = { type: string; count: number };
 const ListProperties = (): JSX.Element => {
   //endpoint to count properties by type specified by the user
   let url =
-    'http://localhost:8800/api/hotels/query/countByType?types=hotel,apartment,cabin,room,VILLAGE,Hotel,CABIN,village';
+    'http://localhost:8800/api/hotels/query/countByType?types=hotel,apartment,cabin,room,VILLAGE,Hotel,CABIN,villa, resort';
 
-  //endpoint to count properties by types defined in the database, but specified at the api.
+  //endpoint to count ALL properties by types defined in the database, but specified at the api.
 
   url = 'http://localhost:8800/api/hotels/count/countByType';
 
   //-----------
 
-  const { data, isLoading, error } = useFetch<TypePropertyType[]>(url);
+  const { data, isLoading } = useFetch<TypePropertyType[]>(url);
   console.log('data:', data);
 
   return (
@@ -27,7 +28,10 @@ const ListProperties = (): JSX.Element => {
             const {
               id,
               url,
-              titles: { category: category, qty: quantity },
+              titles: {
+                category: category,
+                // , qty: quantity
+              },
             } = item;
 
             return (
@@ -43,12 +47,16 @@ const ListProperties = (): JSX.Element => {
                     className='category'
                     style={{ textTransform: 'capitalize' }}
                   >
-                    {data![indx].type}s
+                    {data![indx].type}
+                    {data![indx].count > 1 ? 's' : ''}
                   </h1>
-                  <h2 className='quantity'>
-                    {data![indx].count} {data![indx].type}s
+                  <h2
+                    className='quantity'
+                    style={{ textTransform: 'capitalize' }}
+                  >
+                    {data![indx]?.count} {data![indx].type.toLowerCase()}
+                    {data![indx]?.count > 1 ? 's' : ''}
                   </h2>
-                  {/* <h1 className='category'>{category}</h1> */}
 
                   {/* <h2 className='quantity'>{quantity}</h2> */}
                 </div>
