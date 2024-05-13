@@ -36,7 +36,7 @@ router.get('/count/countByType', countByType);
 router.get('/', getHotels);
 
 //READ BY QUERY
-router.get('/query', getHotelsByQuery);
+router.get('/getHotelsByQuery', getHotelsByQuery);
 
 //UPDATE
 router.put('/:id', verifyAdmin, updateHotel);

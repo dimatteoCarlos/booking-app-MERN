@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 export type UseFetchStateType<T> = {
-  data: null | T; //api response type
+  data: null | T; //inside api response type
   error: null | Error;
   isLoading: boolean;
 };

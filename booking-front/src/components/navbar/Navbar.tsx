@@ -2,13 +2,16 @@ import './navbar.css';
 
 import flag from '../../assets/images/Us3x.png';
 import Support from '../../svg-components/Support';
+import { Link } from 'react-router-dom';
 
 function Navbar(): JSX.Element {
   return (
     <>
       <div className='navbar'>
         <div className='navbar-container'>
-          <span className='logo'>Booking.com</span>
+          <Link to='/'>
+            <span className='logo'>Bookingapp</span>
+          </Link>
           <div className='nav-items'>
             <button className='currency'>USD</button>
             <button className='flag'>

@@ -32,6 +32,6 @@ export const properties: PropertyType[] = [
     name: 'Hilton Garden Inn',
     place: 'Berlin',
     price: 'Starting from $105',
-    rating: { rate: 8.9, rating: 'Excellent' },
+    rating: { rate: 8.9, rating: 'Wonderful' },
   },
 ];

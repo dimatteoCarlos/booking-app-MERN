@@ -28,7 +28,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//makes  api call possible from another server
+//makes api call possible from another server
 app.use(cors());
 app.use(morgan('common'));
 

@@ -66,7 +66,7 @@ export const countHotelsByCity = async (req, res, next) => {
 };
 
 export async function groupHotelsByCity(req, res, next) {
-  //query.../countnByCity?cities=all
+  //query.../countByCity?cities=all
   const result = { list: [] };
   let key = 'city';
 
@@ -114,11 +114,11 @@ export const groupHotelsByKey = async (req, res, next, keyGroup = 'city') => {
       if (result.list.indexOf(hotel[key]) === -1) {
         result.list.push(hotel[key]);
         result[hotel[key]] = {};
-        result[hotel[key]]['counter'] = 0;
+        result[hotel[key]]['count'] = 0;
       }
       // console.log(hotel[key], hotel[key].toLowerCase());
 
-      result[hotel[key]]['counter'] += 1;
+      result[hotel[key]]['count'] += 1;
     }
     console.log('result', result);
     //use this is you want to see the results on the browser or as a response of a request
@@ -157,6 +157,7 @@ export const countHotelsByType = async (req, res, next) => {
     groupHotelsByKey(req, res, next, keyGroup);
 
     res.status(200).json(list);
+
   } catch (error) {
     console.log(error);
     next(error);
@@ -213,12 +214,13 @@ export const getHotels = async (req, res, next) => {
 
 //READ BY QUERY. GET ALL ACCOMODATIONS BY QUERY
 export const getHotelsByQuery = async (req, res, next) => {
-  //endpoint query: localhost:8800/api/hotels/query?featured=true&min=10&max=800
+  //endpoint : http://localhost:8800/api/hotels/getHotelsByQuery/?featured=true&min=10&max=800&limit=4
+
   console.log(req.query);
 
   const { min, max, limit, ...restOfQuery } = req.query;
 
-  console.log(min, max, restOfQuery);
+  console.log(min, max, limit, restOfQuery);
 
   try {
     const data = await HotelModel.find({

@@ -35,15 +35,22 @@
 }
 .rating-property > button {
   cursor: pointer;
-  background-color: #003580;
+  background-color: #003b95;
   color: white;
   border: none;
   outline: none;
-  border-radius: 0.25rem;
-  padding: 0.1875rem;
+  border-radius: 0.3rem;
+  border-bottom-left-radius: 0;
+  padding: 0.2rem;
   margin-right: 0.875rem;
   font-weight: normal;
+  display:inline;
 }
 .rating-property > span {
   font-size: 0.875rem;
+  display:inline;
+}
+
+.rating-property .review {
+margin-left: 0.3rem;
 }
