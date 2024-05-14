@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/home/Home';
 import ErrorPage from './pages/errorPage/ErrorPage';
 import DefaultLayout from './pages/defaultLayout/DefaultLayout';
-
 import ListOfHotels from './pages/listOfHotels/ListOfHotels';
 import DetailsOfHotel from './pages/detailsOfHotel/DetailsOfHotel';
 
@@ -13,9 +12,7 @@ function App(): JSX.Element {
     {
       path: '/',
       element: <DefaultLayout />,
-
       errorElement: <ErrorPage />,
-
       children: [
         {
           index: true,

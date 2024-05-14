@@ -9,6 +9,7 @@ export type UseFetchStateType<T> = {
   data: null | T; //inside api response type
   error: null | Error;
   isLoading: boolean;
+  fetchData?:(url:string)=>void;
 };
 
 function useFetch<T>(url: string) {
@@ -50,7 +51,7 @@ function useFetch<T>(url: string) {
   useEffect(() => {
     fetchData(url);
     return () => {
-      setFetchState((prev) => ({ ...prev, isLoading: false }));
+      setFetchState((prev) => ({ ...prev, isLoading: false })), fetchData;
     };
   }, [url]);
 

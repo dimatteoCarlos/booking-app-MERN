@@ -11,7 +11,7 @@ const ListProperties = (): JSX.Element => {
   // let url =
   //   'http://localhost:8800/api/hotels/query/countByType?types=hotel,apartment,cabin,room,VILLAGE,Hotel,CABIN,villa, resort';
 
-  //endpoint to count ALL properties by types defined in the database, but specified at the api.
+  //endpoint to count properties of ALL types defined in the database, but specified at the api.
 
   let url = 'http://localhost:8800/api/hotels/count/countByType';
 

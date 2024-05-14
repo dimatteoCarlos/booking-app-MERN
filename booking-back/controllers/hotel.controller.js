@@ -157,7 +157,6 @@ export const countHotelsByType = async (req, res, next) => {
     groupHotelsByKey(req, res, next, keyGroup);
 
     res.status(200).json(list);
-
   } catch (error) {
     console.log(error);
     next(error);
@@ -225,10 +224,11 @@ export const getHotelsByQuery = async (req, res, next) => {
   try {
     const data = await HotelModel.find({
       ...restOfQuery,
-      economicPrice: { $gte: min || 1, $lte: max || 800 },
+      economicPrice: { $gte: min, $lte: max },
+      // economicPrice: { $gte: min | 2, $lte: max | 800 },
     }).limit(req.query.limit);
     // const data = await HotelModel.find(req.query).limit(req.query.limit);
-    console.log(data);
+    // console.log(data);
     res.status(200).json(data);
   } catch (error) {
     console.log(error);

@@ -29,6 +29,7 @@
 }
 .place-property {
   font-weight: 300;
+  text-transform: capitalize;
 }
 .price-property {
   font-weight: 500;

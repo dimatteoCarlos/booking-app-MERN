@@ -130,3 +130,5 @@
 .details .texts .btn:active {
   scale: 97%;
 }
+
+.features{text-transform: capitalize;}

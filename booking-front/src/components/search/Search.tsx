@@ -1,4 +1,5 @@
 //Search.tsx
+//Parent: Header.tsx
 import './search.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -48,6 +49,8 @@ const Search = () => {
   const handleSearch = () => {
     navigateTo('/hotels', { state: { destination, date, options } });
   };
+
+  
 
   //------------------------
   return (

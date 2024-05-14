@@ -2,27 +2,29 @@ import './detailedProperties.css';
 
 import { properties } from './dataDetailedProperties';
 import useFetch from '../hooks/useFetch';
+import { HotelDBInfoType } from '../../types/types.ts';
 
-type HotelInfoType = {
-  name: string;
-  type: string;
-  city: string;
-  address: string;
-  distance: string;
-  title: string;
-  photos: string;
-  description: string;
-  rating: number;
-  rooms: string;
-  economicPrice: number;
-  featured: boolean;
-};
+// type HotelDBInfoType = {
+//   _id: string;
+//   name: string;
+//   type: string;
+//   city: string;
+//   address: string;
+//   distance: string;
+//   title: string;
+//   photos: string;
+//   description: string;
+//   rating: number;
+//   rooms: string;
+//   economicPrice: number;
+//   featured: boolean;
+// };
 
 const DetailedProperties = (): JSX.Element => {
   let url =
-    'http://localhost:8800/api/hotels/getHotelsByQuery/?featured=true&min=10&max=800&limit=4';
+    'http://localhost:8800/api/hotels/getHotelsByQuery/?featured=true&min=1&max=10000&limit=4';
 
-  const { error, isLoading, data } = useFetch<HotelInfoType[]>(url);
+  const { error, isLoading, data } = useFetch<HotelDBInfoType[]>(url);
 
   return (
     <div className='best-properties'>
@@ -32,7 +34,7 @@ const DetailedProperties = (): JSX.Element => {
         : properties.map((item, indx) => {
             const {
               id,
-              url,
+              urlImage,
               name,
               place,
               price,
@@ -44,6 +46,8 @@ const DetailedProperties = (): JSX.Element => {
               city,
               economicPrice,
               rating: ratingdb,
+              photos,
+              _id,
             } = data![indx];
 
             return (
@@ -52,13 +56,15 @@ const DetailedProperties = (): JSX.Element => {
                 key={id.toString() + '-' + indx.toString()}
               >
                 <img
-                  src={url}
-                  alt={`${id}_${name}`}
+                  src={photos[0] || urlImage}
+                  alt={`${id}_${name}_${_id}`}
                   className='image-property'
                 />
 
                 <span className='name-property'>{namedb || name}</span>
-                <span className='place-property'>{city || place}</span>
+                <span className='place-property'>
+                  {city.toLowerCase() || place.toLowerCase()}
+                </span>
                 <span className='price-property'>
                   Starting from ${economicPrice || price}
                 </span>
@@ -67,7 +73,7 @@ const DetailedProperties = (): JSX.Element => {
                   <button className='rate'>{ratingdb || rate}</button>
                   <span className='rating'>{rating}</span>
                   <span className='review'>
-                    {Math.ceil(Math.random() * 10 * rate)} reviews
+                    {Math.ceil(Math.random() * 100)} reviews
                   </span>
                 </div>
               </div>

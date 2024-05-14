@@ -5,7 +5,7 @@ export type headerItemType = {
   status: boolean;
 };
 
-export type ModeType = string | null ;
+export type ModeType = string | null;
 
 export type headerTitleType = {
   title: string;
@@ -70,7 +70,7 @@ export type DataOfAHotelType = {
 //------------------
 export type PropertyType = {
   id: number;
-  url: string;
+  urlImage: string;
   name: string;
   place: string;
   price: string;
@@ -78,4 +78,23 @@ export type PropertyType = {
     rate: number;
     rating: string;
   };
+};
+
+//types related to the schemas defined in the database
+
+
+export type HotelDBInfoType = {
+  _id: string;
+  name: string;
+  type: string;
+  city: string;
+  address: string;
+  distance: string;
+  title: string;
+  photos: string;
+  description: string;
+  rating: number;
+  rooms: string;
+  economicPrice: number;
+  featured: boolean;
 };

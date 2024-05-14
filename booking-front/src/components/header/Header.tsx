@@ -1,5 +1,5 @@
 //Header.tsx
-
+//Parents: Home.tsx, ListOfHotels
 import './header.css';
 
 import Badge from '../badges/Badges';

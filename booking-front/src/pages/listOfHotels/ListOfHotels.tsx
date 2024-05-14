@@ -1,5 +1,5 @@
 //ListOfHotels.tsx
-
+//Parent:App.tsx
 import './listOfHotels.css';
 import Header from '../../components/header/Header';
 
@@ -12,14 +12,64 @@ import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
 import ResultsItem from '../../components/resultsItem/ResultsItem';
 
+// import { OptionsType } from '../../types/types';
+
+import { HotelDBInfoType } from '../../types/types.ts';
+
+import useFetch from '../../components/hooks/useFetch';
+//----------------------------
+// declare function useLocation(): Location;
+
+// interface Location<State = any> extends Path {
+//   state: State;
+//   key: string;
+// }
+
+// interface Path {
+//   pathname: string;
+//   search: string;
+//   hash: string;
+// }
+//------------
+
 const ListOfHotels = (): JSX.Element => {
-  const { date: fecha, destination, options: options } = useLocation().state;
+  const {
+    date: dates,
+    destination: destinationValue,
+    options: optionsValue,
+  } = useLocation().state;
 
-  //--------------------
-  const [date, setDate] = useState(fecha);
+  // const location = useLocation();
 
-  //--------------
+  //---define states received in location state (useNavigate from Search)
+  const [date, setDate] = useState(dates);
+  const [destination, setDestination] = useState(destinationValue);
+  const [options, setOptions] = useState(optionsValue);
+  //----------------------
+  const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
+  const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
   const [isOpenDate, setIsOpenDate] = useState<boolean>(false);
+  //----------------
+  let url = `http://localhost:8800/api/hotels/getHotelsByQuery/?city=${destination}&min=${
+    minPrice || 1
+  }&max=${maxPrice || 1000}&limit=100`;
+
+  const { data, isLoading, error, fetchData } =
+    useFetch<HotelDBInfoType[]>(url);
+
+  console.log(data, isLoading, error, fetchData);
+
+  // const handleSearch = (url: string) => {
+  //   fetchData(url);
+  // };
+
+  const handlePrice = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    cb: React.Dispatch<React.SetStateAction<number | undefined>>
+  ) => {
+    e.preventDefault();
+    cb(Number(e.target.value ?? 0));
+  };
 
   return (
     <div>
@@ -40,6 +90,7 @@ const ListOfHotels = (): JSX.Element => {
                 name='destination'
                 id='destination'
                 placeholder={destination}
+                onChange={(e) => setDestination(e.target.value)}
               />
             </div>
 
@@ -81,6 +132,8 @@ const ListOfHotels = (): JSX.Element => {
                     autoComplete='off'
                     className='option-ipnut'
                     min={0}
+                    onChange={(e) => handlePrice(e, setMinPrice)}
+                    placeholder={`${minPrice ?? ''}`}
                   />
                 </div>
 
@@ -93,6 +146,8 @@ const ListOfHotels = (): JSX.Element => {
                     autoComplete='off'
                     type='number'
                     min={0}
+                    onChange={(e) => handlePrice(e, setMaxPrice)}
+                    placeholder={`${maxPrice ?? ''}`}
                   />
                 </div>
 
@@ -132,11 +187,16 @@ const ListOfHotels = (): JSX.Element => {
                     max={30}
                   />
                 </div>
-                <button className='list-search-btn'>Search</button>
+                <button
+                  className='list-search-btn'
+                  // onClick={}
+                >
+                  Search
+                </button>
               </div>
             </div>
           </div>
-          <ResultsItem />
+          {isLoading ? 'Loading...' : <ResultsItem data={data} />}
         </div>
       </div>
     </div>

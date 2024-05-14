@@ -1,3 +1,6 @@
+//Home.tsx
+//Parent:App.tsx
+
 import Header from '../../components/header/Header.tsx';
 import Presentation from '../../components/presentation/Presentation.tsx';
 import DetailedProperties from '../../components/detailedProperties/DetailedProperties.tsx';

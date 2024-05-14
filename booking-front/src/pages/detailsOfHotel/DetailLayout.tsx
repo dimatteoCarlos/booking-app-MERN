@@ -1,3 +1,5 @@
+
+
 import './detailLayout.css';
 
 import { useState } from 'react';
