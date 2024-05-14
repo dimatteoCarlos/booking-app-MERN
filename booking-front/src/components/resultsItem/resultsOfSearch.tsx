@@ -60,7 +60,7 @@ export const resultsOfSearch: ResultsItemType[] = [
       'Entire apartment • 1 queen bed • 67 m² size • Kitchen • Non-smoking room • Free wifi',
     cancelOp: 'Prepayment required',
     cancelOpSubtitle: 'You can cancel later',
-    rating: { desc: 'Non rated', rate: '--' },
+    rating: { desc: 'Non rated', rate: '-' },
     price: 'We Price Match',
     taxesOp: 'Includes taxes and fees',
   },

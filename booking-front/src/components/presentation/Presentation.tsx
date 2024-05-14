@@ -6,20 +6,16 @@ import useFetch from '../hooks/useFetch';
 
 type CityType = { city: string; count: number };
 
-// export type CityApiResponseType = {
-//   isLoading: boolean;
-//   error: any;
-//   data: CityType[];
-// };
-
 const Presentation = () => {
   //endpoint to count properties by cities specified by the user
   let url =
-    'http://localhost:8800/api/hotels/query/countByCity?cities=dublin,berlin,madrid,paraguachon,new%20york';
+    'http://localhost:8800/api/hotels/query/countByCity?cities=dublin,berlin,madrid,new%20york';
 
   //-----------
 
-  const { data, isLoading, error } = useFetch<CityType[]>(url);
+  const { fetchState } = useFetch<CityType[]>(url);
+  
+  const {data, isLoading, error}=fetchState
 
   return (
     <>

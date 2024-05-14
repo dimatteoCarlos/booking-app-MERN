@@ -18,6 +18,7 @@ export const createHotel = async (req, res, next) => {
 
 //-------------------------------
 //READ GET by id
+//endpoint: http://localhost:8800/api/hotels/find/663f7364420a784bf6c15b76
 export const getHotel = async (req, res, next) => {
   const id = req.params.id;
 
@@ -33,7 +34,7 @@ export const getHotel = async (req, res, next) => {
 
 //-------------------------------
 //COUNT BY CITY query
-//define the query by City: /countByCity?cities=berlin, madrid, london
+//define the query by City: /countByCity?cities=berlin,madrid,london
 
 export const countHotelsByCity = async (req, res, next) => {
   //query.../countnByCity?cities=berlin, madrid,london
@@ -56,7 +57,7 @@ export const countHotelsByCity = async (req, res, next) => {
 
     // console.log(list);
 
-    groupHotelsByCity(req, res, next);
+    // groupHotelsByCity(req, res, next);
 
     res.status(200).json(list);
   } catch (error) {
@@ -65,8 +66,9 @@ export const countHotelsByCity = async (req, res, next) => {
   }
 };
 
+// Dev use this to check for the properties in the database. Delete it in production.
+//challenge: find out how to do this groupping in mongodb
 export async function groupHotelsByCity(req, res, next) {
-  //query.../countByCity?cities=all
   const result = { list: [] };
   let key = 'city';
 
@@ -79,11 +81,11 @@ export async function groupHotelsByCity(req, res, next) {
       if (result.list.indexOf(hotel[key]) === -1) {
         result.list.push(hotel[key]);
         result[hotel[key]] = {};
-        result[hotel[key]]['counter'] = 0;
+        result[hotel[key]]['count'] = 0;
       }
       // console.log(hotel[key], hotel[key].toLowerCase());
 
-      result[hotel[key].toLowerCase()]['counter'] += 1;
+      result[hotel[key].toLowerCase()]['count'] += 1;
     }
     console.log('result', result);
 
@@ -94,9 +96,8 @@ export async function groupHotelsByCity(req, res, next) {
   }
 }
 
-//how to do this groupping in mongodb
-//get key info
-
+//get by key info
+//Dev Idem...
 export const groupHotelsByKey = async (req, res, next, keyGroup = 'city') => {
   const result = { list: [] };
   let key = keyGroup;
@@ -131,7 +132,9 @@ export const groupHotelsByKey = async (req, res, next, keyGroup = 'city') => {
 //----------------------------
 //COUNT BY TYPE query
 //query.../countnByType?types=hotel, apartment,room
-//Use this to count specific types given by user
+//Use this to count specific given types
+//Use it as a dev. Delete it in production
+//Dev Idem...
 export const countHotelsByType = async (req, res, next) => {
   const searchedTypes = req.query.types.split(',');
   console.log(searchedTypes);
@@ -164,7 +167,7 @@ export const countHotelsByType = async (req, res, next) => {
 };
 //-------------------------
 //COUNT PROPERTIES BY TYPE
-//Use this to count the properties by the types already defined in the database
+//Use this to count the properties by specific types already set
 
 export const countByType = async (req, res, next) => {
   const givenTypes = [
@@ -210,7 +213,7 @@ export const getHotels = async (req, res, next) => {
     next(error);
   }
 };
-
+//-------------------
 //READ BY QUERY. GET ALL ACCOMODATIONS BY QUERY
 export const getHotelsByQuery = async (req, res, next) => {
   //endpoint : http://localhost:8800/api/hotels/getHotelsByQuery/?featured=true&min=10&max=800&limit=4
@@ -236,7 +239,7 @@ export const getHotelsByQuery = async (req, res, next) => {
     next(error);
   }
 };
-
+//----------------------
 //UPDATE
 export async function updateHotel(req, res, next) {
   const id = req.params.id;

@@ -84,17 +84,17 @@ export type PropertyType = {
 
 
 export type HotelDBInfoType = {
-  _id: string;
+  _id: string;//check
   name: string;
   type: string;
   city: string;
   address: string;
-  distance: string;
+  distance: number;
   title: string;
-  photos: string;
+  photos: string[];
   description: string;
   rating: number;
-  rooms: string;
+  rooms: [string];
   economicPrice: number;
   featured: boolean;
 };

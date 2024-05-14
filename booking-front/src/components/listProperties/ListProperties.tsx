@@ -8,17 +8,19 @@ export type TypePropertyType = { type: string; count: number };
 
 const ListProperties = (): JSX.Element => {
   //endpoint to count properties by type specified by the user
-  // let urlImage =
+  // let url =
   //   'http://localhost:8800/api/hotels/query/countByType?types=hotel,apartment,cabin,room,VILLAGE,Hotel,CABIN,villa, resort';
 
   //endpoint to count properties of ALL types defined in the database, but specified at the api.
 
-  let urlImage = 'http://localhost:8800/api/hotels/count/countByType';
+  let url = 'http://localhost:8800/api/hotels/count/countByType';
 
   //-----------
 
-  const { data, isLoading } = useFetch<TypePropertyType[]>(urlImage);
-  // console.log('data:', data);
+  const { fetchState } = useFetch<TypePropertyType[]>(url);
+  
+  const {data, isLoading}=fetchState
+  console.log('data:', data);
 
   return (
     <div className='list-container'>

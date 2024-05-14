@@ -18,20 +18,22 @@
   height: max-content;
   margin-top: 1.25rem;
   margin-bottom: 1rem;
+
+  justify-content: start;
 }
 
 /*list-search2*/
 
 .list-container .list-search2 {
   border-radius: 0.5rem;
-  flex: 1;
+  /* flex: 1; */
 }
 .list-search2 .title {
   margin-bottom: 1rem;
 }
 
 .list-search2 {
-  flex: 1;
+  flex: 1 0 0;
   border-radius: 0.75rem;
   border: none;
   background-color: #ffaf2a;
@@ -39,12 +41,17 @@
 
   padding: 0.875rem;
   padding-bottom: 0;
+
   position: sticky;
   height: max-content;
-
+  max-width: 25%;
   color: #111;
 }
 
+.list-search2 {
+  max-width: 25%;
+  min-width: 25%;
+}
 .list-search2 .title {
   font-weight: 700;
   font-size: 1.25rem;

@@ -24,13 +24,16 @@ const router = express.Router();
 router.post('/', verifyAdmin, createHotel);
 
 //READ GET by id
+//http://localhost:8800/api/hotels/find/663f7364420a784bf6c15b76
 router.get('/find/:id', getHotel);
 
-//READ GET by query
+//READ GET by query to count by city, by type
 router.get('/query/countByCity', countHotelsByCity);
-router.get('/query/countByType', countHotelsByType);
 
 router.get('/count/countByType', countByType);
+
+//Use as Dev
+router.get('/query/countByType', countHotelsByType);
 
 //READ ALL
 router.get('/', getHotels);

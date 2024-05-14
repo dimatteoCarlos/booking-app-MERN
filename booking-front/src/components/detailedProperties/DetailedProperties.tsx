@@ -24,7 +24,11 @@ const DetailedProperties = (): JSX.Element => {
   let url =
     'http://localhost:8800/api/hotels/getHotelsByQuery/?featured=true&min=1&max=10000&limit=4';
 
-  const { error, isLoading, data } = useFetch<HotelDBInfoType[]>(url);
+  const {
+    fetchState: { data, isLoading, error },
+  } = useFetch<HotelDBInfoType[]>(url);
+
+  console.log('data:', data);
 
   return (
     <div className='best-properties'>

@@ -78,6 +78,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  gap:0.5rem;
 }
 .ratingDesc {
   font-weight: 700;
@@ -86,10 +87,14 @@
 .btnRate {
   color: white;
   background-color: #003580;
-  padding: 0.3125rem;
+  padding: 0.3rem;
   font-weight: bold;
-  border-radius: 0.25rem;
+  border-radius: 0.25rem  0.25rem 0.25rem 0;
   cursor: pointer;
+  min-width: 2rem;
+  width:max-content;
+  height: max-content;
+  text-align: center;
 }
 .texts {
   text-align: right;
