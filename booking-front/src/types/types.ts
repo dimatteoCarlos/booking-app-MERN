@@ -14,7 +14,7 @@ export type headerTitleType = {
 
 export type PropertiesListType = {
   id: number;
-  url: string;
+  urlImage: string;
   titles: {
     category: string;
     qty: string;

@@ -86,3 +86,5 @@ app.listen(PORT, () => {
   console.log('Connected to backend', '\n', `Server http://localhost:${PORT}/`);
 
 });
+
+ // UserModel.insertMany(dataUser);

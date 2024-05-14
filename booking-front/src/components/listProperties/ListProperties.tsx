@@ -8,16 +8,16 @@ export type TypePropertyType = { type: string; count: number };
 
 const ListProperties = (): JSX.Element => {
   //endpoint to count properties by type specified by the user
-  // let url =
+  // let urlImage =
   //   'http://localhost:8800/api/hotels/query/countByType?types=hotel,apartment,cabin,room,VILLAGE,Hotel,CABIN,villa, resort';
 
   //endpoint to count properties of ALL types defined in the database, but specified at the api.
 
-  let url = 'http://localhost:8800/api/hotels/count/countByType';
+  let urlImage = 'http://localhost:8800/api/hotels/count/countByType';
 
   //-----------
 
-  const { data, isLoading } = useFetch<TypePropertyType[]>(url);
+  const { data, isLoading } = useFetch<TypePropertyType[]>(urlImage);
   // console.log('data:', data);
 
   return (
@@ -27,17 +27,16 @@ const ListProperties = (): JSX.Element => {
         : propertiesList.map((item, indx) => {
             const {
               id,
-              url,
+              urlImage,
               titles: {
                 category: category,
-                // , qty: quantity
               },
             } = item;
 
             return (
               <div className='listProperty-item' key={indx}>
                 <img
-                  src={url}
+                  src={urlImage}
                   alt={`${id}_${category}`}
                   className='image-item'
                 />
@@ -58,7 +57,7 @@ const ListProperties = (): JSX.Element => {
                     {data![indx]?.count > 1 ? 's' : ''}
                   </h2>
 
-                  {/* <h2 className='quantity'>{quantity}</h2> */}
+
                 </div>
               </div>
             );
