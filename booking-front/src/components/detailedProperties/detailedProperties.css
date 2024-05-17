@@ -26,14 +26,17 @@
 .name-property {
   color: blue;
   font-weight: bold;
+  text-transform: capitalize;
 }
 .place-property {
   font-weight: 300;
   text-transform: capitalize;
 }
+
 .price-property {
   font-weight: 500;
 }
+
 .rating-property > button {
   cursor: pointer;
   background-color: #003b95;
@@ -50,8 +53,15 @@
 .rating-property > span {
   font-size: 0.875rem;
   display:inline;
+ 
 }
 
 .rating-property .review {
 margin-left: 0.3rem;
+}
+
+.rating-property .rating{
+  text-transform: capitalize !important;
+  font-weight:bold;
+  
 }

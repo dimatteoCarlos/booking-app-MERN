@@ -61,7 +61,7 @@ function useFetch<T>(url: string) {
   //--------------------
   useEffect(() => {
     fetchData(url);
-  }, [url]);
+  }, []);
 
   return { fetchState, reFetch };
 }

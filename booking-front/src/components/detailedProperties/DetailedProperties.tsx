@@ -4,25 +4,10 @@ import { properties } from './dataDetailedProperties';
 import useFetch from '../hooks/useFetch';
 import { HotelDBInfoType } from '../../types/types.ts';
 
-// type HotelDBInfoType = {
-//   _id: string;
-//   name: string;
-//   type: string;
-//   city: string;
-//   address: string;
-//   distance: string;
-//   title: string;
-//   photos: string;
-//   description: string;
-//   rating: number;
-//   rooms: string;
-//   economicPrice: number;
-//   featured: boolean;
-// };
-
 const DetailedProperties = (): JSX.Element => {
+
   let url =
-    'http://localhost:8800/api/hotels/getHotelsByQuery/?featured=true&min=1&max=10000&limit=4';
+    'http://localhost:8800/api/hotels/getHotelsByQuery/?featured=true&min=1&max=10000&minRate=7&limit=4';
 
   const {
     fetchState: { data, isLoading, error },
@@ -49,8 +34,9 @@ const DetailedProperties = (): JSX.Element => {
               name: namedb,
               city,
               economicPrice,
-              rating: ratingdb,
-              photos,
+              rating: ratingDb,
+              rate:ratedb,
+              photoUrlImages,
               _id,
             } = data![indx];
 
@@ -60,7 +46,7 @@ const DetailedProperties = (): JSX.Element => {
                 key={id.toString() + '-' + indx.toString()}
               >
                 <img
-                  src={photos[0] || urlImage}
+                  src={photoUrlImages![6] || urlImage}
                   alt={`${id}_${name}_${_id}`}
                   className='image-property'
                 />
@@ -74,8 +60,11 @@ const DetailedProperties = (): JSX.Element => {
                 </span>
 
                 <div className='rating-property'>
-                  <button className='rate'>{ratingdb || rate}</button>
-                  <span className='rating'>{rating}</span>
+                  <button className='rate'>{ratedb.toFixed(1) || rate}</button>
+
+                  <span className='rating'
+                  style={{textTransform:'capitalize'}}
+                  >{ratingDb || rating}</span>
                   <span className='review'>
                     {Math.ceil(Math.random() * 100)} reviews
                   </span>

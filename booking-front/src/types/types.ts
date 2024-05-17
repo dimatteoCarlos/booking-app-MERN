@@ -82,19 +82,46 @@ export type PropertyType = {
 
 //types related to the schemas defined in the database
 
-
 export type HotelDBInfoType = {
-  _id: string;//check
+  _id?: string; //check
+  id: number;
   name: string;
   type: string;
   city: string;
-  address: string;
-  distance: number;
-  title: string;
-  photos: string[];
-  description: string;
-  rating: number;
-  rooms: [string];
+
   economicPrice: number;
+  rate: number;
+  rating: string;
+  reviews: number;
   featured: boolean;
+  rooms?: string[] | null;
+  photoUrlImages?: string[] | null;
+
+  details: {
+    title: string;
+    address: string;
+    priceHighlight: string;
+    distance: {
+      km: number;
+      comment: string;
+    };
+    detailsDescription: {
+      recommendation: string;
+      description: string;
+    };
+    detailsPriceOfStaying: {
+      commentStay: string;
+      locationStay: string;
+      totPrice: string;
+      durationStay: string;
+    };
+  };
+  features_details: {
+    featureTitle: string;
+    featureSubTitle: string;
+    features: string;
+    cancelOp: string;
+    cancelOpSubtitle: string;
+    taxesOp: string;
+  }; //features
 };

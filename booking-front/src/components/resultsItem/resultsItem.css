@@ -36,6 +36,7 @@
 .title {
   font-size: 1.25rem;
   color: #0071c2;
+  text-transform: capitalize;
 }
 .distance {
   height: 100%;

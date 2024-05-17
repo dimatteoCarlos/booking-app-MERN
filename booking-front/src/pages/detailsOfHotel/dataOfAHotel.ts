@@ -16,7 +16,8 @@ export const dataOfAHotel: DataOfAHotelType = {
     commentStay: 'Perfect for a 9-night stay!',
     locationStay:
       'Located in the real heart of Krakow, this property has an excellent location score of 9.8!',
-    price: '$945',
-    durationStay: '(9 nights)',
+    price: '$945',//calculate
+    durationStay: '(9 nights)',//calculate
   },
 };
+

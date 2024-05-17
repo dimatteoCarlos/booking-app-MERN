@@ -50,8 +50,6 @@ const Search = () => {
     navigateTo('/hotels', { state: { destination, date, options } });
   };
 
-  
-
   //------------------------
   return (
     <>

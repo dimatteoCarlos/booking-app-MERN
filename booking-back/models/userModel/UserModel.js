@@ -1,9 +1,11 @@
 //UserModel.js
 
 import mongoose from 'mongoose';
+
 const { Schema, model } = mongoose;
 
 import { UserSchemaSpec } from './UserSchemaSpec.js';
+
 
 const collectionName = 'User';
 

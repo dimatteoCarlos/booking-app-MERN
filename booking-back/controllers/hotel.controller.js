@@ -216,21 +216,28 @@ export const getHotels = async (req, res, next) => {
 //-------------------
 //READ BY QUERY. GET ALL ACCOMODATIONS BY QUERY
 export const getHotelsByQuery = async (req, res, next) => {
-  //endpoint : http://localhost:8800/api/hotels/getHotelsByQuery/?featured=true&min=10&max=800&limit=4
+  //endpoint : http://localhost:8800/api/hotels/getHotelsByQuery/?city=london&min=10&max=800&minRate=2&limit=1000
 
   console.log(req.query);
 
-  const { min, max, limit, ...restOfQuery } = req.query;
+  const { min, max, limit, minRate, ...restOfQuery } = req.query;
 
-  console.log(min, max, limit, restOfQuery);
+  //validations
+  //check min and max
+  const minPrice = min > max ? max : min;
+  const maxPrice = min > max ? min : max;
 
   try {
     const data = await HotelModel.find({
       ...restOfQuery,
-      economicPrice: { $gte: min, $lte: max },
+// city:{cityTofind}
+      economicPrice: { $gte: minPrice, $lte: maxPrice },
+      rate: { $gte: minRate },
       // economicPrice: { $gte: min | 2, $lte: max | 800 },
     }).limit(req.query.limit);
-    // const data = await HotelModel.find(req.query).limit(req.query.limit);
+
+    
+
     // console.log(data);
     res.status(200).json(data);
   } catch (error) {

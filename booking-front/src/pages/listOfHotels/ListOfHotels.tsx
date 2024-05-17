@@ -10,7 +10,7 @@ import { useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 
 import { DateRange } from 'react-date-range';
-import ResultsItem from '../../components/resultsItem/ResultsItem';
+import ResultsItem from '../../components/resultsItem/ResultsItem.tsx';
 
 // import { OptionsType } from '../../types/types';
 
@@ -31,15 +31,16 @@ const ListOfHotels = (): JSX.Element => {
   //---define states received in location state (useNavigate from Search)
   const [date, setDate] = useState(dates);
   const [destination, setDestination] = useState(location.state.destination);
+
   const [options, setOptions] = useState(optionsValue);
   //----------------------
-  const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
-  const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
+  const [minPrice, setMinPrice] = useState<number | undefined>();
+  const [maxPrice, setMaxPrice] = useState<number | undefined>();
   const [isOpenDate, setIsOpenDate] = useState<boolean>(false);
   //----------------
-  let url = `http://localhost:8800/api/hotels/getHotelsByQuery/?city=${destination}&min=${
+  let url = `http://localhost:8800/api/hotels/getHotelsByQuery/?city=${destination.toLowerCase()}&min=${
     minPrice || 1
-  }&max=${maxPrice || 10000}&limit=100`;
+  }&max=${maxPrice || 10000}&minRate=2&limit=1000`;
 
   const {
     fetchState: { data, isLoading, error },
@@ -56,10 +57,7 @@ const ListOfHotels = (): JSX.Element => {
   //   cb(Number(e.target.value));
   // };
 
-  const handleSearch = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    url: string
-  ) => {
+  const handleSearch = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     console.log('🚀 ~ ListOfHotels ~ url:', url);
     e.preventDefault();
     reFetch!();
@@ -84,7 +82,6 @@ const ListOfHotels = (): JSX.Element => {
         <div className='list-wrapper'>
           <div className='list-search2'>
             <div className='title'>Search</div>
-
             <div className='list-item'>
               <label htmlFor='detination'>Destination/property/name:</label>
 
@@ -94,11 +91,10 @@ const ListOfHotels = (): JSX.Element => {
                 value={destination}
                 id='destination'
                 placeholder={destination}
-                // onChange={(e) => setDestination(e.target.value)}
+                onChange={(e) => setDestination(e.target.value)}
                 // onChange={(e) => handleDestination(e)}
               />
             </div>
-
             <div className='list-item date-search'>
               <label htmlFor='check-date'>Check Dates</label>
 
@@ -124,7 +120,6 @@ const ListOfHotels = (): JSX.Element => {
                 </div>
               )}
             </div>
-
             <div className='list-item options'>
               <label>Options</label>
               <div className='list-options'>
@@ -141,7 +136,7 @@ const ListOfHotels = (): JSX.Element => {
                       setMinPrice(Number(e.target.value))
                     }
                     // onChange={(e) => handlePrice(e, setMinPrice)}
-                    // value={minPrice}
+                    value={minPrice}
                     // placeholder={`${minPrice ?? ''}`}
                   />
                 </div>
@@ -150,17 +145,18 @@ const ListOfHotels = (): JSX.Element => {
                   <span>
                     Max price <small>per night</small>
                   </span>
+
                   <input
                     className='option-input'
                     autoComplete='off'
                     type='number'
-                    min={0}
+                    min={1}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setMaxPrice(Number(e.target.value))
                     }
-
                     // onChange={(e) => handlePrice(e, setMaxPrice)}
-                    // value={maxPrice}
+
+                    value={maxPrice}
                     // placeholder={`${maxPrice ?? ''}`}
                   />
                 </div>
@@ -203,15 +199,20 @@ const ListOfHotels = (): JSX.Element => {
                 </div>
                 <button
                   className='list-search-btn'
-                  onClick={(e) => handleSearch(e, url)}
+                  onClick={(e) => handleSearch(e)}
                 >
                   Search
                 </button>
               </div>
             </div>
+            <div className='totalCountResults'>
+              {data && data.length > 0
+                ? `${data!.length} properties found `
+                : null}
+            </div>{' '}
           </div>
 
-          {isLoading ? <span>'Loading...'</span> : <ResultsItem data={data} />}
+          {isLoading ? 'Loading...' : <ResultsItem data={data} />}
         </div>
       </div>
     </div>

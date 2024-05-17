@@ -14,6 +14,12 @@ import authRoute from './routes/routeAuth.js';
 import usersRoute from './routes/routeUsers.js';
 import roomsRoute from './routes/routeRooms.js';
 
+//models and data
+import HotelModel from './models/hotelModel/HotelModel.js';
+import UserModel from './models/userModel/UserModel.js';
+import { hotel_data } from './models/hotelModel/HotelsData1000.js';
+import { users_data } from './models/userModel/usersData.js';
+
 /*CONFIGURATIONS*/
 const app = express();
 dotenv.config();
@@ -76,6 +82,7 @@ async function connect() {
 mongoose.connection.on('disconnected', () => {
   console.log('mongodb disconnected!');
 });
+
 mongoose.connection.on('connected', () => {
   console.log('mongodb is connected!');
 });
@@ -85,6 +92,8 @@ app.listen(PORT, () => {
 
   console.log('Connected to backend', '\n', `Server http://localhost:${PORT}/`);
 
-});
+  /*ONLY ADD DATA ONCE, JUST ONE TIME*/
 
- // UserModel.insertMany(dataUser);
+  // UserModel.insertMany(users_data);
+  // HotelModel.insertMany(hotel_data);
+});

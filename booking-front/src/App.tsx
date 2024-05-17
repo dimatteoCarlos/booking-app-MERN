@@ -43,3 +43,5 @@ function App(): JSX.Element {
 }
 
 export default App;
+//video: 2:03:37 -  context api para hotelId;
+//

@@ -1,9 +1,11 @@
-
+//DetailLayout.tsx
+//Parent:DetailsOfHotel.tsx
 
 import './detailLayout.css';
 
 import { useState } from 'react';
 import { DataOfAHotelType, PhotoUrlType } from '../../types/types';
+import { HotelDBInfoType } from '../../types/types.ts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import BookingBtn from '../../components/bookingBtn/BookingBtn';
@@ -12,13 +14,19 @@ import Slider from '../../components/slider/Slider';
 type DetailLayoutTypeProp = {
   data: DataOfAHotelType;
   photosHotel: PhotoUrlType[];
+
+  datadb: HotelDBInfoType;
+  error: any;
+  isLoading: boolean;
 };
 
 const DetailLayout = ({
   photosHotel,
   data,
+  datadb,
+  error,
+  isLoading,
 }: DetailLayoutTypeProp): JSX.Element => {
-  
   const {
     title,
     address,
@@ -84,9 +92,9 @@ const DetailLayout = ({
         </div>
 
         <div className='hotel-images'>
-          {photosHotel.map((image, indx) => (
+          {photosHotel?.map((image, indx) => (
             <img
-              src={image.imgUrl}
+              src={image?.imgUrl}
               key={`photo-${indx}`}
               onClick={() => handleOpenModal(indx)}
             />
