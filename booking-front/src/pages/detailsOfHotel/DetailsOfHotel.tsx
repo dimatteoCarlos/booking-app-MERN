@@ -1,3 +1,6 @@
+//DetailsOfHotel.tsx
+//Parent: App.tsx
+
 import './detailsOfHotel.css';
 
 import { photosHotel } from './photosHotel';
@@ -7,32 +10,38 @@ import Header from '../../components/header/Header';
 import DetailLayout from './DetailLayout';
 import FooterList from '../../components/footerList/FooterList';
 import EmailSignup from '../../components/emailSignup/EmailSignup';
-// import { HotelDBInfoType } from '../../types/types.ts';
+import { HotelDBInfoType } from '../../types/typesHotel.ts';
 import { useLocation } from 'react-router-dom';
+import useFetch from '../../components/hooks/useFetch.tsx';
 
 const DetailsOfHotel = () => {
-
-  const location = useLocation()
-  console.log(location)
-  // const hotelId = location.pathname.split('/')[2]
-
+  const location = useLocation();
+  const hotelId = location.pathname.split('/')[2];
 
   //----------------
-  // let url = `http://localhost:8800/api/hotels/find/${hotelId}`;
+  let url = `http://localhost:8800/api/hotels/find/${hotelId}`;
 
-  // const {
-  //   fetchState: { data, isLoading, error },
-  //   reFetch,
-  // } = useFetch<HotelDBInfoType[]>(url);
-
-  // console.log(data, isLoading, error);
-
+  const {
+    fetchState: { data, isLoading, error },
+    // reFetch,
+  } = useFetch<HotelDBInfoType>(url);
 
   return (
     <>
       <Header modeType={'list'} />
       <div className='details-container'>
-        <DetailLayout data={dataOfAHotel} datadb={data} isLoading={isLoading} error={error} photosHotel={photosHotel} />
+        {error && 'Something went wrong, please try again'}
+        {isLoading && 'Loading...please wait!'}
+
+        {data && (
+          <DetailLayout
+            data={data}
+            // isLoading={isLoading}
+            // error={error}
+            defaultData={dataOfAHotel}
+            defaultPhotosHotel={photosHotel}
+          />
+        )}
       </div>
       <EmailSignup />
       <FooterList />

@@ -1,4 +1,6 @@
 //types.ts
+//types related to data files used
+
 export type headerItemType = {
   icon: 'stays' | 'flights' | 'carRentals' | 'attractions' | 'taxis';
   title: string;
@@ -51,6 +53,9 @@ export type PhotoUrlType = {
   imgUrl: string;
 };
 
+
+export type PhotoUrlImagesType=string[];
+
 export type DataOfAHotelType = {
   title: string;
   address: string;
@@ -84,7 +89,6 @@ export type PropertyType = {
 
 export type HotelDBInfoType = {
   _id?: string; //check
-  id: number;
   name: string;
   type: string;
   city: string;
@@ -115,7 +119,8 @@ export type HotelDBInfoType = {
       totPrice: string;
       durationStay: string;
     };
-  };
+  }; //details
+
   features_details: {
     featureTitle: string;
     featureSubTitle: string;

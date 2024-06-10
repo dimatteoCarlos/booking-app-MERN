@@ -17,7 +17,10 @@ import roomsRoute from './routes/routeRooms.js';
 //models and data
 import HotelModel from './models/hotelModel/HotelModel.js';
 import UserModel from './models/userModel/UserModel.js';
-import { hotel_data } from './models/hotelModel/HotelsData1000.js';
+import { data_hotel } from './models/hotelModel/data_hotel_1000.js';
+
+// import { hotel_data } from './models/hotelModel/HotelsData1000.js';
+
 import { users_data } from './models/userModel/usersData.js';
 
 /*CONFIGURATIONS*/
@@ -90,10 +93,12 @@ mongoose.connection.on('connected', () => {
 app.listen(PORT, () => {
   connect();
 
-  console.log('Connected to backend', '\n', `Server http://localhost:${PORT}/`);
+  console.log('Connected to backend', '\n', `local: http://localhost:${PORT}/`);
 
   /*ONLY ADD DATA ONCE, JUST ONE TIME*/
-
   // UserModel.insertMany(users_data);
-  // HotelModel.insertMany(hotel_data);
+//porque esto no funciona para borrar la collection
+// HotelModel.deleteMany({});
+
+  //  HotelModel.insertMany(data_hotel);
 });

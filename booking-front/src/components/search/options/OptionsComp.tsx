@@ -1,6 +1,6 @@
 //OptionsComp.tsx
 import '../search.css';
-import { OptionsType } from '../../../types/types';
+import { OptionsType } from '../../../types/typesHotel';
 
 type OptionsCompTypeProp = {
   options: OptionsType;

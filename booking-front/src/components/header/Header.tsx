@@ -1,10 +1,10 @@
 //Header.tsx
-//Parents: Home.tsx, ListOfHotels
+//Parents: Home.tsx, ListOfHotels.tsx
 import './header.css';
 
 import Badge from '../badges/Badges';
 //import Types
-import { headerItemType, headerTitleType } from '../../types/types';
+import { headerItemType, headerTitleType } from '../../types/typesHotel';
 import Title from './title/Title';
 import Search from '../search/Search';
 import InputChecks from '../inputChecks/InputChecks';
@@ -25,7 +25,7 @@ const headerTitleData: headerTitleType = {
   description: 'Search deals on hotels, homes, and much more...',
 };
 
-import { ModeType } from '../../types/types';
+import { ModeType } from '../../types/typesHotel';
 
 //----prop type
 export type HeaderPropType = {
@@ -33,7 +33,6 @@ export type HeaderPropType = {
 };
 //--------*****-----------------
 function Header({ modeType }: HeaderPropType): JSX.Element {
-  
   return (
     <>
       <div className='header'>
@@ -68,4 +67,4 @@ function Header({ modeType }: HeaderPropType): JSX.Element {
   );
 }
 
-export default Header
+export default Header;

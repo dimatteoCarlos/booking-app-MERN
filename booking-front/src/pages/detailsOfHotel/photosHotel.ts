@@ -1,4 +1,4 @@
-import { PhotoUrlType } from '../../types/types';
+import { PhotoUrlType } from '../../types/typesHotel';
 
 export const photosHotel: PhotoUrlType[] = [
   {

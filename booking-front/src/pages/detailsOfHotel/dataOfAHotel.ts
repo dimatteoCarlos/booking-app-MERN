@@ -1,4 +1,4 @@
-import { DataOfAHotelType } from '../../types/types';
+import { DataOfAHotelType } from '../../types/typesHotel';
 
 export const dataOfAHotel: DataOfAHotelType = {
   title: 'Tower Street Apartments',
@@ -16,8 +16,7 @@ export const dataOfAHotel: DataOfAHotelType = {
     commentStay: 'Perfect for a 9-night stay!',
     locationStay:
       'Located in the real heart of Krakow, this property has an excellent location score of 9.8!',
-    price: '$945',//calculate
-    durationStay: '(9 nights)',//calculate
+    price: '$945', //calculate
+    durationStay: '(9 nights)', //calculate
   },
 };
-

@@ -5,13 +5,14 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-import { PhotoUrlType } from '../../types/types';
+import { PhotoUrlImagesType, PhotoUrlType } from '../../types/typesHotel';
 
 type SliderTypeProp = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSlideIndex: React.Dispatch<React.SetStateAction<number>>;
   slideIndex: number;
-  slides: PhotoUrlType[];
+  // slides: PhotoUrlType[];
+  slides: PhotoUrlImagesType;
 };
 
 const Slider = ({
@@ -62,7 +63,7 @@ const Slider = ({
           />
 
           <img
-            src={slides[slideIndex].imgUrl}
+            src={slides[slideIndex]}
             alt={`image-${slideIndex}`}
             className='image'
           />

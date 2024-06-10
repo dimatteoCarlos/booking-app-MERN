@@ -12,17 +12,19 @@ import DateRangeComp from './dateRange/DateRangeComp';
 import { Range } from 'react-date-range';
 
 import { format } from 'date-fns';
-import { useState } from 'react';
 import OptionsComp from './options/OptionsComp.tsx';
-import { OptionsType } from '../../types/types';
+import { OptionsType } from '../../types/typesHotel.ts';
 import { useNavigate } from 'react-router-dom';
+import { SearchContext, useSearchData } from '../context/SearchContext.tsx';
+import { useContext, useState } from 'react';
+
 //-------------------------
 
 const Search = () => {
   //date-range--------------
   const [isOpenDate, setIsOpenDate] = useState<boolean>(false);
 
-  const [date, setDate] = useState<Range[] | undefined>([
+  const [date, setDate] = useState<Range[] | []>([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -45,14 +47,30 @@ const Search = () => {
   //------------------------
   const navigateTo = useNavigate();
 
+  //-------these are equivalents-----------
+  // const { searchState:searchData, searchDispatch:searchDataFn}=useSearchData();
+  // // console.log(searchData,searchDataFn);
+
+  const { searchState, searchDispatch } = useContext(SearchContext);
+
+  console.log(searchState);
   //------------------------
   const handleSearch = () => {
+    searchDispatch({
+      type: 'NEW_SEARCH',
+      payload: { destination, date, options },
+    });
+
     navigateTo('/hotels', { state: { destination, date, options } });
   };
 
   //------------------------
+
+  //------------------------
+  //------------------------
   return (
     <>
+      {/* <SearchContextProvider> */}
       <div className='search-container'>
         <div
           className='search-item input'
@@ -72,7 +90,7 @@ const Search = () => {
             onChange={(e) => setDestination(e.target.value)}
           />
         </div>
-{/*  */}
+        {/*  */}
         <div className='search-item date-search'>
           <div
             className='click-zone'
@@ -146,10 +164,11 @@ const Search = () => {
 
         <div className='search-item btn'>
           <button className='search-btn' onClick={handleSearch}>
-            Search
+            {'Search'}
           </button>
         </div>
       </div>
+      {/* </SearchContextProvider> */}
     </>
   );
 };

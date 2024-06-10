@@ -1,6 +1,6 @@
 //Title.tsx
 import './title.css';
-import { headerTitleType } from '../../../types/types';
+import { headerTitleType } from '../../../types/typesHotel';
 import SignInBtn from '../../signInBtn/SignInBtn';
 
 const Title = ({ title, description }: headerTitleType) => {

@@ -5,7 +5,8 @@ import DefaultLayout from './pages/defaultLayout/DefaultLayout';
 import ListOfHotels from './pages/listOfHotels/ListOfHotels';
 import DetailsOfHotel from './pages/detailsOfHotel/DetailsOfHotel';
 
-import { ModeType } from './types/types';
+import { ModeType } from './types/typesHotel';
+import Login from './pages/login/Login';
 
 function App(): JSX.Element {
   const router = createBrowserRouter([
@@ -30,7 +31,10 @@ function App(): JSX.Element {
             return 'list';
           },
         },
-        { path: '/hotels/:hotel', element: <DetailsOfHotel /> },
+        { path: '/hotels/:hotelId', element: <DetailsOfHotel /> },
+
+        { path: '/login', element: <Login /> },
+
       ],
     },
   ]);

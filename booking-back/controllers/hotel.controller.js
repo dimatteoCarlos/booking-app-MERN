@@ -25,7 +25,8 @@ export const getHotel = async (req, res, next) => {
   try {
     const hotelIdInfo = await HotelModel.findById(id);
 
-    res.status(200).json(`Hotel Info: ${hotelIdInfo} was obtained`);
+    res.status(200).json(hotelIdInfo);
+    // res.status(200).json(`Hotel Info: ${hotelIdInfo} was obtained`);
     console.log(hotelIdInfo);
   } catch (error) {
     next(error);
@@ -236,8 +237,6 @@ export const getHotelsByQuery = async (req, res, next) => {
       // economicPrice: { $gte: min | 2, $lte: max | 800 },
     }).limit(req.query.limit);
 
-    
-
     // console.log(data);
     res.status(200).json(data);
   } catch (error) {
@@ -280,3 +279,5 @@ export const deleteHotel = async (req, res, next) => {
     next(err);
   }
 };
+
+

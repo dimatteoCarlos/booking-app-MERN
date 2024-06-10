@@ -5,10 +5,13 @@ export const UserSchemaSpec = {
     type: String,
   },
   username: { type: String, required: true, unique: true, min: 3 },
+  name: { type: String, required: false, unique: false, min: 3 },
+  firstName: { type: String, required: false, unique: false, min: 3 },
+  lastName: { type: String, required: false, unique: false, min: 3 },
 
   email: { type: String, required: true, max: 50, unique: true },
 
-  password: { type: String, required: true},
+  password: { type: String, required: true },
 
   city: { type: String },
   country: { type: String, required: false },

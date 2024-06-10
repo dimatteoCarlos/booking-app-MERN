@@ -7,7 +7,7 @@ import { DateRange } from 'react-date-range';
 import type { Range, RangeKeyDict } from 'react-date-range';
 
 type PropsType = {
-  setDate: React.Dispatch<React.SetStateAction<Range[] | undefined>>;
+  setDate: React.Dispatch<React.SetStateAction<Range[] | []>>;
   date: Range[] | undefined;
 };
 

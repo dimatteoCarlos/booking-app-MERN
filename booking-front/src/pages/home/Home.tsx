@@ -2,9 +2,9 @@
 //Parent:App.tsx
 
 import Header from '../../components/header/Header.tsx';
-import Presentation from '../../components/presentation/Presentation.tsx';
-import DetailedProperties from '../../components/detailedProperties/DetailedProperties.tsx';
-import ListProperties from '../../components/listProperties/ListProperties.tsx';
+import Presentation from '../../components/compForHomePage/presentation/Presentation.tsx';
+import DetailedProperties from '../../components/compForHomePage/detailedProperties/DetailedProperties.tsx';
+import ListProperties from '../../components/compForHomePage/listProperties/ListProperties.tsx';
 import EmailSignup from '../../components/emailSignup/EmailSignup.tsx';
 import FooterList from '../../components/footerList/FooterList.tsx';
 import './home.css';

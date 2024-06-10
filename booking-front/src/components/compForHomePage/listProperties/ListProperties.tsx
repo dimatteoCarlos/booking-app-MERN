@@ -2,7 +2,7 @@
 //Parent:Home.tsx
 import './listProperties.css';
 import { propertiesList } from './dataListProperties.ts';
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 
 export type TypePropertyType = { type: string; count: number };
 
@@ -20,7 +20,7 @@ const ListProperties = (): JSX.Element => {
   const { fetchState } = useFetch<TypePropertyType[]>(url);
   
   const {data, isLoading}=fetchState
-  console.log('data:', data);
+  // console.log('data:', data);
 
   return (
     <div className='list-container'>

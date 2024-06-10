@@ -3,9 +3,9 @@
 
 import { Link, useNavigate } from 'react-router-dom';
 import './resultsItem.css';
-import { resultsOfSearch } from './resultsOfSearch.ts';
+import { resultsOfSearch as defaultData } from './resultsOfSearch.ts';
 
-import { HotelDBInfoType } from '../../types/types.ts';
+import { HotelDBInfoType } from '../../../types/typesHotel.ts';
 
 type ResultsItemPropsType = {
   data: HotelDBInfoType[] | null;
@@ -15,28 +15,22 @@ type ResultsItemPropsType = {
 const ResultsItem = ({ data }: ResultsItemPropsType): JSX.Element => {
   const navigateTo = useNavigate();
 
-  function handleBtnAction(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    id: string
-  ) {
-    e.preventDefault();
-    console.log(e.target, id);
-  }
-  
-  console.log('len:', resultsOfSearch.length);
+  // console.log('len:', defaultData.length, 'dataLen:', data!.length);
+
+  //usage of data instead of defaultData
 
   return (
     <>
-      {data!.length > 0 ? (
+      {defaultData!.length > 0 ? (
         <div className='list-results'>
-          {resultsOfSearch.map((item, rndx) => {
+          {defaultData?.map((item, rndx) => {
             const {
-              _id: idDb,
+              _id: id,
               name: nameDb,
               type,
               city,
               details: {
-                address,
+                // address,
                 title,
                 distance: { km: distToCenter, comment: distCom },
               },
@@ -45,9 +39,9 @@ const ResultsItem = ({ data }: ResultsItemPropsType): JSX.Element => {
               },
               rate,
               rating,
-              rooms,
+              // rooms,
               economicPrice,
-              featured,
+              // featured,
               photoUrlImages: photosDb,
             } = data![rndx];
 
@@ -64,14 +58,13 @@ const ResultsItem = ({ data }: ResultsItemPropsType): JSX.Element => {
 
             const ratingToShow: number = rate || Number(item.rating.rate);
 
-            console.log(idDb, address, rating, rooms, featured);
+            // console.log('module:', rndx % defaultData.length)
 
             return (
-              <div className='result-item' key={rndx} id={idDb}>
+              <div className='result-item' key={rndx} id={id}>
                 <img
                   className='image-item'
                   src={photosDb![0] || item.image}
-                  id={idDb}
                   alt={'image-' + { rndx } + '-' + { nameDb }}
                   onClick={() => navigateTo('/hotels/hotel')}
                 />
@@ -84,14 +77,16 @@ const ResultsItem = ({ data }: ResultsItemPropsType): JSX.Element => {
                     {item.taxiOp || 'Check if Free airport taxi is available'}
                   </span>
 
+                  <span className='title'>{featureTitle || item.title}</span>
+
                   <span className='subtitle'>
-                    {  featureSubTitle || item.subtitle || desc}
+                    {featureSubTitle || item.subtitle || desc}
                   </span>
 
                   {/*  */}
                   <span className='features'>
                     {`${type} in ${city}: 
-                   ${features || item.features}`}
+                   ${features || recommendation || item.features || distCom}`}
                   </span>
 
                   <div className='cancelOp'>{cancelOp || item.cancelOp}</div>
@@ -123,19 +118,9 @@ const ResultsItem = ({ data }: ResultsItemPropsType): JSX.Element => {
                     </span>
                     <div className='taxesOp'>{taxesOp || item.taxesOp}</div>
 
-                    {/* <Link to={`/find/${item._id}`}>
-                   <button                 onClick={() => navigateTo('/hotels/hotel')}
-                  className='btn'>See availability</button>
-                 
-                  // </Link> */}
-                    {/* aqui se debereia obtener el id y hacer un link para mostrar las fotos del hotel en DetailsOfHotel, donde se haria el fetch para buscar los datos del hotel, o se enviarina ya selecttionados desde aqui? al hacer click en see availability */}
-                    <Link to='/hotels/hotel'>
-                      <button
-                        // onClick={(e) => handleBtnAction(e, id)}
-                        className='btn'
-                      >
-                        See availability
-                      </button>
+                    {/* Details of Hotel */}
+                    <Link to={`/hotels/${id}`}>
+                      <button className='btn'>See availability</button>
                     </Link>
                   </div>
                 </div>
@@ -151,4 +136,5 @@ const ResultsItem = ({ data }: ResultsItemPropsType): JSX.Element => {
 };
 
 export default ResultsItem;
+
 // http://localhost:8800/api/hotels/find/663f7364420a784bf6c15b76

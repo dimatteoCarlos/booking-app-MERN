@@ -1,4 +1,4 @@
-import { ResultsItemType } from '../../types/types';
+import { ResultsItemType } from '../../../types/typesHotel.ts';
 
 export const resultsOfSearch: ResultsItemType[] = [
   {

@@ -1,11 +1,10 @@
 import './detailedProperties.css';
 
 import { properties } from './dataDetailedProperties';
-import useFetch from '../hooks/useFetch';
-import { HotelDBInfoType } from '../../types/types.ts';
+import useFetch from '../../hooks/useFetch';
+import { HotelDBInfoType } from '../../../types/typesHotel.ts';
 
 const DetailedProperties = (): JSX.Element => {
-
   let url =
     'http://localhost:8800/api/hotels/getHotelsByQuery/?featured=true&min=1&max=10000&minRate=7&limit=4';
 
@@ -13,7 +12,7 @@ const DetailedProperties = (): JSX.Element => {
     fetchState: { data, isLoading, error },
   } = useFetch<HotelDBInfoType[]>(url);
 
-  console.log('data:', data);
+  // console.log('data:', data);
 
   return (
     <div className='best-properties'>
@@ -35,7 +34,7 @@ const DetailedProperties = (): JSX.Element => {
               city,
               economicPrice,
               rating: ratingDb,
-              rate:ratedb,
+              rate: ratedb,
               photoUrlImages,
               _id,
             } = data![indx];
@@ -62,9 +61,12 @@ const DetailedProperties = (): JSX.Element => {
                 <div className='rating-property'>
                   <button className='rate'>{ratedb.toFixed(1) || rate}</button>
 
-                  <span className='rating'
-                  style={{textTransform:'capitalize'}}
-                  >{ratingDb || rating}</span>
+                  <span
+                    className='rating'
+                    style={{ textTransform: 'capitalize' }}
+                  >
+                    {ratingDb || rating}
+                  </span>
                   <span className='review'>
                     {Math.ceil(Math.random() * 100)} reviews
                   </span>

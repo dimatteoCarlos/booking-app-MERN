@@ -2,7 +2,7 @@
 //Parent: Header.tsx
 import './badges.css';
 
-import { headerItemType } from '../../types/types';
+import { headerItemType } from '../../types/typesHotel';
 
 import BedFront from '../../svg-components/BedFront';
 import Flight from '../../svg-components/Flight';

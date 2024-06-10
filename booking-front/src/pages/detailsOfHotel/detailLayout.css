@@ -58,7 +58,7 @@
   flex-direction: row;
   gap: 0.25rem;
 
-  margin: 1rem;
+  padding: 1rem;
 }
 
 .hotel-images img {
@@ -66,7 +66,6 @@
   height: auto;
   cursor: pointer;
   object-fit: cover;
-
 }
 /**********/
 .hotel-details-info {
@@ -85,6 +84,9 @@
 }
 .hotel-desc .desc {
   font-size: 0.8rem;
+  column-count: 2;
+  column-width: 250px;
+  /* border:1px solid red; */
 }
 /*******/
 .hotel-price {
@@ -92,21 +94,29 @@
   display: flex;
   flex-direction: column;
 
-  gap: 1.25rem;
+  gap: 1rem;
   background-color: #ebf3ff;
 
   padding: 0 1rem;
 }
 
 .hotel-price .comment {
-  font-size: 1.125rem;
+  font-size: 1.2rem;
   font-weight: 700;
+  /* text-transform: capitalize; */
+}
+
+.hotel-price .comment.location__comment {
+  text-transform: capitalize;
+  /* padding: 0.5rem 0; */
 }
 
 .hotel-price .location {
   font-size: 0.875rem;
+  margin-top: 0;
   width: 100%;
 }
+
 .hotel-price .price-days .price {
   font-size: 1.5rem;
 }
@@ -121,5 +131,6 @@
   /* width: max-content; */
   height: max-content;
   margin: auto;
+  /* margin-top: 1rem; */
 }
 /*******/

@@ -1,6 +1,5 @@
 //useFetch.tsx
 
-
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -30,7 +29,7 @@ function useFetch<T>(url: string) {
         isLoading: false,
       }));
 
-      console.log('Desde reFetch', url);
+      // console.log('Desde reFetch', url);
     } catch (error: any) {
       console.error(error);
       setFetchState((prev) => ({ ...prev, error: error, isLoading: false }));
@@ -43,7 +42,6 @@ function useFetch<T>(url: string) {
     try {
       const response = await axios.get(url);
       const apiResponseData = await response.data;
-
       setFetchState((prev) => ({
         ...prev,
         data: apiResponseData,
