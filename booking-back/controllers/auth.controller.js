@@ -29,9 +29,10 @@ export const register = async (req, res, next) => {
   }
 };
 
-//GET USER - LOGIN
+//LOGIN - POST
 export const login = async (req, res, next) => {
   const data = req.body;
+  console.log( "req.body:", req.body );
 
   try {
     const userInfo = await UserModel.findOne({ username: req.body.username }); //.select('-password');
@@ -41,7 +42,7 @@ export const login = async (req, res, next) => {
     }
 
     const isRightPassword = bcrypt.compareSync(
-      data.password,
+      req.body.password,
       userInfo.password
     );
 
@@ -58,9 +59,12 @@ export const login = async (req, res, next) => {
 
     const { password, isAdmin, role, ...restOfUserInfo } = userInfo._doc;
 
-    console.log('you are logged in', { ...restOfUserInfo });
+    console.log('you are logged in', {
+      ...restOfUserInfo,
+      //  password, isAdmin, role
+    });
 
-    // res.status(200).json({ ...restOfUserInfo });
+  
 
     res
       .cookie('access_token', token, {
@@ -69,9 +73,7 @@ export const login = async (req, res, next) => {
       .status(200)
       .json({ details: { ...restOfUserInfo }, isAdmin, role });
   } catch (error) {
-    console.log(error);
+    console.error(error, 'mensaje de error');
     res.status(500).json(error);
   }
 };
-
-

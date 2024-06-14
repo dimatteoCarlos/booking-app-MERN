@@ -11,23 +11,24 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import BookingBtn from '../../components/bookingBtn/BookingBtn';
 import Slider from '../../components/slider/Slider';
 
-//-----context------
-
-import { useSearchData } from '../../components/context/SearchContext.tsx';
-
 import { DateRange } from 'react-date-range';
+
+import { useNavigate } from 'react-router-dom';
 //-----context------
+import { useSearchData } from '../../components/context/SearchContext.tsx';
+import { useAuthData } from '../../components/context/AuthContext.tsx';
+import Reserve from '../../components/reserve/Reserve.tsx';
 
 type DetailLayoutTypeProp = {
   defaultData?: DataOfAHotelType;
   defaultPhotosHotel?: PhotoUrlType[];
 
   data: HotelDBInfoType;
-  // error: any;
-  // isLoading: boolean;
+  hotelId:string;
 };
 
 const DetailLayout = ({
+  hotelId,
   data,
   defaultData,
   defaultPhotosHotel,
@@ -36,14 +37,16 @@ const DetailLayout = ({
     _id,
     name,
     type,
-    city,
 
+    city,
     economicPrice,
     rate,
     rating,
+
     reviews,
     featured,
     rooms,
+
     photoUrlImages,
 
     details: {
@@ -57,6 +60,7 @@ const DetailLayout = ({
       detailsPriceOfStaying: {
         commentStay,
         locationStay,
+
         totPrice,
         durationStay,
       },
@@ -85,9 +89,10 @@ const DetailLayout = ({
   const tagBtn: string = 'Reserve or Book Now!';
 
   //---states----
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-
+  const [isOpenSlider, setIsOpenSlider] = useState<boolean>(false);
   const [slideIndex, setSlideIndex] = useState<number>(0);
+
+  const [isOpenReserve, setIsOpenReserve] = useState<boolean>(false);
 
   //------Functions-------------
 
@@ -96,11 +101,11 @@ const DetailLayout = ({
     const startDate = start ? start : today,
       endDate = end ? end : today;
 
-    const milSecondsInDay = 1000 * 60 * 24 * 60;
+    const MILSECONDS_IN_DAY = 1000 * 60 * 24 * 60;
 
     const days =
       Math.ceil(
-        Math.abs(startDate?.getTime() - endDate?.getTime()) / milSecondsInDay
+        Math.abs(startDate?.getTime() - endDate?.getTime()) / MILSECONDS_IN_DAY
       ) + 1;
     return days;
   }
@@ -139,20 +144,27 @@ const DetailLayout = ({
   }
 
   //------------------
-  function handleOpenModal(indx: number): void {
-    setIsOpenModal(true);
+  function handleOpenSlider(indx: number): void {
+    setIsOpenSlider(true);
     setSlideIndex(indx);
   }
 
-  //------useContext----------------
+  //----------------------
   const { searchDispatch, searchState } = useSearchData();
+
+  const {
+    authState: { user },
+  } = useAuthData();
+
+  const navigateTo = useNavigate();
+
   const {
     date: selectedDates,
     options: optionsReservation,
     destination: cityDestination,
   } = searchState;
 
-  console.log(searchState, optionsReservation.rooms);
+  // console.log(searchState, optionsReservation.rooms);
 
   //------------------------------
   const stayingDays = daysBetweenDates(
@@ -167,14 +179,20 @@ const DetailLayout = ({
   return (
     <>
       <div className='layout-container'>
-        {isOpenModal && (
+        {isOpenSlider && (
           <Slider
-            setIsOpen={setIsOpenModal}
+            setIsOpen={setIsOpenSlider}
             setSlideIndex={setSlideIndex}
             slideIndex={slideIndex}
             slides={photoUrlImages!}
           />
         )}
+
+        {!!isOpenReserve && <Reserve hotelId={hotelId} setIsOpen={setIsOpenReserve} 
+        
+        
+        
+        />}
 
         <div className='hotel-header'>
           <h1 className='title'>{title}</h1>
@@ -194,9 +212,10 @@ const DetailLayout = ({
           <div className='distance'>
             {km} <span>km away from center </span>
           </div>
+
           <div className='priceHightligth'>{priceHighlight}</div>
 
-          <BookingBtn tag={tagBtn} />
+          <BookingBtn onClickFn={setIsOpenReserve} tag={tagBtn} />
         </div>
 
         <div className='hotel-images'>
@@ -204,7 +223,7 @@ const DetailLayout = ({
             <img
               src={image}
               key={`photo-${indx}`}
-              onClick={() => handleOpenModal(indx)}
+              onClick={() => handleOpenSlider(indx)}
               alt={`photos-${image}`}
             />
           ))}
@@ -242,7 +261,7 @@ const DetailLayout = ({
               })`}</span>
             </div>
 
-            <BookingBtn tag={tagBtn} />
+            <BookingBtn onClickFn={setIsOpenReserve} tag={tagBtn} />
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import HotelModel from '../models/hotelModel/HotelModel.js';
 
 //CREATE
 export const createRoom = async (req, res, next) => {
-  const hotelId = req.params.hotelid; //porque hotelid y no id
+  const hotelId = req.params.hotelId;
   const data = req.body;
 
   const newRoomDataModel = new RoomModel(data);
@@ -30,7 +30,7 @@ export const createRoom = async (req, res, next) => {
 
 //UPDATE
 export async function updateRoom(req, res, next) {
-  const id = req.params.id;
+  const id = req.params.roomId;
   const data = req.body;
   try {
     const roomUpdated = await RoomModel.findByIdAndUpdate(
@@ -48,7 +48,7 @@ export async function updateRoom(req, res, next) {
 
 //READ GET by id
 export const getRoom = async (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.roomId;
 
   try {
     const RoomIdInfo = await RoomModel.findById(id);
@@ -73,28 +73,31 @@ export const getRooms = async (req, res, next) => {
   }
 };
 
+//Before deleting the roomId from rooms collection, it should be verified if this really exists in the selected Hotel.
+// if the roomId does not exist in the hotel selected, the roomId is deleted from the rooms Collection, but instead, it stays in the hotels that contains it.
+
+//How to really delete the room with the number that is inside the array, and not the entire array of rooms
+
 //DELETE
 
 export const deleteRoom = async (req, res, next) => {
-  const hotelId = req.params.hotelid;
-  const roomId = req.params.id;
+  const hotelId = req.params.hotelId;
+  const roomId = req.params.roomId;
 
   try {
-    //Before deleting the roomId from rooms collection, it should be verified if this really exists in the selected Hotel.
-    // if the roomId does not exist in the hotel selected, the roomId is deleted from the rooms Collection, but instead, it stays in the hotels that contains it.
-
-    //How to really delete the room with the number that is inside the array, and not the entire array of rooms
-
     const RoomDeleted = await RoomModel.findByIdAndDelete(roomId);
 
     console.log(RoomDeleted);
 
     try {
+      //probar que arroja en hotelRoomDeleted
       const hotelRoomDeleted = await HotelModel.findByIdAndUpdate(hotelId, {
         $pull: { rooms: roomId },
       });
-    } catch (error) {
-      console.log(err, 'at hotel', hotelId, 'deleting room', id);
+
+      console.log({ hotelRoomDeleted });
+    } catch (err) {
+      console.log(err, 'at hotel', hotelId, 'deleting room', roomId);
       next(err);
     }
 
@@ -106,7 +109,28 @@ export const deleteRoom = async (req, res, next) => {
         } has been deleted, from room collection db`
       );
   } catch (err) {
-    console.log(err, 'at deleting', id, 'Room');
+    console.log(err, 'at deleting', roomId, 'Room');
     next(err);
+  }
+};
+
+/**************/
+export const updateRoomAvailability = async (req, res, next) => {
+  const roomId = req.params.roomId;
+
+  try {
+    await RoomModel.updateOne(
+      req.params.roomId,
+
+      { 'roomNumbers._id': roomId },
+      {
+        $push: {
+          'roomNumbers.$.unavailableDates': req.body.dates,
+        },
+      }
+    );
+    res.status(200).json('Room status has been updated');
+  } catch (error) {
+    next(error);
   }
 };

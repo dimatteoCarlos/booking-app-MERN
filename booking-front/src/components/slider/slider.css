@@ -5,20 +5,20 @@
 
   width: 100vw;
   height: 100vh;
+
   top: 0;
   left: 0;
   font-size: 4rem;
   font-weight: 700;
   color: lightgray;
   background-color: rgba(0, 0, 0, 0.7);
-    max-width: 1024px;
+  max-width: 1024px;
   z-index: 10;
   display: flex;
   align-items: center;
 }
 
 .slide {
-
   height: 100%;
   width: 100%;
   display: flex;
@@ -31,11 +31,12 @@
 }
 
 .image {
-  margin-top: 1rem;
+  margin-top: 2rem;
   width: 95%;
-  height: auto;
+  height: 75%;
   z-index: 15;
   object-fit: cover;
+  object-position: center;
 }
 
 .close-btn {

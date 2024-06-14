@@ -10,7 +10,8 @@ export type UseFetchStateType<T> = {
   fetchData?: () => Promise<void>;
 };
 
-function useFetch<T>(url: string) {
+function useFetch<T>(url: string): { fetchState: UseFetchStateType<T>; reFetch: () => Promise<void>; } {
+
   const [fetchState, setFetchState] = useState<UseFetchStateType<T>>({
     error: null,
     isLoading: true,
@@ -30,18 +31,20 @@ function useFetch<T>(url: string) {
       }));
 
       // console.log('Desde reFetch', url);
+
     } catch (error: any) {
       console.error(error);
       setFetchState((prev) => ({ ...prev, error: error, isLoading: false }));
     }
   }
-
+//----------------
   async function fetchData(url: string) {
     setFetchState((prev) => ({ ...prev, isLoading: true }));
 
     try {
       const response = await axios.get(url);
       const apiResponseData = await response.data;
+
       setFetchState((prev) => ({
         ...prev,
         data: apiResponseData,

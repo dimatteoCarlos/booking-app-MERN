@@ -7,7 +7,6 @@ import {
   getRooms,
   updateRoom,
   deleteRoom,
-
   // updateRoomAvailability,
 } from '../controllers/room.controller.js';
 
@@ -19,10 +18,12 @@ const router = express.Router();
 
 //CREATE
 
-router.post('/:hotelid', verifyAdmin, createRoom);
+router.post('/:hotelId',
+  //  verifyAdmin, //remember at the end
+  createRoom);
 
 //READ GET by id
-router.get('/:id', getRoom);
+router.get('/:roomId', getRoom);
 
 //READ ALL
 router.get('/', getRooms);
@@ -31,10 +32,10 @@ router.get('/', getRooms);
 
 // router.put("/availability/:id", updateRoomAvailability);
 
-router.put('/:id', verifyAdmin, updateRoom);
+router.put('/:roomId', verifyAdmin, updateRoom);
 
 //DELETE
 // /:id/:hotelid
-router.delete('/:id/:hotelid', verifyAdmin, deleteRoom);
+router.delete('/:roomId/:hotelId', verifyAdmin, deleteRoom);
 
 export default router;

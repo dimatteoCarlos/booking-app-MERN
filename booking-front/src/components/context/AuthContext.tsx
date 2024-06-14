@@ -14,22 +14,23 @@ export type AuthStateType = {
   };
 };
 
-const userInfo: any = localStorage.getItem('userInfo') ?? {
-  username: null,
-  email: null,
-};
 
-console.log({ userInfo });
+function getLsUser(key: string = 'userInfo'): AuthStateType['user'] {
+  const userInfo = localStorage.getItem(key);
+  if (!userInfo) {
+    return{
+      username: null,
+      email: null,
+    };
+  } else {
+    return JSON.parse(userInfo);
+  }
+}
 
 export const INITIAL_AUTH_STATE: AuthStateType = {
   loading: false,
   error: null,
-  user: { username: userInfo.username, email: userInfo.email },
-
-  // user:  localStorage.getItem('userInfo') || {
-  //   username: null,
-  //   email: null,
-  // }
+  user: getLsUser('userInfo'),
 };
 
 type AuthProviderPropType = {
@@ -47,8 +48,6 @@ function AuthContextProvider({ children }: AuthProviderPropType) {
   useEffect(() => {
     localStorage.setItem('userInfo', JSON.stringify(authState.user));
   }, [authState.user]);
-
-  // localStorage.setItem('userInfo', JSON.stringify(authState.user));
 
   return (
     <AuthContext.Provider value={{ authState, authDispatch }}>

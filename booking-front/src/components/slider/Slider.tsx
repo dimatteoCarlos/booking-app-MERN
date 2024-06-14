@@ -43,11 +43,13 @@ const Slider = ({
   return (
     <>
       <div className='slider'>
+
+{/*         
         <FontAwesomeIcon
           icon={faCircleXmark}
           className='close-btn'
           onClick={handleSliderClosing}
-        />
+        /> */}
 
         <div className='slide'>
           <FontAwesomeIcon

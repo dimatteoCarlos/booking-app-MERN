@@ -1,6 +1,7 @@
 //hotel.controller.js
 
 import HotelModel from '../models/hotelModel/HotelModel.js';
+import RoomModel from '../models/roomModel/RoomModel.js';
 
 //CREATE
 export const createHotel = async (req, res, next) => {
@@ -17,24 +18,28 @@ export const createHotel = async (req, res, next) => {
 };
 
 //-------------------------------
-//READ GET by id
-//endpoint: http://localhost:8800/api/hotels/find/663f7364420a784bf6c15b76
+//READ GET hotel by id
+//endpoint: http://localhost:8800/api/hotels/find/:hotelId
+
 export const getHotel = async (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.hotelId;
+  console.log("🚀 ~ getHotel ~ id:", id)
 
   try {
     const hotelIdInfo = await HotelModel.findById(id);
 
-    res.status(200).json(hotelIdInfo);
-    // res.status(200).json(`Hotel Info: ${hotelIdInfo} was obtained`);
     console.log(hotelIdInfo);
+    res.status(200).json(hotelIdInfo);
+
+    //string: res.status(200).json(`Hotel Info: ${hotelIdInfo} was obtained`);
+
   } catch (error) {
     next(error);
   }
 };
 
 //-------------------------------
-//COUNT BY CITY query
+//COUNT hotels BY CITY query
 //define the query by City: /countByCity?cities=berlin,madrid,london
 
 export const countHotelsByCity = async (req, res, next) => {
@@ -131,7 +136,7 @@ export const groupHotelsByKey = async (req, res, next, keyGroup = 'city') => {
   }
 };
 //----------------------------
-//COUNT BY TYPE query
+//COUNT hotels BY TYPE query
 //query.../countnByType?types=hotel, apartment,room
 //Use this to count specific given types
 //Use it as a dev. Delete it in production
@@ -167,7 +172,7 @@ export const countHotelsByType = async (req, res, next) => {
   }
 };
 //-------------------------
-//COUNT PROPERTIES BY TYPE
+//COUNT PROPERTIES  BY TYPE
 //Use this to count the properties by specific types already set
 
 export const countByType = async (req, res, next) => {
@@ -246,9 +251,9 @@ export const getHotelsByQuery = async (req, res, next) => {
   }
 };
 //----------------------
-//UPDATE
+//UPDATE hotel
 export async function updateHotel(req, res, next) {
-  const id = req.params.id;
+  const id = req.params.hotelId;
   const data = req.body;
   try {
     const hotelUpdated = await HotelModel.findByIdAndUpdate(
@@ -267,7 +272,7 @@ export async function updateHotel(req, res, next) {
 //DELETE
 
 export const deleteHotel = async (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.hotelId;
 
   try {
     const hotelDeleted = await HotelModel.findByIdAndDelete(id);
@@ -279,5 +284,55 @@ export const deleteHotel = async (req, res, next) => {
     next(err);
   }
 };
+
+//************** */
+// '/room/:hotelId', getHotelRooms
+
+//READ GET A Hotel rooms Info by hotelId from Hotel and using roomId from Rooms Collections.
+
+//endpoint: http://localhost:8800/api/hotels/room/:hotelId
+//data needed from Hotel collection: rooms[string, ...]
+
+export const getHotelRooms = async (req, res, next)=>{
+
+const {hotelId} = req.params;
+
+console.log(hotelId)
+
+try{
+
+  const hotelRoomsId=await HotelModel.findById({_id:hotelId}, {rooms:1} );
+
+  console.log({hotelRoomsId});
+
+  const hotelRoomsInfo=await Promise.all(hotelRoomsId.rooms.map(async (roomId) => {
+
+    console.log({roomId})
+    try {
+      const roomInfo=await RoomModel.findById(roomId);
+
+console.log({roomInfo})
+
+return roomInfo;
+      
+    } catch (error) {
+      console.log(error.message);
+    }
+
+}
+
+    )
+  )
+
+res.status(200).json(hotelRoomsInfo)
+}catch(err){
+next(err);
+}
+}
+
+
+
+
+
 
 

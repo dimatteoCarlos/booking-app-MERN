@@ -34,6 +34,7 @@ function App(): JSX.Element {
         { path: '/hotels/:hotelId', element: <DetailsOfHotel /> },
 
         { path: '/login', element: <Login /> },
+        
 
       ],
     },

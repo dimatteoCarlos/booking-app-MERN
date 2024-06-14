@@ -53,11 +53,16 @@ const Search = () => {
 
   const { searchState, searchDispatch } = useContext(SearchContext);
 
-  console.log(searchState);
+  // console.log(searchState.date);
   //------------------------
   const handleSearch = () => {
+    
+// let destination='london';
+
     searchDispatch({
       type: 'NEW_SEARCH',
+      // payload: { destination, date, options },
+    
       payload: { destination, date, options },
     });
 

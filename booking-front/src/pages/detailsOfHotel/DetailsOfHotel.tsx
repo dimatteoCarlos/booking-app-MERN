@@ -15,7 +15,8 @@ import { useLocation } from 'react-router-dom';
 import useFetch from '../../components/hooks/useFetch.tsx';
 
 const DetailsOfHotel = () => {
-  const location = useLocation();
+  const location= useLocation();
+
   const hotelId = location.pathname.split('/')[2];
 
   //----------------
@@ -36,10 +37,10 @@ const DetailsOfHotel = () => {
         {data && (
           <DetailLayout
             data={data}
-            // isLoading={isLoading}
-            // error={error}
             defaultData={dataOfAHotel}
             defaultPhotosHotel={photosHotel}
+            hotelId={hotelId}
+
           />
         )}
       </div>

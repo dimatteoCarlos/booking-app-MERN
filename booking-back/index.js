@@ -43,10 +43,13 @@ app.use(morgan('common'));
 
 /*MIDDLEWARES */
 //app.use('route',router) syntax
-app.use('/api/hotels', hotelsRoute);
 app.use('/api/auth', authRoute);
-app.use('/api/users', usersRoute);
+
+app.use('/api/hotels', hotelsRoute);
+
 app.use('/api/rooms', roomsRoute);
+
+app.use('/api/users', usersRoute);
 
 //message error handling
 app.use((err, req, res, next) => {

@@ -8,6 +8,8 @@ import { headerItemType, headerTitleType } from '../../types/typesHotel';
 import Title from './title/Title';
 import Search from '../search/Search';
 import InputChecks from '../inputChecks/InputChecks';
+import { ModeType } from '../../types/typesHotel';
+import { useAuthData, AuthStateType } from '../context/AuthContext';
 
 //-------Data-----------
 //----header list item data
@@ -20,12 +22,13 @@ const headerListData: headerItemType[] = [
 ];
 
 //----header title data
+
+
 const headerTitleData: headerTitleType = {
   title: 'Find your next stay',
   description: 'Search deals on hotels, homes, and much more...',
 };
 
-import { ModeType } from '../../types/typesHotel';
 
 //----prop type
 export type HeaderPropType = {
@@ -33,6 +36,9 @@ export type HeaderPropType = {
 };
 //--------*****-----------------
 function Header({ modeType }: HeaderPropType): JSX.Element {
+  const {authState:user}=useAuthData();
+  const {user:{username}} = user;
+
   return (
     <>
       <div className='header'>
@@ -51,7 +57,7 @@ function Header({ modeType }: HeaderPropType): JSX.Element {
           {modeType !== 'list' && (
             <>
               <div className='header-title'>
-                <Title {...headerTitleData} />
+                <Title {...headerTitleData} username={username}/>
 
                 <div className='header-search'>
                   <Search />

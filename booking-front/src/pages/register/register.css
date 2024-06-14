@@ -1,6 +1,6 @@
-/*login.css*/
+/*register.css*/
 
-.login__modal {
+.register__modal {
   height: 100vh;
   display: flex;
   align-items: center;
@@ -11,7 +11,7 @@
 
 }
 
-.login__modal__container {
+.register__modal__container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -24,24 +24,24 @@ border-radius: 1rem;
 
 }
 
-.login__input {
+.register__input {
   height: 2rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
 }
 
-.login__input--username {
+.register__input--username {
   border: 1px solid rgba(0, 113, 194, 0.556);
 }
-.login__input--email {
+.register__input--email {
   border: 1px solid rgba(0, 194, 23, 0.556);
 }
 
-.login__input--password {
+.register__input--password {
   border: 1px solid rgba(194, 58, 0, 0.556);
 }
 
-.login__modal--btn {
+.register__modal--btn {
   border: none;
   padding: 0.5rem 1rem;
   background-color: rgb(0, 59, 149);
@@ -50,7 +50,7 @@ border-radius: 1rem;
   border-radius: 0.25rem;
   cursor: pointer;
 }
-.login__modal--btn:disabled {
+.register__modal--btn:disabled {
   cursor: not-allowed;
  background-color: rgba(22, 157, 207, 0.964);
 }

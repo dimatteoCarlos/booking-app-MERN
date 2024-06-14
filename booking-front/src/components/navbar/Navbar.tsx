@@ -2,9 +2,14 @@ import './navbar.css';
 
 import flag from '../../assets/images/Us3x.png';
 import Support from '../../svg-components/Support';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import { useAuthData } from '../context/AuthContext';
 
 function Navbar(): JSX.Element {
+  const { authState, authDispatch } = useAuthData();
+
+  const { user } = authState;
+
   return (
     <>
       <div className='navbar'>
@@ -26,12 +31,22 @@ function Navbar(): JSX.Element {
 
             <button className='property'>List your property</button>
 
-            <button className='nav-button'>
-              <span>Register</span>
-            </button>
-            <button className='nav-button'>
-              <span>Login</span>
-            </button>
+            {!!user.username ? (
+              user.username
+            ) : (
+              <>
+                <button className='nav-button'>
+                  <Link to='/register'>
+                    <span>Register</span>
+                  </Link>
+                </button>
+                <button className='nav-button'>
+                  <Link to='/login'>
+                    <span>Login</span>
+                  </Link>
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

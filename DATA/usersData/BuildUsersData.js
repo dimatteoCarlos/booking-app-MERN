@@ -221,8 +221,9 @@ function modifyUsersDataBase(name, lastname) {
   return { username, name, lastname };
 }
 
+//"password":"'password'+i"
 const newdatosUser = Array.from({ length: datosUser.length }, (_, i) => {
-  const password = `'password'+i`;
+  const password = `password${i}`;
   var salt = bcrypt.genSaltSync(SALT_ROUNDS);
   var hash = bcrypt.hashSync(password, salt);
   const aleatorio = Math.floor(Math.random() * len);

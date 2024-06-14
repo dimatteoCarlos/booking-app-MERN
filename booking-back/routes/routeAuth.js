@@ -4,9 +4,10 @@ import { register, login } from '../controllers/auth.controller.js';
 
 const router = express.Router();
 
-//http://localhost:8800/auth on browser
+//http://localhost:8800/api/auth/login 
+//http://localhost:8800/api/auth/register 
 
 router.post('/register', register);
-router.get("/login", login);
+router.post("/login", login);
 
 export default router;
