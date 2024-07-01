@@ -9,7 +9,6 @@ export const createRoom = async (req, res, next) => {
   const data = req.body;
 
   const newRoomDataModel = new RoomModel(data);
-  //it Should not duplicate rooms in rooms collection db, and in the hotels collections db.  Better organize database for validation of the data.
 
   try {
     const roomCreated = await newRoomDataModel.save();
@@ -53,8 +52,8 @@ export const getRoom = async (req, res, next) => {
   try {
     const RoomIdInfo = await RoomModel.findById(id);
 
-    res.status(200).json(`Room Info: ${RoomIdInfo} was obtained`);
-    console.log(RoomIdInfo);
+    res.status(200).json(RoomIdInfo);
+    console.log(`Room Info: ${RoomIdInfo} was obtained`);
   } catch (error) {
     next(error);
   }
@@ -72,11 +71,6 @@ export const getRooms = async (req, res, next) => {
     next(error);
   }
 };
-
-//Before deleting the roomId from rooms collection, it should be verified if this really exists in the selected Hotel.
-// if the roomId does not exist in the hotel selected, the roomId is deleted from the rooms Collection, but instead, it stays in the hotels that contains it.
-
-//How to really delete the room with the number that is inside the array, and not the entire array of rooms
 
 //DELETE
 
@@ -100,28 +94,26 @@ export const deleteRoom = async (req, res, next) => {
       console.log(err, 'at hotel', hotelId, 'deleting room', roomId);
       next(err);
     }
-
-    res
-      .status(200)
-      .json(
-        `Room ${
-          (RoomDeleted.title, RoomDeleted._id)
-        } has been deleted, from room collection db`
-      );
+    console.log(
+      `Room ${
+        (RoomDeleted.title, RoomDeleted._id)
+      } has been deleted, from room collection db`
+    );
+    res.status(200).json(RoomDeleted);
   } catch (err) {
     console.log(err, 'at deleting', roomId, 'Room');
     next(err);
   }
 };
 
-/**************/
+/****Update Room Availability****/
 export const updateRoomAvailability = async (req, res, next) => {
-  const roomId = req.params.roomId;
+  const roomId = req.params.id;
+  console.log({ roomId }, 'dates:', req.body.dates);
 
   try {
-    await RoomModel.updateOne(
-      req.params.roomId,
-
+  await RoomModel.updateOne(
+ 
       { 'roomNumbers._id': roomId },
       {
         $push: {
@@ -129,6 +121,9 @@ export const updateRoomAvailability = async (req, res, next) => {
         },
       }
     );
+
+    console.log('dentro del catch', {roomId}, 'fechas:',req.body.dates );
+
     res.status(200).json('Room status has been updated');
   } catch (error) {
     next(error);

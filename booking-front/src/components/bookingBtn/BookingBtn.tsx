@@ -1,19 +1,22 @@
 //BookingBtn.tsx
-//Parent:DetailLayout.tsx,  Reserve.tsx, 
-
+//Parent:DetailLayout.tsx,  Reserve.tsx,
 
 import './bookingBtn.css';
 type BookingBtnTypeProp = {
   tag: string;
-  onClickFn?: React.Dispatch<React.SetStateAction<boolean>>;
+  onClickFn: ()=>void;
+
 };
 const BookingBtn = ({
-  tag,
+  tag, 
   onClickFn,
 }: BookingBtnTypeProp): JSX.Element => {
+
   function clickHandler() {
     console.log('me apretaste');
-   onClickFn && onClickFn(true)
+    //  onClickFn && onClickFn(true);
+    onClickFn();
+    
   }
 
   return (

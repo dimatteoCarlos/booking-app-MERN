@@ -7,7 +7,7 @@ import {
   getRooms,
   updateRoom,
   deleteRoom,
-  // updateRoomAvailability,
+  updateRoomAvailability,
 } from '../controllers/room.controller.js';
 
 import { verifyAdmin } from '../utils/verifyToken.js';
@@ -19,7 +19,7 @@ const router = express.Router();
 //CREATE
 
 router.post('/:hotelId',
-  //  verifyAdmin, //remember at the end
+  //  verifyAdmin,
   createRoom);
 
 //READ GET by id
@@ -30,12 +30,17 @@ router.get('/', getRooms);
 
 //UPDATE
 
-// router.put("/availability/:id", updateRoomAvailability);
+router.put("/availability/:id",
+   updateRoomAvailability);
 
-router.put('/:roomId', verifyAdmin, updateRoom);
+router.put('/:roomId', 
+  verifyAdmin, 
+  updateRoom);
 
 //DELETE
 // /:id/:hotelid
-router.delete('/:roomId/:hotelId', verifyAdmin, deleteRoom);
+router.delete('/:roomId/:hotelId', 
+  // verifyAdmin,
+   deleteRoom);
 
 export default router;

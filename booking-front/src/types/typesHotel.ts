@@ -98,7 +98,9 @@ export type HotelDBInfoType = {
   rating: string;
   reviews: number;
   featured: boolean;
+
   rooms?: string[] | null;
+
   photoUrlImages?: string[] | null;
 
   details: {
@@ -130,3 +132,6 @@ export type HotelDBInfoType = {
     taxesOp: string;
   }; //features
 };
+
+
+

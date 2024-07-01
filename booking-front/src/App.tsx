@@ -7,12 +7,14 @@ import DetailsOfHotel from './pages/detailsOfHotel/DetailsOfHotel';
 
 import { ModeType } from './types/typesHotel';
 import Login from './pages/login/Login';
+import Reserve from './components/reserve/Reserve';
 
 function App(): JSX.Element {
   const router = createBrowserRouter([
     {
       path: '/',
       element: <DefaultLayout />,
+
       errorElement: <ErrorPage />,
       children: [
         {
@@ -48,5 +50,3 @@ function App(): JSX.Element {
 }
 
 export default App;
-//video: 2:03:37 -  context api para hotelId;
-//

@@ -11,7 +11,6 @@ import './login.css';
 const baseURL = 'http://localhost:8800';
 
 
-
 const INITIAL_CREDENTIALS_STATE: {
   username: string | undefined;
   email: string | undefined;

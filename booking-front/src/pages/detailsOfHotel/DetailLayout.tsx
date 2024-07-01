@@ -14,6 +14,7 @@ import Slider from '../../components/slider/Slider';
 import { DateRange } from 'react-date-range';
 
 import { useNavigate } from 'react-router-dom';
+
 //-----context------
 import { useSearchData } from '../../components/context/SearchContext.tsx';
 import { useAuthData } from '../../components/context/AuthContext.tsx';
@@ -24,7 +25,7 @@ type DetailLayoutTypeProp = {
   defaultPhotosHotel?: PhotoUrlType[];
 
   data: HotelDBInfoType;
-  hotelId:string;
+  hotelId: string;
 };
 
 const DetailLayout = ({
@@ -91,10 +92,9 @@ const DetailLayout = ({
   //---states----
   const [isOpenSlider, setIsOpenSlider] = useState<boolean>(false);
   const [slideIndex, setSlideIndex] = useState<number>(0);
-
   const [isOpenReserve, setIsOpenReserve] = useState<boolean>(false);
 
-  //------Functions-------------
+  //------Functions-----------
 
   function daysBetweenDates(start: Date | undefined, end: Date | undefined) {
     const today = new Date();
@@ -109,7 +109,6 @@ const DetailLayout = ({
       ) + 1;
     return days;
   }
-
   //------------------------------
   function wordReplacement(
     strText: string,
@@ -136,6 +135,7 @@ const DetailLayout = ({
       RATING: rating,
       RATE: rate,
     };
+
     const newText = strText.replace(/CITY|RATING|RATE/gi, function (matched) {
       return wordsToReplace[matched].toLocaleUpperCase();
     });
@@ -149,7 +149,22 @@ const DetailLayout = ({
     setSlideIndex(indx);
   }
 
-  //----------------------
+  //-------------------
+  function handleLoginReserve(user: {
+    username: string | null;
+    email: string | null;
+  }): void {
+    if (user.username) {
+      setIsOpenReserve(true);
+      console.log('you open Reserve Modal');
+    } else {
+      navigateTo('/login');
+      setIsOpenReserve(false);
+      console.log('you close Reserve Modal');
+    }
+  }
+
+  //-----Context data-----------
   const { searchDispatch, searchState } = useSearchData();
 
   const {
@@ -159,7 +174,7 @@ const DetailLayout = ({
   const navigateTo = useNavigate();
 
   const {
-    date: selectedDates,
+    date: startEndSelectedDates,
     options: optionsReservation,
     destination: cityDestination,
   } = searchState;
@@ -168,8 +183,8 @@ const DetailLayout = ({
 
   //------------------------------
   const stayingDays = daysBetweenDates(
-    selectedDates[0].startDate,
-    selectedDates[0].endDate
+    startEndSelectedDates[0].startDate,
+    startEndSelectedDates[0].endDate
   );
 
   const totalCost = Math.floor(
@@ -188,11 +203,9 @@ const DetailLayout = ({
           />
         )}
 
-        {!!isOpenReserve && <Reserve hotelId={hotelId} setIsOpen={setIsOpenReserve} 
-        
-        
-        
-        />}
+        {!!isOpenReserve && (
+          <Reserve hotelId={hotelId} setIsOpen={setIsOpenReserve} />
+        )}
 
         <div className='hotel-header'>
           <h1 className='title'>{title}</h1>
@@ -215,7 +228,8 @@ const DetailLayout = ({
 
           <div className='priceHightligth'>{priceHighlight}</div>
 
-          <BookingBtn onClickFn={setIsOpenReserve} tag={tagBtn} />
+      
+          <BookingBtn onClickFn={() => handleLoginReserve(user)} tag={tagBtn} />
         </div>
 
         <div className='hotel-images'>
@@ -261,7 +275,7 @@ const DetailLayout = ({
               })`}</span>
             </div>
 
-            <BookingBtn onClickFn={setIsOpenReserve} tag={tagBtn} />
+            <BookingBtn onClickFn={() => handleLoginReserve(user)} tag={tagBtn} />
           </div>
         </div>
       </div>

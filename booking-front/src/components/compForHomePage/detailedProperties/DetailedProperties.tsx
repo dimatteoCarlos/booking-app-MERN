@@ -1,8 +1,14 @@
 import './detailedProperties.css';
-
-import { properties } from './dataDetailedProperties';
-import useFetch from '../../hooks/useFetch';
+import { properties } from './dataDetailedProperties.ts';
+import useFetch from '../../hooks/useFetch.tsx';
 import { HotelDBInfoType } from '../../../types/typesHotel.ts';
+
+import { useState } from 'react';
+import { testImage } from '../../../helpers/testImg.tsx';
+
+export type TestImageType = {
+  url: string | string[];
+};
 
 const DetailedProperties = (): JSX.Element => {
   let url =
@@ -13,6 +19,8 @@ const DetailedProperties = (): JSX.Element => {
   } = useFetch<HotelDBInfoType[]>(url);
 
   // console.log('data:', data);
+
+  // const [imageToRender, setImageToRender] = useState<string>('');
 
   return (
     <div className='best-properties'>
@@ -39,20 +47,26 @@ const DetailedProperties = (): JSX.Element => {
               _id,
             } = data![indx];
 
+            const selectedUrlImage =
+              photoUrlImages![6] || urlImage || '/backUpImage.webp';
+
+            testImage(selectedUrlImage);
+
             return (
               <div
                 className='item-container'
                 key={id.toString() + '-' + indx.toString()}
               >
                 <img
-                  src={photoUrlImages![6] || urlImage}
+                  src={selectedUrlImage}
                   alt={`${id}_${name}_${_id}`}
                   className='image-property'
                 />
 
                 <span className='name-property'>{namedb || name}</span>
                 <span className='place-property'>
-                  {city.toLowerCase() || place.toLowerCase()}
+                  {/* {city.toLowerCase() || place.toLowerCase()} */}
+                  {place.toLowerCase() || city.toLowerCase()}
                 </span>
                 <span className='price-property'>
                   Starting from ${economicPrice || price}

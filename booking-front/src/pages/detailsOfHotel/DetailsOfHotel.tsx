@@ -40,7 +40,6 @@ const DetailsOfHotel = () => {
             defaultData={dataOfAHotel}
             defaultPhotosHotel={photosHotel}
             hotelId={hotelId}
-
           />
         )}
       </div>

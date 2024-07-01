@@ -51,8 +51,4 @@ router.delete('/:hotelId', verifyAdmin, deleteHotel);
 /*----GET ROOMs FROM A SPECIFIC HOTEL---*/
 router.get('/room/:hotelId', getHotelRooms)
 
-
-
-
-
 export default router;

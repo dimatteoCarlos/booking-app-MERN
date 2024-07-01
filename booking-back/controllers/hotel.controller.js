@@ -23,7 +23,7 @@ export const createHotel = async (req, res, next) => {
 
 export const getHotel = async (req, res, next) => {
   const id = req.params.hotelId;
-  console.log("🚀 ~ getHotel ~ id:", id)
+  console.log('🚀 ~ getHotel ~ id:', id);
 
   try {
     const hotelIdInfo = await HotelModel.findById(id);
@@ -32,7 +32,6 @@ export const getHotel = async (req, res, next) => {
     res.status(200).json(hotelIdInfo);
 
     //string: res.status(200).json(`Hotel Info: ${hotelIdInfo} was obtained`);
-
   } catch (error) {
     next(error);
   }
@@ -74,6 +73,7 @@ export const countHotelsByCity = async (req, res, next) => {
 
 // Dev use this to check for the properties in the database. Delete it in production.
 //challenge: find out how to do this groupping in mongodb
+
 export async function groupHotelsByCity(req, res, next) {
   const result = { list: [] };
   let key = 'city';
@@ -236,7 +236,7 @@ export const getHotelsByQuery = async (req, res, next) => {
   try {
     const data = await HotelModel.find({
       ...restOfQuery,
-// city:{cityTofind}
+      // city:{cityTofind}
       economicPrice: { $gte: minPrice, $lte: maxPrice },
       rate: { $gte: minRate },
       // economicPrice: { $gte: min | 2, $lte: max | 800 },
@@ -288,51 +288,43 @@ export const deleteHotel = async (req, res, next) => {
 //************** */
 // '/room/:hotelId', getHotelRooms
 
-//READ GET A Hotel rooms Info by hotelId from Hotel and using roomId from Rooms Collections.
+//READ GET A Hotel rooms Info by hotelId from Hotel collection and using roomId to get room info from Rooms Collections.
 
 //endpoint: http://localhost:8800/api/hotels/room/:hotelId
-//data needed from Hotel collection: rooms[string, ...]
+//data structure needed from Hotel collection: rooms[string, ...]
 
-export const getHotelRooms = async (req, res, next)=>{
+export const getHotelRooms = async (req, res, next) => {
+  const { hotelId } = req.params;
 
-const {hotelId} = req.params;
+  console.log(hotelId);
 
-console.log(hotelId)
+  try {
+    const hotelRoomsId = await HotelModel.findById(
+      { _id: hotelId }
+      // ,      { rooms: 1 }
+    );
 
-try{
+    console.log({ hotelRoomsId });
 
-  const hotelRoomsId=await HotelModel.findById({_id:hotelId}, {rooms:1} );
+    const hotelRoomsInfo = await Promise.all(
+      hotelRoomsId.rooms.map(async (roomId) => {
+        console.log({ roomId });
+        try {
+          const roomInfo = await RoomModel.findById(roomId);
 
-  console.log({hotelRoomsId});
+          console.log({ roomInfo });
 
-  const hotelRoomsInfo=await Promise.all(hotelRoomsId.rooms.map(async (roomId) => {
+          return roomInfo;
+        } catch (error) {
+          console.log(error.message);
+        }
+      })
+    );
 
-    console.log({roomId})
-    try {
-      const roomInfo=await RoomModel.findById(roomId);
-
-console.log({roomInfo})
-
-return roomInfo;
-      
-    } catch (error) {
-      console.log(error.message);
-    }
-
-}
-
-    )
-  )
-
-res.status(200).json(hotelRoomsInfo)
-}catch(err){
-next(err);
-}
-}
-
-
-
-
-
+    res.status(200).json(hotelRoomsInfo);
+  } catch (err) {
+    next(err);
+  }
+};
 
 

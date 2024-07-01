@@ -1,0 +1,122 @@
+/*resere.css*/
+
+.rooms__reserve {
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  /* position: fixed; */
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.reserve__container {
+  max-width: 80%;
+  background-color: #fff;
+  gap: 2em;
+  padding: 1.25rem;
+  position: relative;
+
+  border-radius: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* z-index: 10000; */
+}
+.reserve__title {
+  font-style: italic;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+
+.reserve__item {
+  display: flex;
+  align-items: center;
+  gap: 3.25em;
+  padding: 1.25em;
+
+  justify-content: space-between;
+}
+.reserve__item__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125em;
+  justify-content: space-between;
+}
+
+.reserve__item__info--title {
+  font-style: 500px;
+}
+
+.reserve__item__info--description {
+  font-weight: 300;
+}
+
+.reserve__item__info--maxPeople {
+  font-style: 0.75rem;
+}
+
+.reserve__item__info--price {
+  font-weight: 500;
+}
+
+/*----------*/
+.reserve__item--selectRooms {
+  display: flex;
+  gap: 1.5em;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  font-size: 0.5rem;
+
+}
+
+.reserve__selectRooms__roomForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+color:rgb(2, 2, 182);
+font-weight: 400;
+
+}
+
+.reserve__selectRooms__roomForm input{
+  border:10px solid blue;
+  height: 1.25rem;
+}
+
+/*----------*/
+
+.error__message {
+  color: tomato;
+  align-self: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0.25em;
+  right: 0.25em;
+  cursor: pointer;
+  color: #0071c2;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  background-color: #0071c2;
+  border-radius: 50%;
+  color: #fff;
+  border: 0.5px solid #0a0c91;
+}
+
+.reserve__item--booking-btn {
+  max-width: 100%;
+  margin: 1.5em auto;
+}
