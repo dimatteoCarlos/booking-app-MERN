@@ -4,10 +4,7 @@ import './reserve.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import {
-  faCircleXmark,
-  faPenToSquare,
-} from '@fortawesome/free-regular-svg-icons';
+import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
 import useFetch from '../../components/hooks/useFetch.tsx';
 
@@ -21,6 +18,7 @@ import { RoomInfoDBType } from '../../types/typesRoom.ts';
 
 import BookingBtn from '../bookingBtn/BookingBtn.tsx';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 type ReservePropType = {
   hotelId: string;
@@ -32,6 +30,7 @@ function Reserve({ hotelId, setIsOpen }: ReservePropType) {
   const [selectedRooms, setSelectedRooms] = useState<string[]>([]);
 
   /**************/
+  const navigateTo=useNavigate()
   const { searchState } = useSearchData();
 
   //get rooms data from hotel db
@@ -41,7 +40,8 @@ function Reserve({ hotelId, setIsOpen }: ReservePropType) {
 
   const { fetchState } = useFetch<RoomInfoDBType[]>(`${baseURL}${url}`);
 
-  const { data, error, isLoading } = fetchState;
+  const { data } = fetchState;
+
   // console.log({ data });
 
   //-------Get Selected Dates in Range-----
@@ -50,7 +50,7 @@ function Reserve({ hotelId, setIsOpen }: ReservePropType) {
     // destination,
     // options
   } = searchState;
-
+  //-------------------------
   const start = dates[0] ? dates[0].startDate : new Date();
   const end = dates[0] ? dates[0].endDate : new Date();
 
@@ -77,82 +77,59 @@ function Reserve({ hotelId, setIsOpen }: ReservePropType) {
 
   const selectedDatesInRange: Date[] = daysInRangeDates(start, end);
 
-  // console.log('🚀 ~ Reserve ~ selectedDatesInRange:', selectedDatesInRange);
-
   //----------------------
 
-  //isRoomAvailable: para un roomNumber o hab, determina si la fecha en el arreglo unavailable se encuentra dentro de las ya seleccionadas
-  // const selectedDatesInRange = [
-  //   '2024-06-29T18:18:37.897Z',
-  //   '2024-06-30T18:18:37.897Z',
-  //   '2024-07-01T18:18:37.897Z',
-  //   '2024-07-02T18:18:37.897Z',
-  //   '2024-07-03T18:18:37.897Z',
-  //   '2024-07-04T18:18:37.897Z',
-  //   '2024-07-05T18:18:37.897Z',
-  //   '2024-07-06T18:18:37.897Z',
-  //   '2024-07-07T18:18:37.897Z',
-  //   '2024-07-08T18:18:37.897Z',
-  //   '2024-07-09T18:18:37.897Z',
-  //   '2024-07-10T18:18:37.897Z',
-  //   '2024-07-11T18:18:37.897Z',
-  //   '2024-07-12T18:18:37.897Z',
-  //   '2024-07-13T18:18:37.897Z',
-  //   '2024-07-14T18:18:37.897Z',
-  //   '2024-07-15T18:18:37.897Z',
-  //   '2024-07-16T18:18:37.897Z',
-  //   '2024-07-17T18:18:37.897Z',
-  //   '2024-07-18T18:18:37.897Z',
-  //   '2024-07-19T18:18:37.897Z',
-  //   '2024-07-20T18:18:37.897Z',
-  //   '2024-07-21T18:18:37.897Z',
-  //   '2024-07-22T18:18:37.897Z',
-  //   '2024-07-23T18:18:37.897Z',
-  //   '2024-07-24T18:18:37.897Z',
-  //   '2024-07-25T18:18:37.897Z',
-  //   '2024-07-26T18:18:37.897Z',
-  //   '2024-07-27T18:18:37.897Z',
-  //   '2024-07-28T18:18:37.897Z',
-  //   '2024-07-29T18:18:37.897Z',
-  //   '2024-07-30T18:18:37.897Z',
-  // ];
-
-  // const unavailableDates = [
-  //   '2024-06-28T04:00:00.000Z',
-  //   '2024-06-29T04:00:00.000Z',
-  //   '2024-07-03T04:00:00.000Z',
-  // ];
+  //isRoomAvailable: a roomNumber is hab number. This function determnines if selected dates are available for this selected room.
 
   function isRoomAvailable(roomNumber: {
     _id: string;
     number: number;
     unavailableDates: Date[];
   }) {
-    const { unavailableDates } = roomNumber;
-    // console.log('hello, isRoomAvailable working');
-    //everything as string
-    // const isDateFound =selectedDatesInRange.some(date=>unavailableDates.includes(date));
+    const { unavailableDates, number } = roomNumber;
 
-    //if selectedDatesInRange data type are Date type and unavailableDates data type are string.
-
-    // const isDateFound =  unavailableDates.some((date) =>
-    //   selectedDatesInRange.includes(new Date(date))
+    // console.log(
+    //   'hotelId',
+    //   hotelId,
+    //   'room:',
+    //   number,
+    //   'id:',
+    //   id,
+    //   'no disp:',
+    //   unavailableDates,
+    //   selectedDatesInRange
     // );
 
-    const isDateFound = selectedDatesInRange.some((date) =>
-      unavailableDates.includes(date)
+    // The Date.parse() static method parses a string representation of a date, and returns the date's timestamp.
+
+    // The toDateString() method of Date instances returns a string representing the date portion of this date interpreted in the local timezone.
+
+    //convert dates to timestamp
+
+    const selectedDates = selectedDatesInRange.map((d) =>
+      Date.parse(d.toDateString())
     );
-    // console.log('probando fechas:', selectedDatesInRange, 'fechas no disponibles:', unavailableDates)
+
+    const unavailableDate = unavailableDates.map((d) =>
+      Date.parse(new Date(d).toDateString())
+    );
+
+    const isDateFound = selectedDates.some((date) =>
+      unavailableDate.includes(date)
+    );
+
+    console.log(
+      `Room: ${number} is ${!isDateFound ? 'available' : 'not available'}`
+    );
+
     return !isDateFound;
   }
 
   /*rooms schema from database: 
-_id:, title:, price:, maxPeople:, desc:, 
-roomNumbers: {number:Number, unavailableDates:{_id:ObjectId, number:string[]}}[]
-*/
-
+    _id:, title:, price:, maxPeople:, desc:, 
+    roomNumbers: {number:Number, unavailableDates:Date[], _id:ObjectId}[]
+  */
   //roomNumber.unavailableDates
-  //
 
   function handleReserveClosing() {
     setIsOpen(false);
@@ -160,21 +137,49 @@ roomNumbers: {number:Number, unavailableDates:{_id:ObjectId, number:string[]}}[]
 
   function handleRoomSelection(e: React.ChangeEvent<HTMLInputElement>) {
     const isRoomSelected = e.target.checked;
-    const roomInfo = e.target.value;
+    const selectedRoomId = e.target.value;
+
     setSelectedRooms(
       ((selectedRooms) => {
         if (isRoomSelected) {
-          return [...selectedRooms, roomInfo];
+          return [...selectedRooms, selectedRoomId];
         } else {
-          return selectedRooms.filter((room) => room !== roomInfo);
+          return selectedRooms.filter((room) => room !== selectedRoomId);
         }
       })(selectedRooms)
     );
-
-    console.log(roomInfo, 'room', isRoomSelected);
-    console.log({ selectedRooms });
   }
 
+  //-------------------------------------
+  async function handleRoomBooking() {
+    // console.log('room booking', { selectedRooms }, { selectedDatesInRange });
+
+    const route = `/api/rooms/availability/`;
+
+    //api/rooms/availability/:roomId
+
+    try {
+      await Promise.all(
+        selectedRooms.map(async (roomId) => {
+          console.log(`url: ${baseURL}${route}${roomId}`);
+
+          const res: any = await axios.put(`${baseURL}${route}${roomId}`, {
+            dates: selectedDatesInRange,
+          });
+
+          // console.log(`RoomId: ${roomId} data: ${res.data}`);
+
+          return res.data; //just in case
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    } finally{
+      setIsOpen(false);
+      navigateTo('/')
+    }
+  }
+  /******************************/
   return (
     <div className='rooms__reserve'>
       <div className='reserve__container'>
@@ -182,7 +187,6 @@ roomNumbers: {number:Number, unavailableDates:{_id:ObjectId, number:string[]}}[]
           icon={faCircleXmark}
           className='close-btn'
           onClick={handleReserveClosing}
-          // style={{ color: 'gray' }}
         />
         <span className='reserve__title'>Select your rooms:</span>
 
@@ -192,7 +196,7 @@ roomNumbers: {number:Number, unavailableDates:{_id:ObjectId, number:string[]}}[]
               <div className='reserve__item' key={indx}>
                 <div className='reserv__item__info'>
                   <div className='reserve__item__info--title'>
-                    {datum.title} titulo
+                    {datum.title} {datum._id}
                   </div>
                   <div className='reserve__item__info--description'>
                     {datum.desc}
@@ -217,7 +221,7 @@ roomNumbers: {number:Number, unavailableDates:{_id:ObjectId, number:string[]}}[]
                         type='checkbox'
                         id={roomNumber._id}
                         className='roomNumber'
-                        value={roomNumber._id}
+                        value={`${datum._id}_${roomNumber._id}`}
                         onChange={handleRoomSelection}
                         disabled={!isRoomAvailable(roomNumber)}
                       />
@@ -227,7 +231,7 @@ roomNumbers: {number:Number, unavailableDates:{_id:ObjectId, number:string[]}}[]
               </div>
             ) : (
               <div className='error__message' key={`null-${indx}`}>
-                Room info not Available
+                {'Room info not Available'}
               </div>
             )
           )
@@ -243,33 +247,6 @@ roomNumbers: {number:Number, unavailableDates:{_id:ObjectId, number:string[]}}[]
       </div>
     </div>
   );
-
-  //-------------------------------------
-  async function handleRoomBooking() {
-    console.log('room booking', {selectedRooms}, {selectedDatesInRange});
-
-    const url = `/api/rooms/availability/`;
-
-    ///api/rooms/availability/:roomId
-
-    try {
-      await Promise.all(
-        selectedRooms.map(async (roomId) => {
-          console.log(`url: ${baseURL}${url}${roomId}`);
-
-          const res: any = await axios.put(`${baseURL}${url}${roomId}`, {
-            dates: selectedDatesInRange
-          });
-
-          console.log(`RoomId: ${roomId} data: ${res.data}`);
-
-          return res.data; //just in case
-        })
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  }
 }
 
 export default Reserve;

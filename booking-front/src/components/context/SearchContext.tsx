@@ -20,7 +20,7 @@ export type SearchStateType = {
 //deberia tener la mismas propiedades que el estado que se define en search: city, date, option
 export const INITIAL_SEARCH_STATE: SearchStateType = {
   destination: '',
-  date: [],
+  date: [{ startDate: new Date(), endDate: new Date() }],
   options: {
     adults: 0,
     children: 0,

@@ -23,7 +23,7 @@ export const createHotel = async (req, res, next) => {
 
 export const getHotel = async (req, res, next) => {
   const id = req.params.hotelId;
-  console.log('🚀 ~ getHotel ~ id:', id);
+  // console.log('🚀 ~ getHotel ~ id:', id);
 
   try {
     const hotelIdInfo = await HotelModel.findById(id);
@@ -289,32 +289,42 @@ export const deleteHotel = async (req, res, next) => {
 // '/room/:hotelId', getHotelRooms
 
 //READ GET A Hotel rooms Info by hotelId from Hotel collection and using roomId to get room info from Rooms Collections.
+//data structure needed from Hotel collection: rooms[string, ...]
 
 //endpoint: http://localhost:8800/api/hotels/room/:hotelId
-//data structure needed from Hotel collection: rooms[string, ...]
 
 export const getHotelRooms = async (req, res, next) => {
   const { hotelId } = req.params;
 
-  console.log(hotelId);
+  // console.log({ hotelId });
 
   try {
-    const hotelRoomsId = await HotelModel.findById(
+    const hotelDataFromHotelId = await HotelModel.findById(
       { _id: hotelId }
       // ,      { rooms: 1 }
     );
 
-    console.log({ hotelRoomsId });
+    // console.log({ hotelDataFromHotelId });
+
+    //this Ids array, links Hoteldb to RoomsDb through Hotel room Numbers
+    const hotelRoomIds = hotelDataFromHotelId.rooms;
+    // console.log('🚀 ~ getHotelRooms ~ hotelRoomIds:', hotelRoomIds);
 
     const hotelRoomsInfo = await Promise.all(
-      hotelRoomsId.rooms.map(async (roomId) => {
-        console.log({ roomId });
+      hotelRoomIds.map(async (hotelRoomId) => {
+        // console.log({ hotelRoomId });
+
         try {
-          const roomInfo = await RoomModel.findById(roomId);
+          const hotelRoomInfo = await RoomModel.findById(hotelRoomId);
 
-          console.log({ roomInfo });
+          // console.log({ hotelRoomInfo });
 
-          return roomInfo;
+          return {
+            ...hotelRoomInfo._doc,
+            hotelRoomInfo,
+          };
+
+          return hotelRoomInfo;
         } catch (error) {
           console.log(error.message);
         }
@@ -326,5 +336,3 @@ export const getHotelRooms = async (req, res, next) => {
     next(err);
   }
 };
-
-

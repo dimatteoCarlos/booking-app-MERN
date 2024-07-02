@@ -108,13 +108,16 @@ export const deleteRoom = async (req, res, next) => {
 
 /****Update Room Availability****/
 export const updateRoomAvailability = async (req, res, next) => {
-  const roomId = req.params.id;
-  console.log({ roomId }, 'dates:', req.body.dates);
+  const hotelAndRoomId = req.params.id.split('_');
+  const hotelRoomsId = hotelAndRoomId[0],
+    roomId = hotelAndRoomId[1];
+  console.log(hotelAndRoomId);
+
+  // console.log({ hotelAndRoomId }, 'dates:', req.body.dates);
 
   try {
-  await RoomModel.updateOne(
- 
-      { 'roomNumbers._id': roomId },
+    await RoomModel.updateOne(
+      { $and: [{ _id: hotelRoomsId }, { 'roomNumbers._id': roomId }] },
       {
         $push: {
           'roomNumbers.$.unavailableDates': req.body.dates,
@@ -122,7 +125,7 @@ export const updateRoomAvailability = async (req, res, next) => {
       }
     );
 
-    console.log('dentro del catch', {roomId}, 'fechas:',req.body.dates );
+    // console.log('inside try', { roomId }, 'fechas:', req.body.dates);
 
     res.status(200).json('Room status has been updated');
   } catch (error) {

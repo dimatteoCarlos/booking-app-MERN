@@ -4,19 +4,11 @@
 import './bookingBtn.css';
 type BookingBtnTypeProp = {
   tag: string;
-  onClickFn: ()=>void;
-
+  onClickFn: () => void;
 };
-const BookingBtn = ({
-  tag, 
-  onClickFn,
-}: BookingBtnTypeProp): JSX.Element => {
-
+const BookingBtn = ({ tag, onClickFn }: BookingBtnTypeProp): JSX.Element => {
   function clickHandler() {
-    console.log('me apretaste');
-    //  onClickFn && onClickFn(true);
     onClickFn();
-    
   }
 
   return (
