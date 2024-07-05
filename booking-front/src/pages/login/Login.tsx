@@ -3,7 +3,6 @@
 
 import { useState } from 'react';
 import { useAuthData } from '../../components/context/AuthContext';
-
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
@@ -38,7 +37,7 @@ function Login() {
 
   const { loading, error, user } = authState;
 
-  console.log('from authState:', { loading, error, user });
+  // console.log('from authState:', { loading, error, user });
 
   function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));

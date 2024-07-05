@@ -93,7 +93,7 @@ export async function groupHotelsByCity(req, res, next) {
 
       result[hotel[key].toLowerCase()]['count'] += 1;
     }
-    console.log('result', result);
+    // console.log('result', result);
 
     // res.status(200).json(result);
   } catch (error) {
@@ -107,13 +107,13 @@ export async function groupHotelsByCity(req, res, next) {
 export const groupHotelsByKey = async (req, res, next, keyGroup = 'city') => {
   const result = { list: [] };
   let key = keyGroup;
-  console.log('🚀 ~ groupHotelsByKey ~ key:', key);
+  // console.log('🚀 ~ groupHotelsByKey ~ key:', key);
 
   try {
     const qtyDoc = await HotelModel.countDocuments();
 
     const hotels = await HotelModel.find().limit(qtyDoc > 500 ? 500 : qtyDoc);
-    console.log('total number of documents:', qtyDoc);
+    // console.log('total number of documents:', qtyDoc);
 
     for (let index in hotels) {
       const hotel = hotels[index];
@@ -127,7 +127,7 @@ export const groupHotelsByKey = async (req, res, next, keyGroup = 'city') => {
 
       result[hotel[key]]['count'] += 1;
     }
-    console.log('result', result);
+    // console.log('result', result);
     //use this is you want to see the results on the browser or as a response of a request
     // res.status(200).json(result);
   } catch (error) {
@@ -143,7 +143,7 @@ export const groupHotelsByKey = async (req, res, next, keyGroup = 'city') => {
 //Dev Idem...
 export const countHotelsByType = async (req, res, next) => {
   const searchedTypes = req.query.types.split(',');
-  console.log(searchedTypes);
+  // console.log(searchedTypes);
   const keyGroup = 'type';
 
   try {
@@ -159,7 +159,7 @@ export const countHotelsByType = async (req, res, next) => {
       })
     );
 
-    console.log(list);
+    // console.log(list);
 
     //Use this to check all the different types in the database, this helps to check the keys used as type in the db data
 
@@ -185,7 +185,7 @@ export const countByType = async (req, res, next) => {
     'room',
     'village',
   ];
-  console.log(req.params);
+  // console.log(req.params);
   try {
     const list = await Promise.all(
       givenTypes.map(async (givenType) => {
@@ -198,7 +198,7 @@ export const countByType = async (req, res, next) => {
         return countObj;
       })
     );
-    console.log(list);
+    // console.log(list);
 
     res.status(200).json(list);
   } catch (error) {
@@ -211,7 +211,7 @@ export const countByType = async (req, res, next) => {
 export const getHotels = async (req, res, next) => {
   try {
     const data = await HotelModel.find();
-    console.log(data);
+    // console.log(data);
     res.status(200).json(data);
   } catch (error) {
     console.log(error);
@@ -224,7 +224,7 @@ export const getHotels = async (req, res, next) => {
 export const getHotelsByQuery = async (req, res, next) => {
   //endpoint : http://localhost:8800/api/hotels/getHotelsByQuery/?city=london&min=10&max=800&minRate=2&limit=1000
 
-  console.log(req.query);
+  // console.log(req.query);
 
   const { min, max, limit, minRate, ...restOfQuery } = req.query;
 
@@ -277,7 +277,7 @@ export const deleteHotel = async (req, res, next) => {
   try {
     const hotelDeleted = await HotelModel.findByIdAndDelete(id);
 
-    console.log(hotelDeleted);
+    // console.log(hotelDeleted);
     res.status(200).json(`${hotelDeleted.name} has been deleted`);
   } catch (err) {
     console.log(err, 'at deleting', id, 'hotel');

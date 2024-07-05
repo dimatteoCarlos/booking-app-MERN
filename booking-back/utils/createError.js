@@ -4,6 +4,6 @@ export function createError(status, message) {
   const err = new Error();
   err.status = status;
   err.message = message;
-  console.log('executing createError')
+  console.log('running createError')
   return err;
 }

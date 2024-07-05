@@ -1,0 +1,8 @@
+.error__page {
+  width: 100vw;
+  height: 100vh;
+  font-family: inherit;
+
+  color: var(--main-color);
+  background-color: var(--main-bg);
+}

@@ -12,20 +12,19 @@ import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
 import ResultsItem from './resultsItem/ResultsItem.tsx';
 
-// import { OptionsType } from '../../types/types';
-
 import { HotelDBInfoType } from '../../types/typesHotel.ts';
 
 import useFetch from '../../components/hooks/useFetch';
 import { useSearchData } from '../../components/context/SearchContext.tsx';
+// import { OptionsType } from '../../types/types';
 
 //----------------------------
 
 const ListOfHotels = (): JSX.Element => {
   const {
     date: dates,
-    // destination: destinationValue,
     options: optionsValue,
+    // destination: destinationValue,
   } = useLocation().state;
 
   const location = useLocation();
@@ -221,7 +220,7 @@ const ListOfHotels = (): JSX.Element => {
               {data && data.length > 0
                 ? `${data!.length} properties found `
                 : null}
-            </div>{' '}
+            </div>
           </div>
 
           {isLoading ? 'Loading...' : <ResultsItem data={data} />}

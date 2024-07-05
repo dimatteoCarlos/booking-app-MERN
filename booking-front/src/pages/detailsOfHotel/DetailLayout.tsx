@@ -31,22 +31,22 @@ type DetailLayoutTypeProp = {
 const DetailLayout = ({
   hotelId,
   data,
-  defaultData,
-  defaultPhotosHotel,
-}: DetailLayoutTypeProp): JSX.Element => {
+}: // defaultData,
+// defaultPhotosHotel,
+DetailLayoutTypeProp): JSX.Element => {
   const {
-    _id,
-    name,
-    type,
+    // _id,
+    // name,
+    // type,
 
     city,
     economicPrice,
     rate,
     rating,
 
-    reviews,
-    featured,
-    rooms,
+    // reviews,
+    // featured,
+    // rooms,
 
     photoUrlImages,
 
@@ -62,8 +62,8 @@ const DetailLayout = ({
         commentStay,
         locationStay,
 
-        totPrice,
-        durationStay,
+        // totPrice,
+        // durationStay,
       },
     },
 
@@ -156,16 +156,16 @@ const DetailLayout = ({
   }): void {
     if (user.username) {
       setIsOpenReserve(true);
-      console.log('you open Reserve Modal');
+      console.log('Open Reserve modal window');
     } else {
       navigateTo('/login');
       setIsOpenReserve(false);
-      console.log('you close Reserve Modal');
+      console.log('Reserve Modal window close');
     }
   }
 
   //-----Context data-----------
-  const { searchDispatch, searchState } = useSearchData();
+  const { searchState } = useSearchData();
 
   const {
     authState: { user },
@@ -176,7 +176,7 @@ const DetailLayout = ({
   const {
     date: startEndSelectedDates,
     options: optionsReservation,
-    destination: cityDestination,
+    // destination: cityDestination,
   } = searchState;
 
   // console.log(searchState, optionsReservation.rooms);
@@ -228,7 +228,6 @@ const DetailLayout = ({
 
           <div className='priceHightligth'>{priceHighlight}</div>
 
-      
           <BookingBtn onClickFn={() => handleLoginReserve(user)} tag={tagBtn} />
         </div>
 
@@ -275,7 +274,10 @@ const DetailLayout = ({
               })`}</span>
             </div>
 
-            <BookingBtn onClickFn={() => handleLoginReserve(user)} tag={tagBtn} />
+            <BookingBtn
+              onClickFn={() => handleLoginReserve(user)}
+              tag={tagBtn}
+            />
           </div>
         </div>
       </div>

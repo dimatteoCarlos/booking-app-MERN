@@ -1,0 +1,65 @@
+/*topBox.css*/
+
+.topBox__container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.topBox__title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.25rem;
+}
+
+.topBox__userItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.topBox__user {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.topBox__img img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+}
+.topBox__userInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0.25rem;
+  width: 100%;
+}
+
+.topBox__username {
+  font-weight: 700;
+  font-size: 0.875rem;
+  width: max-content;
+}
+.topBox__userEmail {
+  font-size: 0.75rem;
+  font-weight: 200;
+}
+.topBox__amount {
+  font-size: 0.75rem;
+  width: max-content;
+}
+
+[class^='topBox'] {
+  cursor: pointer;
+}

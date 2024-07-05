@@ -1,0 +1,36 @@
+/*layout.css*/
+
+.main__layout {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  background: var(--main-bg);
+  color: var(--main-color);
+  background-color: var(--dark-bg);
+  padding-right: 1rem;
+}
+
+.main__layout {
+  position: relative;
+}
+
+.main__container {
+  display: flex;
+}
+
+.main__menu {
+  flex: 1;
+  border-right: 1px solid var(--soft-bg);
+  color: var(--main-color, 'white');
+}
+
+.main__footer {
+  display: flex;
+  margin-top: 0.25rem;
+  border-top: 1px solid var(--soft-bg);
+  max-height: 3rem;
+  align-self: space-between;
+  color: var(--main-color);
+}

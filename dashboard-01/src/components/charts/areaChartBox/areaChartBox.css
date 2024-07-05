@@ -1,0 +1,24 @@
+/* areaChartBox.css */
+.area__chartBox--container {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.area__chartBox--title {
+  font-weight: bold;
+  font-size: 1.25rem;
+  align-self: start;
+  margin-bottom: 1rem;
+}
+
+.area__chartBox--chart {
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  align-self: center;
+}

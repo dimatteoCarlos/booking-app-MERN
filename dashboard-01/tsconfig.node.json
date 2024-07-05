@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+//agregada
+    "paths": {
+      "recharts": ["../src/index"]
+    }
+  },
+  "include": [
+    "vite.config.ts",
+
+    //agregada
+    "../src/**/*",
+    "../types.d.ts",
+    "./demo/**/*.tsx",
+    "./demo/**/*.ts"
+  ]
+}

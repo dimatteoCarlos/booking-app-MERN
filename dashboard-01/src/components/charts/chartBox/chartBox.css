@@ -1,0 +1,71 @@
+/*chartBox.css*/
+
+.chartBox__container {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 100%;
+}
+.chartBox__side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 3;
+}
+
+.chartBox__head {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  gap: 0.25rem;
+
+  justify-content: start;
+  align-items: center;
+}
+
+.chartBox__img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.chartBox__title {
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.chartBox__figure {
+  font-weight: bold;
+  font-size: 0.875rem;
+  margin: 0.5rem 0;
+}
+
+.chartBox__footer {
+  color: var(--soft-color);
+
+  font-size: 0.86rem;
+}
+.chartBox__side--right {
+  display: flex;
+  flex: 2;
+  justify-content: end;
+}
+
+.chartBox__chart {
+  width: 100%;
+  height: 100%;
+}
+
+.chartBox__percentage {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: green; /*default*/
+  text-align: right;
+}
+
+.chartBox__percentage .text {
+  font-weight: normal;
+  font-size: 0.75rem;
+  color: var(--soft-color);
+}

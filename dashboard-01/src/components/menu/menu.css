@@ -1,0 +1,38 @@
+/*menu.css*/
+[class*='menu'] {
+  font-size: 0.75rem;
+}
+.menu__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0 0.5rem;
+}
+
+.menu__title {
+  text-transform: uppercase;
+
+  color: var(--soft-color);
+  margin: 0.5rem 0;
+}
+.menu__link:hover {
+  border-radius: 5px;
+  background-color: VAR(--soft-bg);
+  width: 90%;
+}
+.menu__link {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  text-align: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  color: var(--soft-color, 'white');
+}
+
+.menu__link-title {
+  font-weight: bold;
+}

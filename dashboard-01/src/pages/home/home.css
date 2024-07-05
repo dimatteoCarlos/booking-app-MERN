@@ -1,0 +1,16 @@
+/*home.css*/
+
+.home__container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  grid-auto-rows: minmax(7rem, auto);
+  height: 100%;
+}
+
+.home__tile {
+  border: 2px solid var(--soft-bg);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+}

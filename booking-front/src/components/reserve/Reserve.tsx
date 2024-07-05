@@ -30,7 +30,7 @@ function Reserve({ hotelId, setIsOpen }: ReservePropType) {
   const [selectedRooms, setSelectedRooms] = useState<string[]>([]);
 
   /**************/
-  const navigateTo=useNavigate()
+  const navigateTo = useNavigate();
   const { searchState } = useSearchData();
 
   //get rooms data from hotel db
@@ -161,7 +161,7 @@ function Reserve({ hotelId, setIsOpen }: ReservePropType) {
     try {
       await Promise.all(
         selectedRooms.map(async (roomId) => {
-          console.log(`url: ${baseURL}${route}${roomId}`);
+          // console.log(`url: ${baseURL}${route}${roomId}`);
 
           const res: any = await axios.put(`${baseURL}${route}${roomId}`, {
             dates: selectedDatesInRange,
@@ -174,9 +174,10 @@ function Reserve({ hotelId, setIsOpen }: ReservePropType) {
       );
     } catch (error) {
       console.log(error);
-    } finally{
+    } finally {
+      console.log('Reserve modal closed');
       setIsOpen(false);
-      navigateTo('/')
+      navigateTo('/');
     }
   }
   /******************************/

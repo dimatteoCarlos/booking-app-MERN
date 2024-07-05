@@ -1,0 +1,33 @@
+/*dastaTable.css*/
+
+/* .dataTable__container {
+} */
+
+.dataTable__dataGrid {
+  padding: 1.25rem;
+}
+
+.MuiDataGrid-toolbarContainer {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.image {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  align-items: center;
+}
+
+.delete {
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1.25rem;
+  align-items: center;
+}
