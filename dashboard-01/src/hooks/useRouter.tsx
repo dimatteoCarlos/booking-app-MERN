@@ -4,14 +4,41 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import ErrorPage from '../pages/error/ErrorPage';
 import Home from '../pages/home/Home';
-import Users from '../pages/users/Users';
-import Products from '../pages/products/Products';
 import Layout from '../pages/layout/Layout';
-import DetailedUser from '../pages/detailedUser/DetailedUser';
-import { DetailedProduct } from '../pages/detailedProduct/DetailedProduct';
+
 import UnderConstruction from '../pages/underConstruction/UnderConstruction';
 import PrivateRoute from '../components/privateRoute/PrivateRoute';
 import Login from '../pages/login/Login';
+import ListItems from '../pages/listItems/ListItems.tsx';
+import DetailedUser from '../pages/detailedUser/DetailedUser';
+import { DetailedProduct } from '../pages/detailedProduct/DetailedProduct';
+
+import { userRows, productRows } from '../data/data.ts';
+
+// import { data_hotel as hotelRows } from '../data/data_hotel_1000.ts';
+
+import { usersHeaderColumnData } from '../pages/listItems/itemHeaderColumns/usersHeaderColumns.tsx';
+
+import { productsHeaderColumnData } from '../pages/listItems/itemHeaderColumns/productsHeaderColumns.tsx';
+
+import { hotelsHeaderColumnData } from '../pages/listItems/itemHeaderColumns/hotelsHeaderColumns.tsx';
+
+export type UserInfoDBType = {
+  _id: string;
+  img: string;
+  username: string;
+  name: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  country: string;
+  city: string;
+  occupation: string;
+  role: string;
+  phone: string;
+  isAdmin: Boolean;
+};
 
 export default function useRouter() {
   const router = createBrowserRouter([
@@ -27,16 +54,6 @@ export default function useRouter() {
             // <PrivateRoute>
             <Home />
             // {/* </PrivateRoute> */}
-          ),
-        },
-        {
-          path: 'users',
-          element: (
-            // <PrivateRoute>
-            //change it later to UsersList, ProductList, make just one DetailedItem reusable component to show detailed info of any Item
-
-            <Users title={'users'} btnLabel={'add new user'} />
-            //</PrivateRoute>
           ),
         },
 
@@ -57,15 +74,42 @@ export default function useRouter() {
             </PrivateRoute>
           ),
         },
+        {
+          path: 'users',
+          element: (
+            // <PrivateRoute>
+            <ListItems
+              itemsHeaderColumnData={usersHeaderColumnData}
+              itemRowsData={userRows}
+            />
+            //</PrivateRoute>
+          ),
+        },
 
         {
           path: 'products',
           element: (
             <PrivateRoute>
-              <Products title={'products'} btnLabel={'add new product'} />
+              <ListItems
+                itemsHeaderColumnData={productsHeaderColumnData}
+                itemRowsData={productRows}
+              />
             </PrivateRoute>
           ),
         },
+
+        {
+          path: 'hotels',
+          element: (
+            <PrivateRoute>
+              <ListItems
+                itemsHeaderColumnData={hotelsHeaderColumnData}
+                // itemRowsData={productRows}
+              />
+            </PrivateRoute>
+          ),
+        },
+
         {
           path: 'products/:id',
 
@@ -91,7 +135,7 @@ export default function useRouter() {
         //     <Logout />
         //  },
         // { path: '/register', element:
-        //     <Register />
+        //     <Register/>
         //  },
       ],
     },

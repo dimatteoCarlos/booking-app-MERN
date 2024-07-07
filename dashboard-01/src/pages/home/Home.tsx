@@ -12,7 +12,7 @@ import {
   barChartBoxVisit,
   PieChartBoxData,
   areaChartBoxData,
-} from '../../data.ts';
+} from '../../data/data.ts';
 import ChartBox from '../../components/charts/chartBox/ChartBox.tsx';
 import BarChartBox from '../../components/charts/barChartBox/BarChartBox.tsx';
 import RingChartBox from '../../components/charts/ringChartBox/RingChartBox.tsx';

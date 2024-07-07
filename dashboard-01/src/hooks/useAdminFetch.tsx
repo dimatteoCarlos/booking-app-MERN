@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Error {
   name: string;
@@ -18,7 +18,7 @@ type FetchStateType<T> = {
 
 const initialState = { isLoading: true, error: null, data: null };
 
-function useFetch<T>(url: string): { fetchState: FetchStateType<T> } {
+function useAdminFetch<T>(url: string): { fetchState: FetchStateType<T> } {
   const [fetchState, setFetchState] = useState(initialState);
 
   async function fetchData() {
@@ -27,7 +27,7 @@ function useFetch<T>(url: string): { fetchState: FetchStateType<T> } {
     try {
       const response = await axios.get(url);
       const apiResp = await response.data;
-      console.log(response, apiResp);
+      // console.log(response, apiResp);
       setFetchState((prevState) => ({
         ...prevState,
         isLoading: true,
@@ -42,14 +42,19 @@ function useFetch<T>(url: string): { fetchState: FetchStateType<T> } {
         error: error,
         // data: null,
       }));
-    }
+    }finally{setFetchState((prevState) => ({
+      ...prevState,
+      isLoading: false,
+      error: null,
+    }));}
   }
 
   useEffect(() => {
     fetchData();
+    
   }, []);
 
   return {fetchState };
 }
 
-export default useFetch;
+export default useAdminFetch;

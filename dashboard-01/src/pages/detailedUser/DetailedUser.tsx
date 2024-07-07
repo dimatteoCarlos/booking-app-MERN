@@ -2,7 +2,7 @@
 //Parent: useRouter.tsx
 
 import DetailedInfo from '../../components/detailedInfo/DetailedInfo';
-import { singleUser } from '../../data';
+import { singleUser } from '../../data/data.ts';
 const DetailedUser = () => {
   return (
     <>

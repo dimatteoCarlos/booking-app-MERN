@@ -60,10 +60,7 @@ function Login() {
     authDispatch({ type: 'LOGIN_START' });
 
     try {
-      const response = await axios.post(
-        `${BASE_URL}/api/auth/login`,
-        credentials
-      );
+      const response = await axios.post(`${BASE_URL}/auth/login`, credentials);
 
       // console.log('resp:', response.data);
 
@@ -98,8 +95,8 @@ function Login() {
   }
 
   console.log(user);
-//create a reusable custom Form Component: for login and register
-//apply input debounce
+  //create a reusable custom Form Component: for login and register
+  //apply input debounce
 
   return (
     <>

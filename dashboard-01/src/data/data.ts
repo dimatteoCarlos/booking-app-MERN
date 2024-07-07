@@ -1,4 +1,4 @@
-import { ChartBoxTypeData } from './types/types';
+import { ChartBoxTypeData } from '../types/types';
 
 export const menu = [
   {
@@ -526,7 +526,6 @@ export const userRows = [
     createdAt: '01.02.2023',
   },
 
-  
   {
     id: 15,
     img: 'https://images.pexels.com/photos/8405873/pexels-photo-8405873.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
@@ -554,7 +553,7 @@ export const userRows = [
   },
 ];
 
-export const products = [
+export const productRows = [
   {
     id: 1,
     img: 'https://store.sony.com.au/on/demandware.static/-/Sites-sony-master-catalog/default/dw1b537bbb/images/PLAYSTATION5W/PLAYSTATION5W.png',

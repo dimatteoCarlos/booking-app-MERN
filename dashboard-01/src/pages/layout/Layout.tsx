@@ -3,7 +3,7 @@
 import './layout.css';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
-import { menu } from '../../data.ts';
+import { menu } from '../../data/data.ts';
 import Menu from '../../components/menu/Menu';
 import Footer from '../../components/footer/Footer';
 

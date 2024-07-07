@@ -1,6 +1,6 @@
 //productsHeaderColumns.tsx
 
-import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import { GridColDef, GridRenderCellParams} from '@mui/x-data-grid';
 
 export const productsHeaderColumnData: GridColDef[] = [
   {
