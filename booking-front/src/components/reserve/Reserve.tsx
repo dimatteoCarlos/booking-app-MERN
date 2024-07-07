@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
-import useFetch from '../../components/hooks/useFetch.tsx';
+import useFetch from '../../hooks/useFetch.tsx';
 
 import { useSearchData } from '../../components/context/SearchContext.tsx';
 

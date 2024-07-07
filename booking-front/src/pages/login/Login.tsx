@@ -9,7 +9,6 @@ import './login.css';
 
 const baseURL = 'http://localhost:8800';
 
-
 const INITIAL_CREDENTIALS_STATE: {
   username: string | undefined;
   email: string | undefined;
@@ -64,12 +63,15 @@ function Login() {
       console.log('resp:', response.data);
 
       const {
-        details: {username}, details: {email},
+        userAuthInfo: { username },
+        userAuthInfo: { email },
       } = response.data;
 
-      authDispatch({ type: 'LOGIN_SUCCESS', payload: {username, email} });
+      authDispatch({ type: 'LOGIN_SUCCESS', payload: { username, email } });
 
-      navigateTo('/', { state: { info: response.data.details } });
+      // authDispatch({type:'LOGIN_SUCCESS',payload:response.data.userAuthInfo})
+
+      navigateTo('/', { state: { info: response.data.userAuthInfo } });
 
     } catch (error: any) {
       authDispatch({ type: 'LOGIN_FAILURE', payload: error.response.data });

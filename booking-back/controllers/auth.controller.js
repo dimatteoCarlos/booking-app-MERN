@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { createError } from '../utils/createError.js';
 
-//Para crear un usuario nuevo, deberia haber ademas de validacion, verificacion del rol en alguna tabla, o seria un administrador el que coloque los roles.
+//Para crear un usuario nuevo, se deberia verificar que el username introducido no se encuentre ya en la base de datos,  deberia haber ademas de validacion, verificacion del rol en alguna tabla, o seria un administrador el que coloque los roles.
 
 // logica para trabajar con expiration token y acces token?
 
@@ -21,8 +21,11 @@ export const register = async (req, res, next) => {
     const newUserDataModel = new UserModel({ ...req.body, password: hash });
 
     const newUser = await newUserDataModel.save();
+
     console.log(`${newUser.username} has been created`);
+
     res.status(200).send(`${newUser.username} has been created`);
+    
   } catch (error) {
     console.log(error);
     next(error);
@@ -69,9 +72,9 @@ export const login = async (req, res, next) => {
         httpOnly: true,
       })
       .status(200)
-      .json({ details: { ...mainUserInfo }, isAdmin, role });
+      .json({ userAuthInfo: { ...mainUserInfo }, isAdmin, role });
   } catch (error) {
-    console.error(error, 'mensaje de error');
+    console.error(error, 'error message');
     res.status(500).json(error);
   }
 };

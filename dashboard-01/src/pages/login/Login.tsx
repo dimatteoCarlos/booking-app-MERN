@@ -1,31 +1,36 @@
 //Login.tsx
-//Parent:
+//Parent:useRouter.tsx
 
 import { useState } from 'react';
 import { useAuthData } from '../../context/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
+import { BASE_URL } from '../../constants/constants';
 
-const baseURL = 'http://localhost:8800';
+// const baseURL = 'http://localhost:8800';
+
+// const INITIAL_CREDENTIALS_STATE: {
+//   username: string | undefined;
+//   email: string | undefined;
+//   password: string | undefined;
+//   isAdmin?:boolean | undefined;
+// } = {
+//   username: undefined,
+//   email: undefined,
+//   password: undefined,
+//   isAdmin:undefined
+// };
 
 const INITIAL_CREDENTIALS_STATE: {
   username: string | undefined;
   email: string | undefined;
   password: string | undefined;
 } = {
-  username: undefined,
-  email: undefined,
-  password: undefined,
+  username: 'Elva_McDonald',
+  email: 'elva@gmail.com',
+  password: "'password'+i",
 };
-
-// const INITIAL_CREDENTIALS_STATE:{  username: string |undefined,
-//   email: string |undefined,
-//   password: string |undefined,} = {
-//   username: "Elva_McDonald",
-//   email: "elva@gmail.com",
-//   password: "'password'+i",
-//   }
 
 function Login() {
   const navigateTo = useNavigate();
@@ -34,9 +39,14 @@ function Login() {
 
   const { authState, authDispatch } = useAuthData();
 
-  const { loading, error, user } = authState;
+  const { loading, error, user, ...restAuthState } = authState;
 
-  // console.log('from authState:', { loading, error, user });
+  console.log(
+    'from authState:',
+    { loading, error, user },
+    'el resto:',
+    restAuthState
+  );
 
   function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -50,28 +60,46 @@ function Login() {
     authDispatch({ type: 'LOGIN_START' });
 
     try {
-
       const response = await axios.post(
-        `${baseURL}/api/auth/login`,
+        `${BASE_URL}/api/auth/login`,
         credentials
       );
 
-      console.log('resp:', response.data);
+      // console.log('resp:', response.data);
 
       const {
-        details: {username}, details: {email},
+        userAuthInfo: { username },
+        userAuthInfo: { email },
+        isAdmin,
+        role, //to crosscheck
       } = response.data;
 
-      authDispatch({ type: 'LOGIN_SUCCESS', payload: {username, email} });
+      console.log(username, email);
 
-      navigateTo('/', { state: { info: response.data.details } });
+      if (isAdmin) {
+        authDispatch({
+          type: 'LOGIN_SUCCESS',
+          payload: { user: { username, email }, isAdmin },
+          // payload: response.data.userAuthInfo
+        });
+        // authDispatch({ type: 'LOGIN_SUCCESS', payload: { username, email } });
 
+        navigateTo('/', { state: { info: response.data.userAuthInfo } });
+      } else {
+        authDispatch({
+          type: 'LOGIN_FAILURE',
+          payload: { message: `Sorry! The role of "${role}" has no clearance` },
+        });
+      }
     } catch (error: any) {
+      console.log(error);
       authDispatch({ type: 'LOGIN_FAILURE', payload: error.response.data });
     }
   }
 
   console.log(user);
+//create a reusable custom Form Component: for login and register
+//apply input debounce
 
   return (
     <>
@@ -84,6 +112,7 @@ function Login() {
             name='username'
             onChange={inputHandler}
             className='login__input--username login__input'
+            required
           />
 
           <input
@@ -93,6 +122,7 @@ function Login() {
             name='email'
             onChange={inputHandler}
             className='login__input--email login__input'
+            required
           />
 
           <input
@@ -102,12 +132,13 @@ function Login() {
             name='password'
             onChange={inputHandler}
             className='login__input--password login__input'
+            required
           />
 
           <button
             onClick={loginHandler}
             disabled={loading}
-            className='booking-btn'
+            className='login__modal--btn'
           >
             Login
           </button>

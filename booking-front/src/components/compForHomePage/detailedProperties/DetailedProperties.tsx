@@ -1,6 +1,6 @@
 import './detailedProperties.css';
 import { properties } from './dataDetailedProperties.ts';
-import useFetch from '../../hooks/useFetch.tsx';
+import useFetch from '../../../hooks/useFetch.tsx';
 import { HotelDBInfoType } from '../../../types/typesHotel.ts';
 
 import { useState } from 'react';

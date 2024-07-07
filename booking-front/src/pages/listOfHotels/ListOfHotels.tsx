@@ -14,7 +14,7 @@ import ResultsItem from './resultsItem/ResultsItem.tsx';
 
 import { HotelDBInfoType } from '../../types/typesHotel.ts';
 
-import useFetch from '../../components/hooks/useFetch';
+import useFetch from '../../hooks/useFetch.tsx';
 import { useSearchData } from '../../components/context/SearchContext.tsx';
 // import { OptionsType } from '../../types/types';
 

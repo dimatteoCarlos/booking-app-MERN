@@ -12,10 +12,10 @@ import FooterList from '../../components/footerList/FooterList';
 import EmailSignup from '../../components/emailSignup/EmailSignup';
 import { HotelDBInfoType } from '../../types/typesHotel.ts';
 import { useLocation } from 'react-router-dom';
-import useFetch from '../../components/hooks/useFetch.tsx';
+import useFetch from '../../hooks/useFetch.tsx';
 
 const DetailsOfHotel = () => {
-  const location= useLocation();
+  const location = useLocation();
 
   const hotelId = location.pathname.split('/')[2];
 

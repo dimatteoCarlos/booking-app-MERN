@@ -7,11 +7,11 @@ import {
 } from '@mui/x-data-grid';
 
 export const usersHeaderColumnData: GridColDef<Object>[] = [
-  { field: 'id', headerName: 'ID', width: 90 },
+  // { field: 'username', headerName: 'Username', width: 100 },
   {
     field: 'img',
     headerName: 'Image',
-    width: 100,
+    width: 75,
 
     renderCell: (params: GridRenderCellParams): JSX.Element => {
       return (
@@ -27,14 +27,14 @@ export const usersHeaderColumnData: GridColDef<Object>[] = [
   {
     field: 'firstName',
     headerName: 'First name',
-    width: 150,
+    width: 140,
     editable: true,
     type: 'string',
   },
   {
     field: 'lastName',
     headerName: 'Last name',
-    width: 150,
+    width: 140,
     editable: true,
     type: 'string',
   },
@@ -42,14 +42,14 @@ export const usersHeaderColumnData: GridColDef<Object>[] = [
     field: 'email',
     headerName: 'Email',
     type: 'email',
-    width: 110,
+    width: 180,
     editable: true,
   },
   {
     field: 'phone',
     headerName: 'Phone',
     type: 'string',
-    width: 110,
+    width: 130,
     editable: true,
   },
   {
@@ -65,11 +65,20 @@ export const usersHeaderColumnData: GridColDef<Object>[] = [
   },
 
   {
-    field: 'verified',
-    headerName: 'Verified',
+    field: 'isAdmin',
+    headerName: 'isAdmin',
     description: 'boolean',
     sortable: true,
-    width: 90,
+    width: 80,
     type: 'boolean',
+  },
+
+  {
+    field: 'city',
+    headerName: 'City',
+    description: 'text',
+    sortable: true,
+    width: 100,
+    type: 'string',
   },
 ];

@@ -2,8 +2,10 @@
 //Parent:
 
 import { createContext, useContext, useEffect, useReducer } from 'react';
+import { BASE_URL } from '../constants/constants.ts';
 
 import { AuthReducer } from '../reducer/AuthReducer.tsx';
+import axios from 'axios';
 
 export type AuthStateType = {
   loading: boolean;
@@ -12,6 +14,7 @@ export type AuthStateType = {
     username: string | null;
     email: string | null;
   };
+  isAdmin?: boolean;
 };
 
 function getLsUser(key: string = 'userInfo'): AuthStateType['user'] {
@@ -25,6 +28,9 @@ function getLsUser(key: string = 'userInfo'): AuthStateType['user'] {
     return JSON.parse(userInfo);
   }
 }
+
+//crear un use middleware para consultar si el usuario autorizado
+//es admin.  el controlador middleware seria un get, basado en el username del usuario loggeado, sin necesidad de realizar verficacion. al obtener el isAdmin, e incluirlo en el authContextData, para su disposicion global.
 
 export const INITIAL_AUTH_STATE: AuthStateType = {
   loading: false,

@@ -2,7 +2,7 @@
 //Parent:Home.tsx
 import './listProperties.css';
 import { propertiesList } from './dataListProperties.ts';
-import useFetch from '../../hooks/useFetch';
+import useFetch from '../../../hooks/useFetch.tsx';
 
 export type TypePropertyType = { type: string; count: number };
 
@@ -18,8 +18,8 @@ const ListProperties = (): JSX.Element => {
   //-----------
 
   const { fetchState } = useFetch<TypePropertyType[]>(url);
-  
-  const {data, isLoading}=fetchState
+
+  const { data, isLoading } = fetchState;
   // console.log('data:', data);
 
   return (
@@ -30,9 +30,7 @@ const ListProperties = (): JSX.Element => {
             const {
               id,
               urlImage,
-              titles: {
-                category: category,
-              },
+              titles: { category: category },
             } = item;
 
             return (
@@ -58,8 +56,6 @@ const ListProperties = (): JSX.Element => {
                     {data![indx]?.count} {data![indx].type.toLowerCase()}
                     {data![indx]?.count > 1 ? 's' : ''}
                   </h2>
-
-
                 </div>
               </div>
             );

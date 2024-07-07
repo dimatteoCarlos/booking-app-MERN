@@ -18,14 +18,9 @@ type PageTypeProp = {
   routePage: string;
 };
 
-const ShowPageTable = ({
-  title,
-  btnLabel,
-  rowsData,
-  headerColumn,
-  routePage,
-  setIsModalOpen,
-}: PageTypeProp): JSX.Element => {
+function ShowPageTable({
+  title, btnLabel, rowsData, headerColumn, routePage, setIsModalOpen,
+}: PageTypeProp): JSX.Element {
   return (
     <>
       <div className='page__container'>
@@ -43,12 +38,11 @@ const ShowPageTable = ({
           <DataTable
             rows={rowsData}
             headerColumn={headerColumn}
-            routePage={routePage}
-          />
+            routePage={routePage} />
         </div>
       </div>
     </>
   );
-};
+}
 
 export default ShowPageTable;

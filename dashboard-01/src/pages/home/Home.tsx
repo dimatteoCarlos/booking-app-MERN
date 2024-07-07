@@ -96,7 +96,19 @@ const Home = (): JSX.Element => {
   return (
     <>
       <section className='home__container'>
+      <div
+            className={`home__${gridConfig[0].classname} home__${gridConfig[0].id}`}
+            key={gridConfig[0].id}
+            style={{
+              gridColumn: `${gridConfig[0].col__span}`,
+              gridRow: `${gridConfig[0].row__span}`,
+            }}
+          >
+            {gridConfig[0].content}
+          </div>
+
         {gridConfig.sort(()=>Math.floor(Math.random()-0.5)).map((item) => (
+          item.id!=='tile__1' &&
           <div
             className={`home__${item.classname} home__${item.id}`}
             key={item.id}

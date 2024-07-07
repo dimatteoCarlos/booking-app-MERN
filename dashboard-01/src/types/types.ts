@@ -88,3 +88,6 @@ export type Activities = {
   text: string;
   time: string;
 };
+
+
+

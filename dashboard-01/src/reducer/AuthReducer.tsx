@@ -16,6 +16,7 @@ export function AuthReducer(
     }
   | { loading: boolean; error: string; user: any }
   | { loading: boolean; error: any; user: null } {
+
   switch (action.type) {
     case 'LOGIN_START':
       return {
@@ -29,7 +30,8 @@ export function AuthReducer(
       };
 
     case 'LOGIN_SUCCESS':
-      return { ...state, loading: false, error: null, user: action.payload };
+      return { ...state, loading: false, error: null, user: action.payload
+        .user, isAdmin:action.payload.isAdmin };
 
     case 'LOGIN_FAILURE':
       return {

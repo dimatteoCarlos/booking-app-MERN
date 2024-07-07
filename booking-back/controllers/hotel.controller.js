@@ -215,10 +215,10 @@ export const getHotels = async (req, res, next) => {
     res.status(200).json(data);
   } catch (error) {
     console.log(error);
-
     next(error);
   }
 };
+
 //-------------------
 //READ BY QUERY. GET ALL ACCOMODATIONS BY QUERY
 export const getHotelsByQuery = async (req, res, next) => {

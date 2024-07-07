@@ -2,8 +2,6 @@
 
 import UserModel from '../models/userModel/UserModel.js';
 
-//COMO HACER DE ESTO UNA RUTA PROTEGIDA CON AUTH??
-
 export const getUser = async (req, res, next) => {
   const id = req.params.id;
   console.log('get user route');
@@ -17,24 +15,24 @@ export const getUser = async (req, res, next) => {
     next(error);
   }
 };
-
+//--------------------------------------
 export const getUsers = async (req, res, next) => {
-  const id = req.params.id;
+  const queInfoUser = req.params;
+  console.log('info user desde getUsers backend', {queInfoUser});
 
   try {
-    const users = await UserModel.find().select(
-      '-password'
-      // , '-role'
-    );
+    const users = await UserModel.find().select('-password');
 
-    console.log(users);
+    // console.log(users);
+
     res.status(200).json(users);
+
   } catch (error) {
     console.log(error);
     next(error);
   }
 };
-
+//---------------------------------------
 export const updateUser = async (req, res, next) => {
   const id = req.params.id;
   const data = req.body;
@@ -51,7 +49,7 @@ export const updateUser = async (req, res, next) => {
     next(error);
   }
 };
-
+//-----------------------------------
 export const deleteUser = async (req, res, next) => {
   const id = req.params.id;
 

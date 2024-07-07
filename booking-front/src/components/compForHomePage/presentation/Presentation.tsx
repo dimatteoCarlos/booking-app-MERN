@@ -2,7 +2,7 @@
 //Parent: Home.tsx
 import './presentation.css';
 import { dataPresentation } from './dataPresentation';
-import useFetch from '../../hooks/useFetch';
+import useFetch from '../../../hooks/useFetch';
 
 type CityType = { city: string; count: number };
 

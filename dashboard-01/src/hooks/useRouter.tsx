@@ -11,6 +11,7 @@ import DetailedUser from '../pages/detailedUser/DetailedUser';
 import { DetailedProduct } from '../pages/detailedProduct/DetailedProduct';
 import UnderConstruction from '../pages/underConstruction/UnderConstruction';
 import PrivateRoute from '../components/privateRoute/PrivateRoute';
+import Login from '../pages/login/Login';
 
 export default function useRouter() {
   const router = createBrowserRouter([
@@ -19,33 +20,79 @@ export default function useRouter() {
       path: '/',
       element: <Layout />,
       errorElement: <ErrorPage />,
-
       children: [
-        { index: true, element: <PrivateRoute><Home /></PrivateRoute> },
+        {
+          index: true,
+          element: (
+            // <PrivateRoute>
+            <Home />
+            // {/* </PrivateRoute> */}
+          ),
+        },
         {
           path: 'users',
           element: (
             // <PrivateRoute>
-              <Users title={'users'} btnLabel={'add new user'} />
-            // </PrivateRoute>
+            //change it later to UsersList, ProductList, make just one DetailedItem reusable component to show detailed info of any Item
+
+            <Users title={'users'} btnLabel={'add new user'} />
+            //</PrivateRoute>
           ),
         },
-   
+
         {
           path: 'users/:id',
-          element: <PrivateRoute>
-            <DetailedUser />
-            </PrivateRoute>,
+          element: (
+            <PrivateRoute>
+              <DetailedUser />
+            </PrivateRoute>
+          ),
         },
 
-             {
+        {
+          path: 'users/new',
+          element: (
+            <PrivateRoute>
+              {/* <NewToAdd inputs={newUserEntry} title='Add New User'/> */}
+            </PrivateRoute>
+          ),
+        },
+
+        {
           path: 'products',
-          element: <Products title={'products'} btnLabel={'add new product'} />,
+          element: (
+            <PrivateRoute>
+              <Products title={'products'} btnLabel={'add new product'} />
+            </PrivateRoute>
+          ),
         },
         {
           path: 'products/:id',
-          element: <DetailedProduct />,
+
+          element: (
+            <PrivateRoute>
+              <DetailedProduct />
+            </PrivateRoute>
+          ),
         },
+
+        {
+          path: 'products/new',
+          element: (
+            <PrivateRoute>
+              {/* <NewToAdd inputs={newProductEntry} title='Add New Product'/> */}
+            </PrivateRoute>
+          ),
+        },
+
+        { path: '/login', element: <Login /> },
+
+        // { path: '/logout', element:
+        //     <Logout />
+        //  },
+        // { path: '/register', element:
+        //     <Register />
+        //  },
       ],
     },
   ]);

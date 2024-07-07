@@ -79,6 +79,7 @@ export const menu = [
       },
     ],
   },
+
   {
     id: 4,
     title: 'Maintenance',
@@ -112,6 +113,31 @@ export const menu = [
         title: 'Logs',
         url: '/',
         icon: 'log.svg',
+      },
+    ],
+  },
+
+  {
+    id: 6,
+    title: 'access',
+    listItems: [
+      {
+        id: 1,
+        title: 'Login',
+        url: '/login',
+        icon: 'login.svg',
+      },
+      {
+        id: 2,
+        title: 'Logout',
+        url: '/logout',
+        icon: 'logout.svg',
+      },
+      {
+        id: 3,
+        title: 'Register',
+        url: '/register',
+        icon: 'register.svg',
       },
     ],
   },
@@ -499,6 +525,8 @@ export const userRows = [
     phone: '123 456 789',
     createdAt: '01.02.2023',
   },
+
+  
   {
     id: 15,
     img: 'https://images.pexels.com/photos/8405873/pexels-photo-8405873.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
@@ -508,10 +536,22 @@ export const userRows = [
     phone: '123 456 789',
     createdAt: '01.02.2023',
   },
-
-
-
-  
+  {
+    id: '23',
+    img: ' https://images.pexels.com/photos/5483470/pexels-photo-5483470.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    lastName: 'Coles',
+    firstName: 'Kiara',
+    email: 'kiCol@gmail.com',
+    phone: '9871433120',
+    username: 'Kiara_Coles',
+    name: 'Kiara',
+    password: '$2a$10$bEMgoIFayB1C/XZp6lkamO3n92R6Y2PVuYgyJjs.j5XO0RPNFKNwS',
+    city: 'Maracaibo',
+    country: 'VE',
+    occupation: 'Grpahic Assistant',
+    role: 'user',
+    isAdmin: false,
+  },
 ];
 
 export const products = [
@@ -780,4 +820,3 @@ export const singleProduct = {
     },
   ],
 };
-

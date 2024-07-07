@@ -23,7 +23,7 @@ const DataTable = ({
   routePage,
 }: DataTableTypeProp): JSX.Element => {
   //--------functions
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: number | string) => {
     console.log(`id: ${id} has been deleted`, { routePage });
   };
 
@@ -35,10 +35,10 @@ const DataTable = ({
     renderCell: (params: GridRenderCellParams): JSX.Element => {
       return (
         <div className='actions'>
-          <Link to={`${params.row.id}`}>
+          <Link to={`${params.row._id}`}>
             <img src='/view.svg' alt='' />
           </Link>
-          <div className='delete' onClick={() => handleDelete(params.row.id)}>
+          <div className='delete' onClick={() => handleDelete(params.row._id)}>
             <img src='/delete.svg' alt='' />
           </div>
         </div>
@@ -54,6 +54,8 @@ const DataTable = ({
         <DataGrid
           className='dataTable__dataGrid'
           rows={rows}
+          getRowId={(row: any) => row._id?row._id:row.id}
+          // getRowId={(row: any) =>  row.first_name + row.salary}
           columns={columns}
           initialState={{
             pagination: {

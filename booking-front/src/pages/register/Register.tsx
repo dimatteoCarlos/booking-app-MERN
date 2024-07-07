@@ -10,8 +10,6 @@ import './register.css';
 
 const baseURL = 'http://localhost:8800';
 
-
-
 const INITIAL_CREDENTIALS_STATE: {
   username: string | undefined;
   email: string | undefined;
@@ -66,13 +64,13 @@ function Register() {
       console.log('resp:', response.data);
 
       const {
-        details: {username}, details: {email},
+        userAuthInfo: { username },
+        userAuthInfo: { email },
       } = response.data;
 
-      authDispatch({ type: 'REGISTER_SUCCESS', payload: {username, email} });
+      authDispatch({ type: 'REGISTER_SUCCESS', payload: { username, email } });
 
-      navigateTo('/', { state: { info: response.data.details } });
-
+      navigateTo('/', { state: { info: response.data.userAuthInfo } });
     } catch (error: any) {
       authDispatch({ type: 'REGISTER_FAILURE', payload: error.response.data });
     }

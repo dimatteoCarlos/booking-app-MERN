@@ -1,23 +1,22 @@
-//Users.tsx
-//Parents:useRouter.tsx
+//ListItem.tsx
+//Parents:UsersList.tsx, useRouter.tsx
 
-import { userRows as userRowsData } from '../../data';
-
-import { usersHeaderColumnData } from './usersHeaderColumns';
+// import { itemsHeaderColumnData } from './usersHeaderColumns';
 
 import { useState } from 'react';
-
-import { TitleBtnType } from '../../types/types';
-
 import ShowPageTable from '../../components/showPageTable/ShowPageTable';
-
 import AddNew from '../../components/addNew/AddNew';
-
 import { useAuthData } from '../../context/AuthContext';
 import useFetch from '../../hooks/useFetch';
 import { BASE_URL } from '../../constants/constants';
 
-type UsersTypeProp = TitleBtnType;
+// import { TitleBtnType } from '../../types/types';
+//{itemsHeaderColumnData,endpoint,}
+
+type ListItemsTypeProp = {
+  title: string;
+  btnLabel: string;
+};
 
 export type UserInfoDBType = {
   _id: string;
@@ -45,7 +44,7 @@ export type UseFetchStateType<T> = {
   // fetchData?: () => Promise<void>;
 };
 
-const Users = ({ title, btnLabel }: UsersTypeProp): JSX.Element => {
+const ListItems = ({ title, btnLabel }: UsersTypeProp): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const url = `${BASE_URL}/api/users/`;
@@ -58,11 +57,11 @@ const Users = ({ title, btnLabel }: UsersTypeProp): JSX.Element => {
 
   console.log(isLoading, error);
 
-  const userRows = (() => {
+  const itemRows = (() => {
     if (!!data) {
       return data;
     } else {
-      return userRowsData!;
+      return itemRowsData!;
     }
   })();
 
@@ -84,14 +83,14 @@ const Users = ({ title, btnLabel }: UsersTypeProp): JSX.Element => {
             isModalOpen={isModalOpen}
             title={title}
             btnLabel={btnLabel}
-            rowsData={userRows!}
-            headerColumn={usersHeaderColumnData}
+            rowsData={itemRows!}
+            headerColumn={itemsHeaderColumnData}
             routePage={'users'}
           />
           <AddNew
             setIsModalOpen={setIsModalOpen}
             isModalOpen={isModalOpen}
-            headersColumn={usersHeaderColumnData}
+            headersColumn={itemsHeaderColumnData}
             itemToAdd='user'
             routePage={'users'}
           />
