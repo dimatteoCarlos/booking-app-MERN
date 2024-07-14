@@ -17,6 +17,7 @@ import ChartBox from '../../components/charts/chartBox/ChartBox.tsx';
 import BarChartBox from '../../components/charts/barChartBox/BarChartBox.tsx';
 import RingChartBox from '../../components/charts/ringChartBox/RingChartBox.tsx';
 import AreaChartBox from '../../components/charts/areaChartBox/AreaChartBox.tsx';
+import { useLocation } from 'react-router-dom';
 
 const Home = (): JSX.Element => {
   const gridConfig = [
@@ -93,6 +94,10 @@ const Home = (): JSX.Element => {
     },
   ];
 
+  const {...userStateInfo}=useLocation();
+  
+  //console.log('user info from location:', userStateInfo ); //info coming from login.tsx
+
   return (
     <>
       <section className='home__container'>
@@ -107,8 +112,20 @@ const Home = (): JSX.Element => {
             {gridConfig[0].content}
           </div>
 
+          <div
+            className={`home__${gridConfig[3].classname} home__${gridConfig[3].id}`}
+            key={gridConfig[3].id}
+            style={{
+              gridColumn: `${gridConfig[3].col__span}`,
+              gridRow: `${gridConfig[3].row__span}`,
+            }}
+          >
+            {gridConfig[3].content}
+          </div>
+
+
         {gridConfig.sort(()=>Math.floor(Math.random()-0.5)).map((item) => (
-          item.id!=='tile__1' &&
+          item.id!=='tile__1' &&  item.id!=='tile__4' &&
           <div
             className={`home__${item.classname} home__${item.id}`}
             key={item.id}
@@ -120,6 +137,7 @@ const Home = (): JSX.Element => {
             {item.content}
           </div>
         ))}
+        
       </section>
     </>
   );

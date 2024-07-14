@@ -11,8 +11,14 @@ import expand from './icons-svg/expand.svg';
 import app from './icons-svg/app.svg';
 import notification from './icons-svg/notification-svgrepo-com.svg';
 import setting from './icons-svg/setting-setting-svgrepo-com.svg';
+import logout from '/logout.svg';
+import { useAuthData, AuthStateType } from '../../context/AuthContext';
 
 function Navbar() {
+  const {
+    authState: { user}
+  } = useAuthData();
+  //  console.log('navbar:', user)
   return (
     <>
       <div className='navbar__container'>
@@ -58,10 +64,18 @@ function Navbar() {
             <Link to='link' className='navbar__link-double'>
               <img
                 className='navbar__icon navbar__icon-user '
-                src='userPhoto.PNG'
+                src={user.img!}
                 alt='user'
               />
-              <div className='navbar__icon navbar__icon-username'>Jane</div>
+              <div className='navbar__icon navbar__icon-username'>
+                {user.username}
+              </div>
+            </Link>
+          </li>
+
+          <li className='navbar__link'>
+            <Link to='link'>
+              <img className='navbar__icon' src={logout} alt='' />
             </Link>
           </li>
 

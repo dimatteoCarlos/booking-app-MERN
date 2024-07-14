@@ -7,20 +7,38 @@ import {
   deleteUser,
 } from '../controllers/user.controller.js';
 
-import {  verifyUser, verifyAdmin } from '../utils/verifyToken.js';
+import { verifyUser, verifyAdmin } from '../utils/verifyToken.js';
 
 const router = express.Router();
 
 //READ ONE
-router.get('/:id', verifyUser, getUser);
+router.get(
+  '/:id',
+  // verifyUser,
+  getUser
+);
 //UPDATE
-router.put('/:id', verifyUser, updateUser);
+router.put(
+  '/:id',
+  // // verifyUser,
+  updateUser
+);
 //DELETE
-router.delete('/:id', verifyUser, deleteUser);
+router.delete(
+  '/:id',
+
+   // verifyUser,
+
+  deleteUser
+);
 //READ ALL
-router.get('/', 
-  // verifyAdmin,
-   getUsers);
+router.get(
+  '/',
+
+  //  verifyAdmin,
+  //
+  getUsers
+);
 
 export default router;
 

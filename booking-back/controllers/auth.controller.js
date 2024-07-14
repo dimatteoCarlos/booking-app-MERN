@@ -5,6 +5,8 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { createError } from '../utils/createError.js';
 
+// const app = express();
+// app.use(cookieParser())
 //Para crear un usuario nuevo, se deberia verificar que el username introducido no se encuentre ya en la base de datos,  deberia haber ademas de validacion, verificacion del rol en alguna tabla, o seria un administrador el que coloque los roles.
 
 // logica para trabajar con expiration token y acces token?
@@ -25,7 +27,6 @@ export const register = async (req, res, next) => {
     console.log(`${newUser.username} has been created`);
 
     res.status(200).send(`${newUser.username} has been created`);
-    
   } catch (error) {
     console.log(error);
     next(error);
@@ -34,11 +35,10 @@ export const register = async (req, res, next) => {
 
 //LOGIN - POST
 export const login = async (req, res, next) => {
-  const data = req.body;
-  // console.log( "req.body:", req.body );
+  console.log('req.body:', req.body);
 
   try {
-    const userInfo = await UserModel.findOne({ username: req.body.username }); //.select('-password');
+    const userInfo = await UserModel.findOne({ username: req.body.username });
 
     if (!userInfo) {
       return next(createError(404, 'User not found'));
@@ -50,31 +50,36 @@ export const login = async (req, res, next) => {
     );
 
     if (!isRightPassword) {
+      console.log('Wrong password or username!');
       return next(createError(400, 'Wrong password or username!'));
     }
 
-    const token = jwt.sign(
-      { id: userInfo._id, isAdmin: userInfo.isAdmin, role: userInfo.role },
-      process.env.JWT
-      // ,
-      // { expiresIn: '1h' }
-    );
-
     const { password, isAdmin, role, ...mainUserInfo } = userInfo._doc;
 
-    console.log('you are logged in', {
-      ...mainUserInfo,
-      //  password, isAdmin, role
+    console.log({ password, isAdmin, role, mainUserInfo });
+
+    const token = jwt.sign(
+      {
+        id: mainUserInfo._id,
+        isAdmin: isAdmin,
+        role: role,
+      },
+      process.env.JWT
+      // ,{ expiresIn: '1h' }
+    );
+
+    console.log('token:', token, typeof token);
+
+    console.log('previous cookies:', req.cookies);
+
+    res.cookie('access_token', token, {
+      httpOnly: true,
     });
 
-    res
-      .cookie('access_token', token, {
-        httpOnly: true,
-      })
-      .status(200)
-      .json({ userAuthInfo: { ...mainUserInfo }, isAdmin, role });
+    res.status(200).json({ userAuthInfo: { ...mainUserInfo }, isAdmin, role });
   } catch (error) {
     console.error(error, 'error message');
-    res.status(500).json(error);
+    next(error);
+    // res.status(500).json(error);
   }
 };

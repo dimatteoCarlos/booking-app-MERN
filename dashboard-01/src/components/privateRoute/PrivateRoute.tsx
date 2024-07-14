@@ -14,11 +14,11 @@ function PrivateRoute({ children }: ProtectedRouteProps): JSX.Element {
     authState: {
       user: { username },
       user: { email },
-      ...rest
+      // ...rest
     },
   } = useAuthData();
 
-  console.log('resto:', rest);
+  // console.log('resto:', rest);
 
   useEffect(() => {
     const userIsLoggedIn = !!(username && email);

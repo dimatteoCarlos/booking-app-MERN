@@ -8,8 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import './login.css';
 import { BASE_URL } from '../../constants/constants';
 
-// const baseURL = 'http://localhost:8800';
-
 // const INITIAL_CREDENTIALS_STATE: {
 //   username: string | undefined;
 //   email: string | undefined;
@@ -29,24 +27,24 @@ const INITIAL_CREDENTIALS_STATE: {
 } = {
   username: 'Elva_McDonald',
   email: 'elva@gmail.com',
-  password: "'password'+i",
+  password: 'password',
 };
 
-function Login() {
+function LoginAdmin() {
   const navigateTo = useNavigate();
 
   const [credentials, setCredentials] = useState(INITIAL_CREDENTIALS_STATE);
 
   const { authState, authDispatch } = useAuthData();
 
-  const { loading, error, user, ...restAuthState } = authState;
+  const { isLoading, error, user} = authState;
 
-  console.log(
-    'from authState:',
-    { loading, error, user },
-    'el resto:',
-    restAuthState
-  );
+  // console.log(
+  //   'from authState:',
+  //   { isLoading, error, user },
+  //   'el resto:',
+  //   restAuthState
+  // );
 
   function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -58,25 +56,29 @@ function Login() {
     e.preventDefault();
 
     authDispatch({ type: 'LOGIN_START' });
+  
 
     try {
-      const response = await axios.post(`${BASE_URL}/auth/login`, credentials);
+      const response = await axios.post(`${BASE_URL}/auth/login`, credentials, {withCredentials: true});
 
       // console.log('resp:', response.data);
 
       const {
         userAuthInfo: { username },
         userAuthInfo: { email },
+        userAuthInfo: { img },
+        userAuthInfo: { _id: userId },
         isAdmin,
         role, //to crosscheck
       } = response.data;
 
-      console.log(username, email);
+      console.log(username, email, img, isAdmin, role, userId);
 
       if (isAdmin) {
+        // if (user) {
         authDispatch({
           type: 'LOGIN_SUCCESS',
-          payload: { user: { username, email }, isAdmin },
+          payload: { user: { username, email, img }, isAdmin, userId },
           // payload: response.data.userAuthInfo
         });
         // authDispatch({ type: 'LOGIN_SUCCESS', payload: { username, email } });
@@ -94,7 +96,6 @@ function Login() {
     }
   }
 
-  console.log(user);
   //create a reusable custom Form Component: for login and register
   //apply input debounce
 
@@ -134,7 +135,7 @@ function Login() {
 
           <button
             onClick={loginHandler}
-            disabled={loading}
+            disabled={isLoading}
             className='login__modal--btn'
           >
             Login
@@ -147,4 +148,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginAdmin;

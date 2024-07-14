@@ -7,7 +7,13 @@ import {
 } from '@mui/x-data-grid';
 
 export const usersHeaderColumnData: GridColDef<Object>[] = [
-  // { field: 'username', headerName: 'Username', width: 100 },
+  {
+    field: 'country',
+    headerName: 'Country',
+    width: 80,
+    sortable: true,
+    editable: true,
+  },
   {
     field: 'img',
     headerName: 'Image',
@@ -78,7 +84,7 @@ export const usersHeaderColumnData: GridColDef<Object>[] = [
     headerName: 'City',
     description: 'text',
     sortable: true,
-    width: 100,
+    width: 180,
     type: 'string',
   },
 ];

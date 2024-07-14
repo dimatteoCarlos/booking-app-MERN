@@ -1,6 +1,5 @@
 //ShowPageTable.tsx
-
-//Parents:Products.tsx ,  Users.tsx
+//Parents:ListItems.tsx
 
 import { GridColDef } from '@mui/x-data-grid';
 import DataTable from '../../components/dataTable/DataTable';
@@ -12,15 +11,18 @@ type PageTypeProp = {
   btnLabel: string;
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-
-  rowsData: Object[];
+  
+  setRowsData:React.Dispatch<React.SetStateAction<{}[]>>;
+  rowsData: {}[];
   headerColumn: GridColDef[];
   routePage: string;
+  url:string;
 };
 
 function ShowPageTable({
-  title, btnLabel, rowsData, headerColumn, routePage, setIsModalOpen,
+  title, btnLabel, rowsData, headerColumn, routePage,url, setIsModalOpen,setRowsData,
 }: PageTypeProp): JSX.Element {
+  
   return (
     <>
       <div className='page__container'>
@@ -36,9 +38,13 @@ function ShowPageTable({
 
         <div className='page__content'>
           <DataTable
-            rows={rowsData}
+            rowsData={rowsData}
+            setRowsData={setRowsData}
             headerColumn={headerColumn}
-            routePage={routePage} />
+            routePage={routePage}
+            url={url}
+            />
+
         </div>
       </div>
     </>

@@ -43,10 +43,14 @@ router.get('/', getHotels);
 router.get('/getHotelsByQuery', getHotelsByQuery);
 
 //UPDATE
-router.put('/:hotelId', verifyAdmin, updateHotel);
+router.put('/:hotelId',
+   verifyAdmin,
+   updateHotel);
 
 //DELETE
-router.delete('/:hotelId', verifyAdmin, deleteHotel);
+router.delete('/:hotelId',
+   verifyAdmin,
+   deleteHotel);
 
 /*----GET ROOMs FROM A SPECIFIC HOTEL---*/
 router.get('/room/:hotelId', getHotelRooms)

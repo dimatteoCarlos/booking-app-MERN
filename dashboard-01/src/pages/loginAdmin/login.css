@@ -1,14 +1,14 @@
 /*login.css*/
 
 .login__modal {
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin:auto;
-  /* border: 1px solid red; */
-
+  height: 100%;
+  margin: auto;
+  border: 1px solid red;
 }
 
 .login__modal__container {
@@ -16,12 +16,11 @@
   flex-direction: column;
   gap: 0.5rem;
   max-width: 95%;
-justify-content: center;
-align-items: center;
-padding: 1rem;
-border:1px solid  rgba(0, 113, 194, 0.556);
-border-radius: 1rem;
-
+  justify-content: center;
+  align-items: center;
+  padding: 1.5em;
+  border: 1px solid rgba(0, 113, 194, 0.556);
+  border-radius: 1rem;
 }
 
 .login__input {
@@ -33,6 +32,7 @@ border-radius: 1rem;
 .login__input--username {
   border: 1px solid rgba(0, 113, 194, 0.556);
 }
+
 .login__input--email {
   border: 1px solid rgba(0, 194, 23, 0.556);
 }
@@ -50,14 +50,14 @@ border-radius: 1rem;
   border-radius: 0.25rem;
   cursor: pointer;
 }
+
 .login__modal--btn:disabled {
   cursor: not-allowed;
- background-color: rgba(22, 157, 207, 0.964);
+  background-color: rgba(22, 157, 207, 0.964);
 }
 
 .error__msg {
   color: tomato;
   font-weight: bold;
   max-width: 70%;
-  
 }

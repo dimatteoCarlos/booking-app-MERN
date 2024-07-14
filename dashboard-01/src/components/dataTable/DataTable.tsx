@@ -10,36 +10,71 @@ import {
 
 import './dataTable.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 type DataTableTypeProp = {
-  rows: Object[];
+  rowsData: { [key: string]: string | number | null | JSX.Element }[];
+  setRowsData: React.Dispatch<React.SetStateAction<{}[]>>;
   headerColumn: GridColDef<Object>[];
   routePage: string;
+  url: string;
 };
 
 const DataTable = ({
-  rows,
+  rowsData,
+  setRowsData,
   headerColumn,
   routePage,
+  url,
 }: DataTableTypeProp): JSX.Element => {
-  //--------functions
-  const handleDelete = (id: number | string) => {
-    console.log(`id: ${id} has been deleted`, { routePage });
-  };
 
+
+  //--------functions-------------------
+  const handleDelete = async (id: number | string) => {
+    console.log('Handle Delete of item ', { id });
+    const newRowsData = rowsData.filter((item) => {
+      const itemId = item._id ? item._id : item.id;
+      return (itemId !== id);
+    });
+
+    // const newRowsDatas=rowsData.filter(x=>x._id!==id)
+
+    setRowsData(newRowsData);
+
+    //Handling delete of item on database
+    
+
+    if (routePage !== 'products') {
+      try {
+        
+      const response = await axios.delete(`${url}${id}`);
+      const apiResp = await response.data;
+      console.log(`endpoint: ${url}${id}`);
+      console.log(apiResp);
+      } catch (error) {
+        
+      }
+    }
+
+    console.log(`id: ${id} has been deleted from`,routePage);
+  };
+//--------------
   const actionColumn: GridColDef = {
     field: 'action',
-    headerName: 'Action',
+    headerName: 'Actions',
     width: 200,
     sortable: false,
     renderCell: (params: GridRenderCellParams): JSX.Element => {
+      const id = !!params.row._id ? params.row._id : params.row.id;
+
       return (
         <div className='actions'>
-          <Link to={`${params.row._id}`}>
+          <Link to={`${id}`}>
             <img src='/view.svg' alt='' />
           </Link>
-          <div className='delete' onClick={() => handleDelete(params.row._id)}>
-            <img src='/delete.svg' alt='' />
+
+          <div className='delete' onClick={() => handleDelete(id)}>
+            <img src='/delete.svg' alt='del' />
           </div>
         </div>
       );
@@ -51,11 +86,12 @@ const DataTable = ({
   return (
     <>
       <div className='dataTable__container'>
+        
+
         <DataGrid
           className='dataTable__dataGrid'
-          rows={rows}
-          getRowId={(row: any) => row._id?row._id:row.id}
-          // getRowId={(row: any) =>  row.first_name + row.salary}
+          rows={rowsData}
+          getRowId={(row: any) => (row._id ? row._id : row.id)}
           columns={columns}
           initialState={{
             pagination: {

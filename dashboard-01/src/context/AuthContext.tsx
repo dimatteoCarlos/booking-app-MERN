@@ -2,18 +2,19 @@
 //Parent:
 
 import { createContext, useContext, useEffect, useReducer } from 'react';
-import { BASE_URL } from '../constants/constants.ts';
-
 import { AuthReducer } from '../reducer/AuthReducer.tsx';
-import axios from 'axios';
+// import { BASE_URL } from '../constants/constants.ts';
+// import axios from 'axios';
 
 export type AuthStateType = {
-  loading: boolean;
+  isLoading: boolean;
   error: any;
   user: {
     username: string | null;
     email: string | null;
+    img?:string | null;
   };
+
   isAdmin?: boolean;
 };
 
@@ -23,6 +24,8 @@ function getLsUser(key: string = 'userInfo'): AuthStateType['user'] {
     return {
       username: null,
       email: null,
+      img:null,
+
     };
   } else {
     return JSON.parse(userInfo);
@@ -33,10 +36,12 @@ function getLsUser(key: string = 'userInfo'): AuthStateType['user'] {
 //es admin.  el controlador middleware seria un get, basado en el username del usuario loggeado, sin necesidad de realizar verficacion. al obtener el isAdmin, e incluirlo en el authContextData, para su disposicion global.
 
 export const INITIAL_AUTH_STATE: AuthStateType = {
-  loading: false,
+  isLoading: false,
   error: null,
   user: getLsUser('userInfo'),
 };
+
+//incluir autenticacion aqui tambien
 
 type AuthProviderPropType = {
   children: React.ReactNode;

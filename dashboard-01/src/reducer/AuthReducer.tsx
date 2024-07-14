@@ -10,42 +10,44 @@ export function AuthReducer(
   | any
   | AuthStateType
   | {
-      loading: boolean;
+      isLoading: boolean;
       error: null;
-      user: { username: null; email: null };
+      user: { username: null; email: null ;img:null};
     }
-  | { loading: boolean; error: string; user: any }
-  | { loading: boolean; error: any; user: null } {
+  | { isLoading: boolean; error: string; user: any }
+  | { isLoading: boolean; error: any; user: null } {
 
   switch (action.type) {
     case 'LOGIN_START':
       return {
         ...state,
-        loading: true,
+        isLoading: true,
         error: null,
         user: {
           username: null,
           email: null,
+          img:null,
         },
+       
       };
 
     case 'LOGIN_SUCCESS':
-      return { ...state, loading: false, error: null, user: action.payload
-        .user, isAdmin:action.payload.isAdmin };
+      return { ...state, isLoading: false, error: null, user: action.payload
+        .user, isAdmin:action.payload.isAdmin};
 
     case 'LOGIN_FAILURE':
       return {
         ...state,
-        loading: false,
+        isLoading: false,
         error: action.payload,
         user: {
           username: null,
           email: null,
+          img:null
         },
       };
     case 'LOGIN_LOGOUT':
       return { ...state, INITIAL_AUTH_STATE };
-    // return { ...state, loading: false, error: null, user: {username: null, email: null,}, };
 
     default:
       return { ...state };

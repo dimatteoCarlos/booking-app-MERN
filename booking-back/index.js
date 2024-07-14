@@ -36,9 +36,30 @@ app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+//---------------------------
 //makes api call possible from another server
-app.use(cors());
+// app.use(cors());
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+
+// Configuring CORS w/ Dynamic Origin
+// const whitelist = [
+//   'http://localhost:5173',
+//   'http://localhost:5174',
+//   'http://localhost:8800',
+// ];
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.includes(origin) || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('origin not allowed by CORS: '));
+//     }
+//   },
+// };
+
+// app.use(cors(corsOptions));
+
+//---------------------------
 app.use(morgan('common'));
 
 /*MIDDLEWARES */
@@ -50,6 +71,8 @@ app.use('/api/hotels', hotelsRoute);
 app.use('/api/rooms', roomsRoute);
 
 app.use('/api/users', usersRoute);
+
+//---------------------------
 
 //message error handling
 app.use((err, req, res, next) => {
@@ -101,8 +124,8 @@ app.listen(PORT, () => {
 
   /*ONLY ADD DATA ONCE, JUST ONE TIME*/
   // UserModel.insertMany(users_data);
-//porque esto no funciona para borrar la collection
-// HotelModel.deleteMany({});
+  //porque esto no funciona para borrar la collection
+  // HotelModel.deleteMany({});
 
   //  HotelModel.insertMany(data_hotel);
 });

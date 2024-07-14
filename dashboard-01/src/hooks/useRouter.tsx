@@ -8,7 +8,7 @@ import Layout from '../pages/layout/Layout';
 
 import UnderConstruction from '../pages/underConstruction/UnderConstruction';
 import PrivateRoute from '../components/privateRoute/PrivateRoute';
-import Login from '../pages/login/Login';
+
 import ListItems from '../pages/listItems/ListItems.tsx';
 import DetailedUser from '../pages/detailedUser/DetailedUser';
 import { DetailedProduct } from '../pages/detailedProduct/DetailedProduct';
@@ -21,7 +21,10 @@ import { usersHeaderColumnData } from '../pages/listItems/itemHeaderColumns/user
 
 import { productsHeaderColumnData } from '../pages/listItems/itemHeaderColumns/productsHeaderColumns.tsx';
 
+import { roomsHeaderColumnData } from '../pages/listItems/itemHeaderColumns/roomsHeaderColumns.tsx';
+
 import { hotelsHeaderColumnData } from '../pages/listItems/itemHeaderColumns/hotelsHeaderColumns.tsx';
+import LoginAdmin from '../pages/loginAdmin/LoginAdmin.tsx';
 
 export type UserInfoDBType = {
   _id: string;
@@ -56,7 +59,6 @@ export default function useRouter() {
             // {/* </PrivateRoute> */}
           ),
         },
-
         {
           path: 'users/:id',
           element: (
@@ -80,12 +82,11 @@ export default function useRouter() {
             // <PrivateRoute>
             <ListItems
               itemsHeaderColumnData={usersHeaderColumnData}
-              itemRowsData={userRows}
+              itemRowsData={userRows!}
             />
             //</PrivateRoute>
           ),
         },
-
         {
           path: 'products',
           element: (
@@ -97,29 +98,50 @@ export default function useRouter() {
             </PrivateRoute>
           ),
         },
-
         {
           path: 'hotels',
           element: (
             <PrivateRoute>
               <ListItems
                 itemsHeaderColumnData={hotelsHeaderColumnData}
-                // itemRowsData={productRows}
+                // itemRowsData={hotelRows}
               />
             </PrivateRoute>
           ),
         },
 
         {
-          path: 'products/:id',
+          path: 'hotels/new',
+          element: (
+            <PrivateRoute>
+              <ListItems
+                itemsHeaderColumnData={hotelsHeaderColumnData}
+                // itemRowsData={hotelRows}
+              />
+            </PrivateRoute>
+          ),
+        },
 
+
+        {
+          path: 'rooms',
+          element: (
+            <PrivateRoute>
+              <ListItems
+                itemsHeaderColumnData={roomsHeaderColumnData}
+                itemRowsData={undefined}
+              />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: 'products/:id',
           element: (
             <PrivateRoute>
               <DetailedProduct />
             </PrivateRoute>
           ),
         },
-
         {
           path: 'products/new',
           element: (
@@ -128,8 +150,7 @@ export default function useRouter() {
             </PrivateRoute>
           ),
         },
-
-        { path: '/login', element: <Login /> },
+        { path: '/login', element: <LoginAdmin /> },
 
         // { path: '/logout', element:
         //     <Logout />

@@ -2,14 +2,13 @@
 //Parent:Layout.tsx
 
 import './menu.css';
-import { MenuTypeData } from '../../types/types.ts';
+import { menu } from '../../data/data.ts';
 import { Link } from 'react-router-dom';
 
-type MenuTypeProp = {
-  menu: MenuTypeData[];
-};
+// import { MenuTypeData } from '../../types/types.ts';
 
-function Menu({ menu }: MenuTypeProp): JSX.Element {
+
+function Menu(): JSX.Element {
   return (
     <>
       <div className='menu__container'>

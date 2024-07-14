@@ -1,21 +1,20 @@
 //ListItem.tsx
 //Parents:UsersList.tsx, useRouter.tsx
 
-import { useState } from 'react';
-import ShowPageTable from '../../components/showPageTable/ShowPageTable';
-import AddNew from '../../components/addNew/AddNew';
-import useAdminFetch from '../../hooks/useAdminFetch';
-import { BASE_URL } from '../../constants/constants';
+import { useEffect, useState } from 'react';
+import ShowPageTable from '../../components/showPageTable/ShowPageTable.tsx';
+import AddNew from '../../components/addNew/AddNew.tsx';
+import useAdminFetch from '../../hooks/useAdminFetch.tsx';
+import { BASE_URL } from '../../constants/constants.ts';
 import { useLocation } from 'react-router-dom';
 import { GridColDef } from '@mui/x-data-grid';
-import { useAuthData } from '../../context/AuthContext';
+// import { useAuthData } from '../../context/AuthContext';
+
+export type KeyValueType={[key:string]:string|number|boolean|JSX.Element|undefined};
 
 type ListItemsTypeProp = {
   itemsHeaderColumnData: GridColDef<Object>[];
-  itemRowsData?: {}[] | null;
-};
-
-// type UserRowDataType=Partial<UserInfoDBType>
+  itemRowsData?: KeyValueType[];}
 
 export type UseFetchStateType<T> = {
   data: null | T;
@@ -23,6 +22,7 @@ export type UseFetchStateType<T> = {
   isLoading: boolean;
 };
 
+//Component------------------------------------
 const ListItems: React.FC<ListItemsTypeProp> = ({
   itemsHeaderColumnData,
   itemRowsData,
@@ -33,50 +33,74 @@ const ListItems: React.FC<ListItemsTypeProp> = ({
   const itemToAdd = `${routePage.substring(0, routePage.length - 1)}`;
   const title = routePage,
     btnLabel = `add new ${itemToAdd}`;
+  
+   const url = `${BASE_URL}${routePath}/`;
 
-  const url = `${BASE_URL}${routePath}/`;
+  console.log(url, routePath);
 
   // const { fetchState } = useFetch<UserInfoDBType[]>(url);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { fetchState } = useAdminFetch<Object[]>(url);
-  const { data, isLoading, error } = fetchState;
-  // console.log(isLoading, error);
-  //user, isLoading, y manejo del error
+  const [rowsData, setRowsData] = useState<KeyValueType[]>(itemRowsData!);
 
-  const itemRows = (() => {
-    if (!!data) {
-      return data;
-    } else {
-      return itemRowsData!;
-    }
-  })();
+  //how to use generic type dinamically without using if?
+  const { fetchState } = useAdminFetch<KeyValueType[]>(url);
+  const { data, isLoading } = fetchState;
+
+  useEffect(() => {
+    const list = (() => {
+      if (!!data) {
+        return data;
+      } else {
+        // return data!;
+        return itemRowsData??undefined;
+      }
+    })();
+    // console.log('list:', list);
+
+    setRowsData(list!);
+  }, [data]);
 
   return (
     <>
-      {/* {!!error && (
-        <div className='error'>Nothing in the database!</div>
-      )} */}
       {isLoading && <div className='loader'>Loading ....</div>}
 
-      {!!itemRows && (
+      {!!rowsData && (
         <>
           <ShowPageTable
             setIsModalOpen={setIsModalOpen}
             isModalOpen={isModalOpen}
             title={title}
             btnLabel={btnLabel}
-            rowsData={itemRows!}
+            rowsData={rowsData}
+            setRowsData={setRowsData}
             headerColumn={itemsHeaderColumnData}
             routePage={routePage}
+            url={url}
           />
 
-          <AddNew
+         {<AddNew
             setIsModalOpen={setIsModalOpen}
             isModalOpen={isModalOpen}
             headersColumn={itemsHeaderColumnData}
             itemToAdd={itemToAdd}
             routePage={routePage}
-          />
+
+            // setRowsData={setRowsData}
+            // rowsData={rowsData}
+          />}
+
+
+
+          {/*<AddNew
+            // setIsModalOpen={setIsModalOpen}
+            // isModalOpen={isModalOpen}
+            // headersColumn={itemsHeaderColumnData}
+            // itemToAdd={itemToAdd}
+            // routePage={routePage}
+
+            // setRowsData={setRowsData}
+            // rowsData={rowsData}
+          />*/}
         </>
       )}
     </>
