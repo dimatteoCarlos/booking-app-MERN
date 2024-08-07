@@ -126,6 +126,5 @@ app.listen(PORT, () => {
   // UserModel.insertMany(users_data);
   //porque esto no funciona para borrar la collection
   // HotelModel.deleteMany({});
-
   //  HotelModel.insertMany(data_hotel);
 });

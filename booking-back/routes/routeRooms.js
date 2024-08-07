@@ -34,7 +34,7 @@ router.put("/availability/:id",
    updateRoomAvailability);
 
 router.put('/:roomId', 
-  verifyAdmin, 
+  // verifyAdmin, 
   updateRoom);
 
 //DELETE

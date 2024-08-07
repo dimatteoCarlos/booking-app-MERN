@@ -3,11 +3,11 @@
 
 import { useEffect, useState } from 'react';
 import ShowPageTable from '../../components/showPageTable/ShowPageTable.tsx';
-import AddNew from '../../components/addNew/AddNew.tsx';
 import useAdminFetch from '../../hooks/useAdminFetch.tsx';
 import { BASE_URL } from '../../constants/constants.ts';
 import { useLocation } from 'react-router-dom';
 import { GridColDef } from '@mui/x-data-grid';
+import AddNew from '../../components/addNew/AddNew.tsx';
 // import { useAuthData } from '../../context/AuthContext';
 
 export type KeyValueType={[key:string]:string|number|boolean|JSX.Element|undefined};
@@ -34,9 +34,9 @@ const ListItems: React.FC<ListItemsTypeProp> = ({
   const title = routePage,
     btnLabel = `add new ${itemToAdd}`;
   
-   const url = `${BASE_URL}${routePath}/`;
+   const url = `${BASE_URL}${routePath}`;
 
-  console.log(url, routePath);
+  console.log('from ListItems:', url, routePath);
 
   // const { fetchState } = useFetch<UserInfoDBType[]>(url);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -75,32 +75,23 @@ const ListItems: React.FC<ListItemsTypeProp> = ({
             setRowsData={setRowsData}
             headerColumn={itemsHeaderColumnData}
             routePage={routePage}
+            routePath={routePath}
             url={url}
+
           />
 
-         {<AddNew
+
+          <AddNew
             setIsModalOpen={setIsModalOpen}
             isModalOpen={isModalOpen}
             headersColumn={itemsHeaderColumnData}
             itemToAdd={itemToAdd}
             routePage={routePage}
 
-            // setRowsData={setRowsData}
-            // rowsData={rowsData}
-          />}
-
-
-
-          {/*<AddNew
-            // setIsModalOpen={setIsModalOpen}
-            // isModalOpen={isModalOpen}
-            // headersColumn={itemsHeaderColumnData}
-            // itemToAdd={itemToAdd}
-            // routePage={routePage}
-
-            // setRowsData={setRowsData}
-            // rowsData={rowsData}
-          />*/}
+            setRowsData={setRowsData}
+            rowsData={rowsData}
+          />
+          
         </>
       )}
     </>

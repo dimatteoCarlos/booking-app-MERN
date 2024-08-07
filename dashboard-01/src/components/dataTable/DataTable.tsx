@@ -25,7 +25,7 @@ const DataTable = ({
   setRowsData,
   headerColumn,
   routePage,
-  url,
+  url:dbUrl,
 }: DataTableTypeProp): JSX.Element => {
 
 
@@ -47,9 +47,9 @@ const DataTable = ({
     if (routePage !== 'products') {
       try {
         
-      const response = await axios.delete(`${url}${id}`);
+      const response = await axios.delete(`${dbUrl}${id}`);
       const apiResp = await response.data;
-      console.log(`endpoint: ${url}${id}`);
+      console.log(`endpoint: ${dbUrl}${id}`);
       console.log(apiResp);
       } catch (error) {
         

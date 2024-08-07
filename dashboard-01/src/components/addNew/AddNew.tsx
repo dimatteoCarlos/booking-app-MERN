@@ -3,6 +3,7 @@
 
 import { GridColDef } from '@mui/x-data-grid';
 import React, { FormEvent } from 'react';
+import { KeyValueType } from '../../pages/listItems/ListItems.tsx';
 
 import './addNew.css';
 
@@ -12,7 +13,10 @@ type AddNewTypeProp = {
   headersColumn: GridColDef<Object>[];
   itemToAdd: string;
   routePage: string;
+  setRowsData?:React.Dispatch<React.SetStateAction<KeyValueType[]>>;
+  rowsData?:KeyValueType[]
 };
+
 
 const AddNew = ({
   setIsModalOpen,
@@ -20,6 +24,8 @@ const AddNew = ({
   headersColumn,
   itemToAdd,
   routePage,
+  // setRowsData, 
+  // rowsData
 }: AddNewTypeProp): JSX.Element => {
   //--------functions---------
   const handleCloseModal = () => {

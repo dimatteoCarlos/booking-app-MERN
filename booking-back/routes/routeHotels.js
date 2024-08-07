@@ -22,7 +22,9 @@ const router = express.Router();
 
 //CREATE
 //'/:id?limit=5'
-router.post('/', verifyAdmin, createHotel);
+router.post('/',
+   //  verifyAdmin,
+    createHotel);
 
 //READ GET by id
 //http://localhost:8800/api/hotels/find/663f7364420a784bf6c15b76
@@ -44,12 +46,12 @@ router.get('/getHotelsByQuery', getHotelsByQuery);
 
 //UPDATE
 router.put('/:hotelId',
-   verifyAdmin,
+   // verifyAdmin,
    updateHotel);
 
 //DELETE
 router.delete('/:hotelId',
-   verifyAdmin,
+   // verifyAdmin,
    deleteHotel);
 
 /*----GET ROOMs FROM A SPECIFIC HOTEL---*/

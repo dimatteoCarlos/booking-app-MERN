@@ -25,6 +25,7 @@ import { roomsHeaderColumnData } from '../pages/listItems/itemHeaderColumns/room
 
 import { hotelsHeaderColumnData } from '../pages/listItems/itemHeaderColumns/hotelsHeaderColumns.tsx';
 import LoginAdmin from '../pages/loginAdmin/LoginAdmin.tsx';
+import AddNewHotel from '../components/addNewHotel/AddNewHotel.tsx';
 
 export type UserInfoDBType = {
   _id: string;
@@ -113,15 +114,14 @@ export default function useRouter() {
         {
           path: 'hotels/new',
           element: (
-            <PrivateRoute>
-              <ListItems
+            // <PrivateRoute>
+              <AddNewHotel
                 itemsHeaderColumnData={hotelsHeaderColumnData}
                 // itemRowsData={hotelRows}
               />
-            </PrivateRoute>
+            // </PrivateRoute> */
           ),
         },
-
 
         {
           path: 'rooms',
